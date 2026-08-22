@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kate Marifairy - Biography</title>
+    <link rel="icon" type="image/png" href="https://kazikate.github.io/Biography/assets/twin/Twinbio3.jpg">
+    
+    <meta name="color-scheme" content="dark">
+    <meta property="og:title" content="Kate Marifairy - Biography">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://kazikate.github.io/Biography/assets/twin/Twinbio2.jpg">
+    <meta property="og:url" content="https://kazikate.github.io/Biography/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@katemarifairy">
+    <meta name="twitter:title" content="Kate Marifairy - Biography">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https://kazikate.github.io/Biography/assets/twin/Twinbio2.jpg">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        @import url('https://api.fontshare.com/css?f[]=chillax@300,400,500,600,700&display=swap');
+
+        :root {
+            color-scheme: dark;
+            --dark-bg: #000000;
+            --link-bg: #1F1925;
+            --link-hover: #31283D;
+            --text-light: #DCBAF7;
+            --accent-purple: #9d50ff;
+            --lyric-accent: #DCBAF7;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --image-height-vh: 50vh;
+            --transition-start: 60%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            --ui-accent: #A48BB8;
+            --ui-light: #DCBAF7;
+            transition: background-color 0.5s ease, color 0.5s ease, --ui-accent 0.8s ease, --ui-light 0.8s ease;
+        }
+
+        body.theme-lyric-on {
+            --ui-accent: var(--lyric-accent);
+            --ui-light: var(--lyric-accent);
+        }
+
+        ::selection { background-color: rgba(157, 80, 255, 0.35); }
+        ::-moz-selection { background-color: rgba(157, 80, 255, 0.35); }
+
+        .profile-img-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: var(--image-height-vh);
+            z-index: 1;
+            max-width: 600px;
+            mask-image: linear-gradient(to bottom, black var(--transition-start), transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black var(--transition-start), transparent 94%);
+            transition: opacity 0.8s ease-out;
+            opacity: 0;
+            will-change: transform;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .profile-img-container.is-visible { opacity: 1; transition-delay: 0.1s; }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin-top: calc(var(--image-height-vh) * 0.8 - 10px);
+            z-index: 2;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 0 20px 40px;
+            text-align: center;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+        .bottom-blur-layer {
+            position: fixed;
+            bottom: 0;
+            z-index: 9;
+            pointer-events: none;
+            height: 100px;
+            width: 100%;
+            max-width: 600px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            mask-image: linear-gradient(to top, black 0%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 0%, transparent 100%);
+        }
+
+        .profile-img-visual {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url('https://kazikate.github.io/Biography/assets/Twinbio.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            filter: blur(0px);
+            transition: background-image 0.5s ease, filter 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            will-change: filter, transform;
+        }
+
+        body.is-modal-open .profile-img-visual { transform: scale(1.08); }
+        .dim-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            opacity: 0;
+            transition: opacity 0.1s linear;
+            will-change: opacity;
+        }
+        .username {
+            font-family: 'Chillax', sans-serif;
+            font-size: 2.5em;
+            font-weight: 500;
+            margin-top: 0px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            opacity: 0;
+            max-width: 600px;
+        }
+        .username.is-visible { opacity: 1; transform: translateY(30px); transition-delay: 0.3s; }
+        .bio {
+            font-size: 0.97em;
+            font-weight: 550;
+            opacity: 0;
+            
+            /* YENİ: Biyografiyi daraltıp sağdan-soldan boşluk bırakma ayarları */
+            max-width: 90%; /* Ekranın sadece %85'ini kaplar, kenarlardan pay bırakır */
+            margin: 5px auto 20px auto; /* auto sayesinde kutu daralsa da TAM ORTADA kalır */
+            line-height: 1.5; /* Metin uzunsa satır aralıklarını hafif açıp okumayı rahatlatır */
+            
+            transform: translateY(18px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .bio.is-visible { opacity: 0.8; transform: translateY(0); transition-delay: 0.5s; }
+        .social-icons-mini {
+            margin: 15px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            max-width: 600px;
+        }
+        .social-icons-mini.is-visible { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+        .link-button {
+            display: flex;
+            align-items: center;
+            background-color: var(--link-bg);
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 38px;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            height: 38px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: background-color 0s, box-shadow 0.2s, opacity 0.6s ease-out, transform 0.6s ease-out;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .link-button.is-visible { opacity: 1; transform: translateY(0); }
+        .link-button:nth-child(1) { transition-delay: 0.9s; }
+        .link-button:nth-child(2) { transition-delay: 1.0s; }
+        .link-button:nth-child(3) { transition-delay: 1.1s; }
+        .link-button:nth-child(4) { transition-delay: 1.2s; }
+        .link-button:nth-child(5) { transition-delay: 1.3s; }
+        .link-button:nth-child(6) { transition-delay: 1.4s; }
+        .link-button:nth-child(7) { transition-delay: 1.5s; }
+        .link-button:nth-child(8) { transition-delay: 1.6s; }
+  
+        @keyframes press-link {
+            0% { transform: scale(1) translateZ(0); }
+            50% { transform: scale(0.98) translateZ(0); }
+            100% { transform: scale(1) translateZ(0); }
+        }
+        .link-button.press { animation: press-link 0.2s ease-out; pointer-events: none; }
+
+        .social-icons-mini a {
+            display: inline-block;
+            opacity: 1;
+            transition: transform 0.2s, opacity 0.2s;
+            line-height: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .social-icons-mini a:hover { opacity: 1; transform: scale(1.1); }
+        .bio-emoji {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.1em;
+            margin: 0.1px;
+            display: inline-block;
+        }
+        .link-img-placeholder {
+            transform: translateX(-11px);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #1F1925;
+            margin-right: 0px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.2);
+        }
+        .link-text-details {
+            flex-grow: 1;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 40px;
+        }
+        .link-platform { font-weight: 600; display: block; }
+        .link-username { font-size: 0.75em; opacity: 0.6; font-weight: 400; display: block; }
+        .footer-links {
+            margin-top: 40px;
+            font-size: 1em;
+            font-weight: 400;
+            margin-bottom: 0px;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-links a {
+            color: var(--text-light);
+            opacity: 0.6;
+            text-decoration: none;
+            margin: 0 2px;
+        }
+        .footer-links a:hover { opacity: 1; text-decoration: underline; }
+        .footer-links .footer-text { display: inline-block; }
+
+        .no-scroll { overflow: hidden; }
+
+        @media (max-width: 480px) {
+            body { padding: 0; }
+            .container { padding: 0 20px 40px; }
+        }
+        @media (min-width: 700px) {
+            .profile-img-container, .content-wrapper, .bottom-blur-layer { max-width: 500px; }
+            .container { max-width: 800px; padding: 0 0 40px 0; }
+            
+            /* 1. Masaüstünde profil alanını 1:1 kare yap */
+            .profile-img-container {
+                height: 550px !important; 
+            }
+            
+            /* 2. İçerik kutusunun kayma mesafesini ayarla */
+            .content-wrapper {
+                margin-top: 410px !important; 
+            } /* <-- BU PARANTEZ EKSİKTİ, EKLENDİ */
+
+            /* MÜZİK ÇALARI KUSURSUZ HİZALAYAN KOD */
+            #music-widget {
+                left: 50% !important;
+                transform: translateX(calc(-50% + 15px)) !important; 
+                max-width: 500px !important;
+                width: 100% !important;
+                padding-left: 0 !important; 
+            }
+        }
+
+        .image-preview-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .image-preview-modal.is-open {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.85);
+            pointer-events: auto;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-circle-mask {
+            width: 85vw;
+            height: 85vw;
+            max-width: 400px;
+            max-height: 400px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(157, 80, 255, 0.4);
+            position: relative;
+            margin: 0 auto;
+        }
+        #preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        body.animations-done .link-button { transition-delay: 0s !important; }
+        @media (hover: hover) {
+            body.animations-done .link-button:hover {
+                transform: scale(1.05);
+                transition: transform 0.15s ease-out !important;
+            }
+            body.animations-done .link-button:not(:hover) {
+                transform: scale(1);
+                transition: transform 0.15s !important;
+            }
+        }
+
+        .profile-hover-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .profile-hover-layer i {
+            color: var(--ui-light);
+            font-size: 3.5em;
+            transform: scale(0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-img-container.scrolled-past .profile-hover-layer { opacity: 0 !important; }
+        .profile-img-container.scrolled-past .profile-hover-layer i { transform: scale(0.5) !important; }
+        .profile-img-container.show-hint .profile-hover-layer { opacity: 1 !important; }
+        .profile-img-container.show-hint .profile-hover-layer i { transform: scale(1) !important; }
+
+        .social-icons-mini img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .downloadable-profile-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: 4;
+            pointer-events: auto;
+            -webkit-touch-callout: default !important;
+        }
+        .profile-img-container.disable-hover .profile-hover-layer { opacity: 0 !important; transition: none !important; }
+        .profile-img-container.disable-hover .profile-hover-layer i { transform: scale(0.5) !important; transition: none !important; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background-color: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background-color: rgba(157, 80, 255, 0.4); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: rgba(157, 80, 255, 0.8); }
+
+        #music-widget {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .music-cover-container {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 4;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            border: 2px solid var(--ui-accent);
+            overflow: hidden;
+            background-color: transparent;
+            transition: background-color 0.5s ease, border-color 0.8s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .music-cover-container.solid-bg { background-color: #120e18; }
+        .default-glass-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+        .default-glass-cover svg {
+            width: 22px;
+            height: 22px;
+            color: var(--ui-accent);
+            transition: color 0.8s ease;
+        }
+        .track-cover-layer {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+        .spin-anim { animation: spin-record 5s linear infinite; }
+        @keyframes spin-record { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .music-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .music-cover-container.is-active .music-overlay { opacity: 1; }
+
+        .music-overlay svg {
+            width: 20px;
+            height: 20px;
+            color: var(--ui-accent);
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.15s ease-out, transform 0.15s ease-out, color 0.8s ease;
+            pointer-events: none;
+        }
+        .music-overlay svg.show-icon {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.8s ease;
+        }
+
+        .music-waves {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            height: 20px;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+            pointer-events: none;
+        }
+        .music-waves.show-wave {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #forward-icon {
+            transform: translateX(-15px) scale(0.5);
+            transition: opacity 0.15s ease-out, transform 0.15s ease-out, color 0.8s ease;
+        }
+        #forward-icon.show-forward {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.8s ease;
+        }
+
+        .wave-line {
+            width: 3px;
+            height: 100%;
+            background-color: var(--ui-accent);
+            border-radius: 3px;
+            animation: wave-bounce 1s ease-in-out infinite alternate;
+            transition: background-color 0.8s ease;
+        }
+        .wave-line:nth-child(1) { animation-delay: 0.0s; }
+        .wave-line:nth-child(2) { animation-delay: 0.3s; height: 60%; }
+        .wave-line:nth-child(3) { animation-delay: 0.6s; height: 80%; }
+        .wave-line:nth-child(4) { animation-delay: 0.9s; height: 50%; }
+        @keyframes wave-bounce {
+            0% { height: 20%; opacity: 0.5; }
+            100% { height: 100%; opacity: 1; }
+        }
+
+        .music-pill {
+            position: absolute;
+            left: 27px;
+            top: 7px;
+            height: 45px;
+            background: rgba(20, 15, 25, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--ui-accent);
+            border-radius: 0 25px 25px 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            max-width: 0;
+            padding: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            opacity: 0;
+            transition: max-width 0.5s cubic-bezier(0.5, 0, 0.1, 1), padding 0.5s cubic-bezier(0.5, 0, 0.1, 1), opacity 0s 0.5s, border-color 0.8s ease;
+        }
+        .music-pill.show-pill {
+            max-width: 250px;
+            padding: 0 20px 0 35px;
+            opacity: 1;
+            transition: max-width 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55), padding 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.1s ease, border-color 0.8s ease;
+        }
+
+        .seek-pill {
+            position: absolute;
+            left: 27px;
+            top: 7.8px;
+            height: 45px;
+            background: rgba(20, 15, 25, 0.6);
+            box-sizing: border-box;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--ui-accent);
+            border-radius: 0 25px 25px 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            opacity: 0;
+            width: 100vw;
+            max-width: 0;
+            padding: 0;
+            transition: max-width 0.5s cubic-bezier(0.5, 0, 0.1, 1), padding 0.5s cubic-bezier(0.5, 0, 0.1, 1), opacity 0s 0.5s, border-color 0.8s ease;
+        }
+        .seek-pill.show-seek {
+            max-width: min(calc(85vw - 75px), 380px);
+            padding: 0 15px 0 40px;
+            opacity: 1;
+            z-index: 2;
+            transition: max-width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.1s ease, border-color 0.8s ease;
+        }
+
+        .prev-btn {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 35px;
+            height: 35px;
+            background: rgba(20, 15, 25, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--ui-accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(0) scale(0.5);
+            z-index: 3;
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.5, 0, 0.1, 1) 0.1s, opacity 0s 0.6s, scale 0.2s ease, border-color 0.8s ease;
+        }
+        .prev-btn.show-prev {
+            opacity: 1;
+            transform: translateY(60px) scale(1);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s, opacity 0.1s ease, scale 0.2s ease, border-color 0.8s ease;
+        }
+
+        .lyric-btn {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 35px;
+            height: 35px;
+            background: rgba(20, 15, 25, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--ui-accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transform: translateY(60px) translateX(0) scale(0.5);
+            opacity: 0;
+            z-index: 1;
+            transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.2s 0.2s, background-color 0.3s, scale 0.2s ease, border-color 0.8s ease;
+        }
+        .lyric-btn.show-prev {
+            transform: translateY(60px) translateX(45px) scale(1);
+            opacity: 1;
+            z-index: 2;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15s, opacity 0.1s 0.15s, scale 0.2s ease, border-color 0.8s ease;
+        }
+
+        .lyric-btn:active, .prev-btn:active {
+            scale: 0.85;
+            transition: scale 0.1s ease-out !important;
+        }
+
+        .lyric-btn svg {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            color: var(--ui-accent);
+            transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.8s ease;
+        }
+        .lyric-icon-open { opacity: 1; transform: scale(1) rotate(0deg); }
+        .lyric-icon-close { opacity: 0; transform: scale(0.5) rotate(-45deg); pointer-events: none; }
+        .lyric-btn.is-active .lyric-icon-open { opacity: 0; transform: scale(0.5) rotate(45deg); pointer-events: none; }
+        .lyric-btn.is-active .lyric-icon-close { opacity: 1; transform: scale(1) rotate(0deg); }
+
+        .prev-btn svg { width: 16px; height: 16px; color: var(--ui-accent); transition: color 0.8s ease; }
+
+        .lyrics-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 6;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1);
+            mask-image: linear-gradient(to bottom, transparent 15%, black 35%, black 65%, transparent 85%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 15%, black 35%, black 65%, transparent 85%);
+            touch-action: none;
+        }
+        .lyrics-container.show-lyrics {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .lyrics-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 220px;
+            padding-bottom: 220px;
+            padding-left: 15%;
+            padding-right: 15%;
+            text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            transition: transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1);
+        }
+
+        .lyric-line {
+            min-height: 35px;
+            line-height: 1.4;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0);
+            margin: 15px 0;
+            transition: color 0.4s, transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1), filter 0.4s, opacity 0.4s;
+        }
+        .lyric-line.active {
+            opacity: 1;
+            transform: scale(1.2) translateY(0);
+            filter: blur(0px);
+            color: var(--lyric-accent);
+            text-shadow: 0 0 15px var(--lyric-accent);
+        }
+        .lyric-line.prev {
+            opacity: 0.4;
+            transform: scale(0.9) translateY(-10px);
+            filter: blur(1px);
+            color: #FFF;
+        }
+        .lyric-line.next {
+            opacity: 0.4;
+            transform: scale(0.9) translateY(10px);
+            filter: blur(1px);
+            color: #FFF;
+        }
+
+        .lyric-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: currentColor;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce-dot 0.6s infinite alternate;
+        }
+        .lyric-dot:nth-child(2) { animation-delay: 0.2s; }
+        .lyric-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce-dot {
+            0% { transform: translateY(0); opacity: 0.3; }
+            100% { transform: translateY(-8px); opacity: 1; box-shadow: 0 0 10px currentColor; }
+        }
+
+        .time-display {
+            font-size: 0.75rem;
+            color: var(--ui-light);
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            opacity: 0.9;
+            width: 42px;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            flex-shrink: 0;
+            display: inline-block;
+            transition: color 0.8s ease;
+        }
+        #seek-bar {
+            -webkit-appearance: none;
+            flex-grow: 1;
+            margin: 0 10px;
+            height: 3px;
+            border-radius: 3px;
+            outline: none;
+            background: linear-gradient(to right, var(--ui-light) 0%, rgba(255,255,255,0.15) 0%);
+            transition: background 0.8s ease, height 0.3s ease;
+            cursor: pointer;
+            touch-action: none;
+        }
+        #seek-bar.seekbar-active { height: 6px; }
+        #seek-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(220, 186, 247, 0.8);
+            transition: transform 0.2s, width 0.3s ease, height 0.3s ease;
+        }
+        #seek-bar.seekbar-active::-webkit-slider-thumb { width: 16px; height: 16px; }
+
+        .cover-bounce { animation: hit-bounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes hit-bounce {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .music-info { display: flex; flex-direction: column; justify-content: center; transition: opacity 0.3s ease; }
+        .music-info.fade-out { opacity: 0; }
+        #track-title { color: white; font-size: 0.85rem; font-weight: 600; }
+        #track-artist { color: rgba(255, 255, 255, 0.6); font-size: 0.7rem; }
+        .pause-anim { animation-play-state: paused !important; }
+    
+/* --- DÜZELTİLMİŞ PROFİL DEĞİŞTİRME SİSTEMİ CSS --- */
+.panel-wrapper {
+    position: relative;
+    width: 100%;
+}
+.view-panel {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    width: 100%;
+}
+.view-panel.hidden-panel {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;      
+    left: 0;     
+    visibility: hidden;
+    transform: translateY(20px) scale(0.98);
+    height: 100%; 
+    overflow: hidden;
+}
+.view-panel.active-panel {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+/* ===================================================
+   İSİM DEĞİŞTİRME İKONU (MOBİL + MASAÜSTÜ + ÖZELLEŞTİRME)
+=================================================== */
+/* ===================================================
+   İSİM DEĞİŞTİRME İKONU (KESİN ÖZELLEŞTİRME)
+=================================================== */
+.username-switch {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* İKONUN KENDİSİ, BOYUTU VE KONUMU */
+.username-switch::after {
+    content: '\f2f1' !important;
+    font-family: 'Font Awesome 5 Free', 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+    
+    /* 1. BOYUT (Şu an büyüttüm, istersen değiştir) */
+    font-size: 0.40em !important; 
+    
+    /* 2. SAĞA/SOLA KONUM (İsme yapışmasın diye biraz daha sağa ittim) */
+    right: -25px !important; 
+    
+    /* 3. YUKARI/AŞAĞI KONUM */
+    top: 56% !important; 
+    
+    position: absolute !important;
+    transform: translateY(-50%) rotate(0deg);
+    opacity: 0.3; 
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.4s ease !important;
+}
+
+/* MASAÜSTÜ (Hover) VE MOBİL (Active) PARLAMA DURUMU */
+.username-switch:hover::after,
+.username-switch:active::after {
+    opacity: 1;
+    transform: translateY(-50%) rotate(180deg);
+    text-shadow: 0 0 12px currentColor; 
+}
+
+/* TIKLANDIĞI AN ÇALIŞACAK ZORUNLU ANİMASYON SINIFI */
+.username-switch.icon-spin-active::after {
+    opacity: 1 !important;
+    transform: translateY(-50%) rotate(180deg) !important;
+    text-shadow: 0 0 15px currentColor !important;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, text-shadow 0.2s !important;
+}
+
+
+/* MASAÜSTÜ HOVER (Fare) VE MOBİL ACTIVE (Dokunma) ANINDAKİ EFEKT */
+.username-switch:hover::after,
+.username-switch:active::after {
+    opacity: 1; /* Tamamen belirginleşir */
+    
+    /* 4. DÖNÜŞ: 180 derece döner. Daha çok dönsün istersen 360deg yapabilirsin */
+    transform: translateY(-50%) rotate(180deg); 
+    
+    /* 5. PARLAMA (GLOW): İkonun etrafına kendi renginde bir ışık saçar */
+    text-shadow: 0 0 12px currentColor; 
+}
+
+    /* JS ile tıklama anında devreye girecek zorunlu dönme sınıfı */
+.username-switch.icon-spin-active::after {
+    opacity: 1 !important;
+    transform: translateY(-50%) rotate(180deg) !important;
+    text-shadow: 0 0 15px currentColor !important;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, text-shadow 0.2s !important;
+}
+
+.username-switch::after {
+    content: '\f2f1';
+    font-family: 'Font Awesome 5 Free', 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.3em;
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%);
+    opacity: 0.3;
+    transition: opacity 0.3s, transform 0.3s;
+}
+.username-switch:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) rotate(180deg);
+}
+.profile-img-visual.no-image {
+    background-image: none !important;
+    background-color: #120e18; 
+}
+
+#twin-panel {
+    --link-bg: #211821;      
+    --text-light: #f6baf7;   
+    color: var(--text-light); 
+}
+
+#twin-panel .link-img-placeholder {
+    background-color: #211821; 
+}
+
+body.is-twin-active:not(.theme-lyric-on) {
+    --ui-accent: #f6baf7; 
+}
+
+#twin-panel .link-button {
+    background-color: #211821; 
+    color: #f6baf7; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); 
+}
+
+#twin-panel .link-img-placeholder {
+    background-color: #211821; 
+    /* İçeriye doğru hafif gölge */
+}
+
+#twin-panel .social-icons-mini a {
+    border-radius: 50%; 
+    padding: 2px; 
+}
+
+#twin-panel .social-icons-mini .mini-icon {
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+#twin-panel .social-icons-mini a {
+    margin: 0px; 
+}
+    
+#twin-panel .instagram-mini-icon .mini-icon { 
+    width: 47px; height: 47px; transform: translateY(-13px) translateX(13px); 
+}
+#twin-panel .twitter-mini-icon .mini-icon { 
+    width: 55px; height: 55px; transform: translateY(-14px) translateX(7px); 
+}
+#twin-panel .facebook-mini-icon .mini-icon { 
+    width: 49px; height: 49px; transform: translateY(-13px) translateX(0px); 
+}
+#twin-panel .tiktok-mini-icon .mini-icon { 
+    width: 47px; height: 47px; transform: translateY(-13px) translateX(-11px); 
+}
+#twin-panel .spotify-mini-icon .mini-icon { 
+    width: 42px; height: 42px; transform: translateY(-13px) translateX(-14px); 
+}
+#twin-panel .youtube-mini-icon .mini-icon { 
+    width: 50px; height: 50px; transform: translateY(-13px) translateX(-4px); 
+}
+#twin-panel .pinterest-mini-icon .mini-icon { 
+    width: 43px; height: 43px; transform: translateY(-16px) translateX(-15px); 
+}
+
+#kazikate-panel .social-icons-mini a {
+    margin: 0 2px; 
+}
+    
+#kazikate-panel .social-icons-mini .mini-icon {
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+#kazikate-panel .instagram-mini-icon .mini-icon { 
+    width: 47px; height: 47px; transform: translateY(-13px) translateX(16px); 
+}
+#kazikate-panel .twitter-mini-icon .mini-icon { 
+    width: 55px; height: 55px; transform: translateY(-14px) translateX(7px); 
+}
+#kazikate-panel .threads-mini-icon .mini-icon { 
+    width: 49px; height: 49px; transform: translateY(-13px) translateX(-2px); 
+}
+#kazikate-panel .tiktok-mini-icon .mini-icon { 
+    width: 47px; height: 47px; transform: translateY(-13px) translateX(-12px); 
+}
+#kazikate-panel .spotify-mini-icon .mini-icon { 
+    width: 42px; height: 42px; transform: translateY(-13px) translateX(-14px); 
+}
+#kazikate-panel .youtube-music-mini-icon .mini-icon { 
+    width: 45px; height: 45px; transform: translateY(-13px) translateX(-14px); 
+}
+#kazikate-panel .website-mini-icon .mini-icon { 
+    width: 48px; height: 48px; transform: translateY(-13px) translateX(-17px); 
+}
+    
+@media (hover: hover) {
+    .profile-img-container:not(.scrolled-past):hover .profile-hover-layer {
+        opacity: 1 !important;
+    }
+    .profile-img-container:not(.scrolled-past):hover .profile-hover-layer i {
+        transform: scale(1) !important;
+    }
+}
+  
+:root {
+    --dynamic-modal-rgb: 157, 80, 255; 
+}
+
+.modal-circle-mask {
+    box-shadow: 0 0 50px rgba(var(--dynamic-modal-rgb), 0.6) !important;
+    transition: box-shadow 0.8s ease; 
+}
+
+body.is-twin-active .profile-hover-layer i {
+    color: #f6baf7 !important; 
+}
+
+body.is-touching .profile-img-container:hover .profile-hover-layer,
+body.is-touching .profile-img-container:hover .profile-hover-layer i {
+    opacity: 0 !important;
+    transform: scale(0.5) !important;
+    pointer-events: none !important;
+}
+
+
+    </style>
+</head>
+<body class="is-twin-active">
+
+
+    <div id="music-widget">
+        <div class="music-pill" id="music-pill">
+            <div class="music-info">
+                <div id="track-title">Bekleniyor...</div>
+                <div id="track-artist">Müzik Çalar</div>
+            </div>
+        </div>
+        <div class="seek-pill" id="seek-pill">
+            <span class="time-display" id="current-time">00:00</span>
+            <input type="range" id="seek-bar" min="0" max="100" value="0" step="any">
+            <span class="time-display" id="total-time">00:00</span>
+        </div>
+        <div class="prev-btn" id="prev-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line>
+            </svg>
+        </div>
+        <div class="lyric-btn" id="lyric-btn">
+            <svg class="lyric-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                <path d="M10 11h-1v-2a1 1 0 0 1 1-1h.5"></path>
+                <path d="M15 11h-1v-2a1 1 0 0 1 1-1h.5"></path>
+            </svg>
+            <svg class="lyric-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                <path d="M10 11h-1v-2a1 1 0 0 1 1-1h.5"></path>
+                <path d="M15 11h-1v-2a1 1 0 0 1 1-1h.5"></path>
+                <line x1="22" y1="2" x2="2" y2="22"></line>
+            </svg>
+        </div>
+        <div class="music-cover-container" id="music-toggle">
+            <div class="default-glass-cover" id="default-cover">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
+                </svg>
+            </div>
+            <img src="" id="track-cover-1" crossorigin="Anonymous" class="track-cover-layer" alt="Album Cover">
+            <img src="" id="track-cover-2" crossorigin="Anonymous" class="track-cover-layer" alt="Album Cover">
+            <div class="music-overlay">
+                <svg id="play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg id="pause-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                <svg id="forward-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+                <div class="music-waves" id="wave-icon"><div class="wave-line"></div><div class="wave-line"></div><div class="wave-line"></div><div class="wave-line"></div></div>
+            </div>
+        </div>
+        <audio id="audio-player"></audio>
+    </div>
+
+    <canvas id="particle-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></canvas>
+
+    <div class="profile-img-container">
+        <div class="profile-img-visual"><div class="dim-overlay"></div></div>
+        <div class="lyrics-container" id="lyrics-container">
+            <div class="lyrics-wrapper" id="lyrics-wrapper"></div>
+        </div>
+      <img src="https://kazikate.github.io/Biography/assets/Twinbio.jpg" alt="Twin Profil Resmi" class="downloadable-profile-img">
+        <div class="profile-hover-layer"><i class="fas fa-expand"></i></div>
+    </div>
+
+<div class="content-wrapper">
+    <div class="container">
+        
+        <!-- YENİ EKLENEN: İki profili üst üste düzgün tutacak kutu -->
+        <div class="panel-wrapper">
+            
+            <!-- ================= 1. KAZIKATE PROFİLİ ================= -->
+           <div id="kazikate-panel" class="view-panel hidden-panel">
+                <header class="profile-header">
+                    <h1 class="username username-switch" onclick="toggleProfile('twin')">Kazikate</h1>
+                    <p class="bio">Future RN <img src="https://kazikate.github.io/Biography/assets/Syringe.png" alt="Şırınga Emojisi" class="bio-emoji"> • Lost in Music <img src="https://kazikate.github.io/Biography/assets/Music.png" alt="Müzik Emojisi" class="bio-emoji"></p>
+                    
+                    <div class="social-icons-mini">
+                        <a href="https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5" aria-label="Instagram" class="instagram-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Instagrammini.png" alt="Instagram" class="mini-icon"></a>
+                        <a href="https://x.com/kazikate1" aria-label="Twitter (X)" class="twitter-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Twittermini.png" alt="Twitter" class="mini-icon"></a>
+                        <a href="https://www.threads.com/@azadaltunnn" aria-label="Threads" class="threads-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Threadsmini.png" alt="Threads" class="mini-icon"></a>
+                        <a href="https://www.tiktok.com/@kazikate1" aria-label="TikTok" class="tiktok-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Tiktokmini.png" alt="TikTok" class="mini-icon"></a>
+                        <a href="https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa" aria-label="Spotify" class="spotify-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Spotifymini.png" alt="Spotify" class="mini-icon"></a>
+                        <a href="https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s" aria-label="YouTube Music" class="youtube-music-mini-icon"><img src="https://kazikate.github.io/Biography/assets/YTMusicmini.png" alt="YouTube Music" class="mini-icon"></a>
+                        <a href="https://github.com/kazikate" aria-label="Website" class="website-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Githubmini.png" alt="Website" class="mini-icon"></a>
+                    </div>
+                </header>
+                
+                <div class="links-section">
+                    <a href="https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Instagram.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">Instagram</span><span class="link-username">@azadaltunnn</span></div>
+                    </a>
+                    <a href="https://x.com/kazikate1" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Twitter.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">Twitter</span><span class="link-username">@kazikate1</span></div>
+                    </a>
+                    <a href="https://www.threads.com/@azadaltunnn" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Threads.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">Threads</span><span class="link-username">@azadaltunnn</span></div>
+                    </a>
+                    <a href="https://www.tiktok.com/@kazikate1" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Tiktok.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">TikTok</span><span class="link-username">@kazikate1</span></div>
+                    </a>
+                    <a href="https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Spotify.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">Spotify</span></div>
+                    </a>
+                    <a href="https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/YTMusic.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">Youtube Music</span></div>
+                    </a>
+                    <a href="https://github.com/kazikate" target="_blank" class="link-button">
+                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Github.png');"></div>
+                        <div class="link-text-details"><span class="link-platform">GitHub</span></div>
+                    </a>
+                </div>
+                
+                <footer class="footer-links"><span style="opacity: 0.8;">●</span><span class="footer-text" style="margin: 0 1px;">Created by Kazikate</span></footer>
+            </div>
+            
+<!-- ================= 2. İKİZİNİN PROFİLİ ================= -->
+<div id="twin-panel" class="view-panel active-panel">
+    <header class="profile-header">
+        <h1 class="username username-switch" onclick="toggleProfile('kazikate')">Kate Marifairy</h1>
+        <p class="bio">Peri Kraliçe, Gryffindor, Gamer, Roleplayer, Yazar, Şair, Linkin Park ve JoJo fan</p>
+        
+        <div class="social-icons-mini">
+            <a href="https://www.instagram.com/kate_marifairy" aria-label="Instagram" class="instagram-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Instagrammini.png" alt="Instagram" class="mini-icon"></a>
+            <a href="https://x.com/katemarifairy" aria-label="Twitter" class="twitter-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Twittermini.png" alt="Twitter" class="mini-icon"></a>
+            <a href="https://m.facebook.com/kate.marifairy/" aria-label="Facebook" class="facebook-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Facebookmini.png" alt="Facebook" class="mini-icon"></a>
+            <a href="https://m.youtube.com/@Kate_Marifairy" aria-label="Youtube" class="youtube-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Youtubemini.png" alt="Youtube" class="mini-icon"></a>
+            <a href="https://www.tiktok.com/@katemarifairy" aria-label="TikTok" class="tiktok-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Tiktokmini.png" alt="TikTok" class="mini-icon"></a>
+            <a href="https://www.pinterest.com/kate_marifairy/" aria-label="Pinterest" class="pinterest-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Pinterest.png" alt="YouTube Music" class="mini-icon"></a>
+            <a href="https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m" aria-label="Spotify" class="spotify-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Spotifymini.png" alt="Spotify" class="mini-icon"></a>
+        </div>
+    </header>
+    
+    <div class="links-section">
+        <a href="https://www.instagram.com/kate_marifairy" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Instagram.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Instagram</span><span class="link-username">@kate_marifairy</span></div>
+        </a>
+        <a href="https://x.com/katemarifairy" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Twitter.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Twitter</span><span class="link-username">@katemarifairy</span></div>
+        </a>
+        <a href="https://bsky.app/profile/katemarifairy.bsky.social" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Bluesky.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Bluesky</span><span class="link-username">@katemarifairy.bsky.social</span></div>
+        </a>
+        <a href="https://steamcommunity.com/profiles/76561199183309979/" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Steam.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Steam</span><span class="link-username">Kate Marifairy</span></div>
+        </a>
+        <a href="https://m.facebook.com/kate.marifairy/" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Facebook.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Facebook</span></div>
+        </a>
+        <a href="https://www.pinterest.com/kate_marifairy/" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Pinterest.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Pinterest</span></div>
+        </a>
+        <a href="https://m.youtube.com/@Kate_Marifairy" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Youtube.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Youtube</span></div>
+        </a>
+        <a href="https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m" target="_blank" class="link-button">
+            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Spotify.png');"></div>
+            <div class="link-text-details"><span class="link-platform">Spotify</span></div>
+        </a>
+    </div>
+    
+    <footer class="footer-links"><span style="opacity: 0.8;">●</span><span class="footer-text" style="margin: 0 1px;">Created for Kate by Kazikate</span></footer>
+</div>
+
+            
+        </div> <!-- panel-wrapper SONU -->
+
+    </div>
+</div>
+
+
+
+    <div id="image-preview-modal" class="image-preview-modal">
+        <div class="modal-content">
+            <div class="modal-circle-mask">
+<img src="https://kazikate.github.io/Biography/assets/Twinbio2.jpg" alt="Twin Profil Resmi" id="preview-image" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ---------- DEĞİŞKENLER ----------
+        let currentDragY = 0;
+        const RESISTANCE = 1;
+        const MAX_OVERSCROLL = 120;
+
+        const profileImgContainer = document.querySelector('.profile-img-container');
+        const profileImgVisual = document.querySelector('.profile-img-visual');
+        const dimOverlay = document.querySelector('.dim-overlay');
+        const downloadableImg = document.querySelector('.downloadable-profile-img');
+        const SPRING_TRANSITION = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        const MODAL_STATE_NAME = 'image_preview_open';
+
+        const audioPlayer = document.getElementById('audio-player');
+        const toggleBtn = document.getElementById('music-toggle');
+        const defaultCover = document.getElementById('default-cover');
+        const trackTitle = document.getElementById('track-title');
+        const trackArtist = document.getElementById('track-artist');
+        const trackCover1 = document.getElementById('track-cover-1');
+        const trackCover2 = document.getElementById('track-cover-2');
+        let activeCover = 1;
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const waveIcon = document.getElementById('wave-icon');
+        const musicPill = document.querySelector('.music-pill');
+        const lyricBtn = document.getElementById('lyric-btn');
+        const lyricsContainer = document.getElementById('lyrics-container');
+        const lyricsWrapper = document.getElementById('lyrics-wrapper');
+        const seekPill = document.getElementById('seek-pill');
+        const prevBtn = document.getElementById('prev-btn');
+        const seekBar = document.getElementById('seek-bar');
+        const currentTimeDisplay = document.getElementById('current-time');
+        const totalTimeDisplay = document.getElementById('total-time');
+
+        let isLyricsMode = false;
+        let currentLyrics = [];
+        let activeLyricIndex = -1;
+        let isPlaying = false;
+        let isFirstPlay = true;
+        let pillTimeout, iconTimeout, clickTimer;
+        let shuffledQueue = [];
+        let currentQueueIndex = 0;
+        let pillCloseTimer;
+        let trackLoadTicket = 0;
+        let lyricFetchTicket = 0;
+        let pressTimer;
+        let isLongPress = false;
+        let isSeeking = false;
+        let advancedControlsTimer, advCloseTimer;
+        let shouldReopenAdvanced = false;
+        let cachedDuration = 0;
+        let animationFrameId;
+        let isUserDraggingLyric = false;
+        let lyricStartY = 0;
+        let initialTransformY = 0;
+        let lyricSpring = null;
+
+        // ---------- FAYDALI FONKSİYONLAR ----------
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        }
+
+        function closeAdvancedControls(forceHideSeekbarOnly = false) {
+            if (isLyricsMode) {
+                if (forceHideSeekbarOnly) seekPill.classList.remove('show-seek');
+                clearTimeout(advancedControlsTimer);
+                clearTimeout(advCloseTimer);
+                return;
+            }
+            seekPill.classList.remove('show-seek');
+            prevBtn.classList.remove('show-prev');
+            lyricBtn.classList.remove('show-prev');
+            clearTimeout(advancedControlsTimer);
+            clearTimeout(advCloseTimer);
+            if (!forceHideSeekbarOnly) {
+                advCloseTimer = setTimeout(() => {
+                    toggleBtn.classList.add('cover-bounce');
+                    setTimeout(() => toggleBtn.classList.remove('cover-bounce'), 400);
+                }, 350);
+            }
+        }
+
+        function openAdvancedControls() {
+            seekPill.classList.add('show-seek');
+            if (!isLyricsMode) {
+                prevBtn.classList.add('show-prev');
+                lyricBtn.classList.add('show-prev');
+            }
+            resetAdvancedControlsTimer();
+        }
+
+        function resetAdvancedControlsTimer() {
+            if (isLyricsMode) return;
+            clearTimeout(advancedControlsTimer);
+            advancedControlsTimer = setTimeout(() => closeAdvancedControls(), 10000);
+        }
+
+        function closePill() {
+            musicPill.classList.remove('show-pill');
+            clearTimeout(pillCloseTimer);
+            pillCloseTimer = setTimeout(() => {
+                if (isLyricsMode) {
+                    seekPill.classList.add('show-seek');
+                } else {
+                    toggleBtn.classList.add('cover-bounce');
+                    setTimeout(() => toggleBtn.classList.remove('cover-bounce'), 400);
+                    if (shouldReopenAdvanced) {
+                        shouldReopenAdvanced = false;
+                        openAdvancedControls();
+                    }
+                }
+            }, 400);
+        }
+
+        function showPill() {
+            closeAdvancedControls(true);
+            if (isLyricsMode) {
+                prevBtn.classList.add('show-prev');
+                lyricBtn.classList.add('show-prev');
+            }
+            musicPill.classList.add('show-pill');
+            clearTimeout(pillTimeout);
+            clearTimeout(pillCloseTimer);
+            pillTimeout = setTimeout(() => closePill(), 3000);
+        }
+
+        // ---------- LYRİC SPRING SİSTEMİ ----------
+        function syncLyricPosition() {
+            if (!isLyricsMode || currentLyrics.length === 0 || isUserDraggingLyric || lyricSpring) return;
+            const currentTime = audioPlayer.currentTime;
+            let newIndex = -1;
+            for (let i = 0; i < currentLyrics.length; i++) {
+                if (currentTime >= currentLyrics[i].time - 0.3) { newIndex = i; } else break;
+            }
+            if (newIndex !== activeLyricIndex) {
+                animateToLyric(newIndex >= 0 ? newIndex : 0, { springK: 0.04, damping: 0.78 });
+            }
+        }
+
+        function animateToLyric(targetIndex, options = {}) {
+            if (!isLyricsMode || currentLyrics.length === 0) return;
+            const targetEl = document.getElementById(`lyric-${targetIndex}`);
+            if (!targetEl) return;
+            const containerCenter = lyricsContainer.clientHeight / 2;
+            const targetY = -(targetEl.offsetTop - containerCenter + (targetEl.clientHeight / 2));
+
+            if (lyricSpring) lyricSpring = null;
+
+            const style = window.getComputedStyle(lyricsWrapper);
+            const matrix = new DOMMatrixReadOnly(style.transform);
+            const startY = matrix.m42;
+
+            const springK = options.springK || 0.02;
+            const damping = options.damping || 0.85;
+            lyricSpring = {
+                targetY,
+                currentY: startY,
+                velocity: options.velocity || 0,
+                lastTime: performance.now(),
+                springK,
+                damping,
+                targetIndex,
+                dragMode: false,
+            };
+            lyricsWrapper.style.transition = 'none';
+            requestAnimationFrame(animateSpring);
+        }
+
+        function animateSpring(timestamp) {
+            if (!lyricSpring) return;
+            const spring = lyricSpring;
+            const now = timestamp || performance.now();
+            const elapsed = Math.min(now - spring.lastTime, 32);
+            spring.lastTime = now;
+
+            const displacement = spring.currentY - spring.targetY;
+            const acceleration = -spring.springK * displacement - (1 - spring.damping) * spring.velocity;
+            spring.velocity += acceleration * (elapsed / 16.6);
+            spring.currentY += spring.velocity * (elapsed / 16.6);
+
+            lyricsWrapper.style.transform = `translateY(${spring.currentY}px)`;
+
+            if (spring.dragMode) {
+                requestAnimationFrame(animateSpring);
+                return;
+            }
+
+            const containerCenter = lyricsContainer.clientHeight / 2;
+            let closestIndex = -1, minDistance = Infinity;
+            document.querySelectorAll('.lyric-line').forEach((el, index) => {
+                const elCenter = el.offsetTop + spring.currentY + (el.clientHeight / 2);
+                const dist = Math.abs(containerCenter - elCenter);
+                if (dist < minDistance) { minDistance = dist; closestIndex = index; }
+            });
+
+            if (closestIndex !== -1 && closestIndex !== activeLyricIndex) {
+                document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active', 'prev', 'next'));
+                activeLyricIndex = closestIndex;
+                const activeEl = document.getElementById(`lyric-${closestIndex}`);
+                if (activeEl) {
+                    activeEl.classList.add('active');
+                    if (closestIndex > 0) document.getElementById(`lyric-${closestIndex - 1}`)?.classList.add('prev');
+                    if (closestIndex < currentLyrics.length - 1) document.getElementById(`lyric-${closestIndex + 1}`)?.classList.add('next');
+                }
+            }
+
+            if (Math.abs(displacement) < 0.5 && Math.abs(spring.velocity) < 0.3 && closestIndex === spring.targetIndex) {
+                lyricsWrapper.style.transition = 'transform 0.2s ease-out';
+                lyricsWrapper.style.transform = `translateY(${spring.targetY}px)`;
+                lyricSpring = null;
+                document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active', 'prev', 'next'));
+                activeLyricIndex = spring.targetIndex;
+                const finalEl = document.getElementById(`lyric-${spring.targetIndex}`);
+                if (finalEl) {
+                    finalEl.classList.add('active');
+                    if (spring.targetIndex > 0) document.getElementById(`lyric-${spring.targetIndex - 1}`)?.classList.add('prev');
+                    if (spring.targetIndex < currentLyrics.length - 1) document.getElementById(`lyric-${spring.targetIndex + 1}`)?.classList.add('next');
+                }
+                setTimeout(() => { lyricsWrapper.style.transition = ''; }, 200);
+                return;
+            }
+            requestAnimationFrame(animateSpring);
+        }
+
+        // ---------- DOKUNMATİK LYRİC OLAYLARI ----------
+        lyricsContainer.addEventListener('touchstart', (e) => {
+            if (!isLyricsMode || currentLyrics.length === 0 || e.touches.length > 1) return;
+            isUserDraggingLyric = true;
+            lyricStartY = e.touches[0].clientY;
+            const transform = window.getComputedStyle(lyricsWrapper).getPropertyValue('transform');
+            initialTransformY = transform !== 'none' ? parseFloat(transform.split(',')[5]) : 0;
+            currentDragY = initialTransformY;
+            lyricsWrapper.style.transition = 'none';
+            document.querySelectorAll('.lyric-line').forEach(el => el.style.transition = 'color 0.2s, transform 0.2s, filter 0.2s, opacity 0.2s');
+
+            if (lyricSpring) lyricSpring = null;
+            lyricSpring = {
+                targetY: initialTransformY,
+                currentY: initialTransformY,
+                velocity: 0,
+                lastTime: performance.now(),
+                springK: 0.08,
+                damping: 0.6,
+                dragMode: true,
+                targetIndex: -1,
+            };
+            requestAnimationFrame(animateSpring);
+        }, { passive: false });
+
+        lyricsContainer.addEventListener('touchmove', (e) => {
+            if (!isUserDraggingLyric) return;
+            e.preventDefault();
+            const deltaY = e.touches[0].clientY - lyricStartY;
+            let newY = initialTransformY + deltaY;
+
+            const containerCenter = lyricsContainer.clientHeight / 2;
+            const firstLine = document.getElementById('lyric-0');
+            const lastLine = document.getElementById(`lyric-${currentLyrics.length - 1}`);
+            let isOverscrolling = false;
+            if (firstLine && lastLine) {
+                const maxScrollDown = -(firstLine.offsetTop - containerCenter + (firstLine.clientHeight / 2));
+                const maxScrollUp = -(lastLine.offsetTop - containerCenter + (lastLine.clientHeight / 2));
+                if (newY > maxScrollDown) {
+                    let overScroll = newY - maxScrollDown;
+                    overScroll = Math.min(overScroll, MAX_OVERSCROLL);
+                    newY = maxScrollDown + overScroll * RESISTANCE;
+                    isOverscrolling = true;
+                } else if (newY < maxScrollUp) {
+                    let overScroll = maxScrollUp - newY;
+                    overScroll = Math.min(overScroll, MAX_OVERSCROLL);
+                    newY = maxScrollUp - overScroll * RESISTANCE;
+                    isOverscrolling = true;
+                }
+            }
+            currentDragY = newY;
+            if (lyricSpring) lyricSpring.targetY = newY;
+
+            if (!isOverscrolling) {
+                let closestIndex = -1, minDistance = Infinity;
+                document.querySelectorAll('.lyric-line').forEach((el, index) => {
+                    const elCenter = el.offsetTop + newY + (el.clientHeight / 2);
+                    const dist = Math.abs(containerCenter - elCenter);
+                    if (dist < minDistance) { minDistance = dist; closestIndex = index; }
+                });
+                if (closestIndex !== -1 && closestIndex !== activeLyricIndex) {
+                    activeLyricIndex = closestIndex;
+                    document.querySelectorAll('.lyric-line').forEach(el => el.classList.remove('active', 'prev', 'next'));
+                    const activeEl = document.getElementById(`lyric-${closestIndex}`);
+                    if (activeEl) {
+                        if (navigator.vibrate) navigator.vibrate(10);
+                        activeEl.classList.add('active');
+                        if(closestIndex > 0) document.getElementById(`lyric-${closestIndex - 1}`)?.classList.add('prev');
+                        if(closestIndex < currentLyrics.length - 1) document.getElementById(`lyric-${closestIndex + 1}`)?.classList.add('next');
+                    }
+                }
+            }
+        }, { passive: false });
+
+        lyricsContainer.addEventListener('touchend', () => {
+            if (!isUserDraggingLyric) return;
+            isUserDraggingLyric = false;
+            lyricsWrapper.style.transition = 'transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1)';
+            document.querySelectorAll('.lyric-line').forEach(el => el.style.transition = '');
+
+            const containerCenter = lyricsContainer.clientHeight / 2;
+            const firstLine = document.getElementById('lyric-0');
+            const lastLine = document.getElementById(`lyric-${currentLyrics.length - 1}`);
+            let targetIndex = activeLyricIndex;
+            if (firstLine && lastLine) {
+                const maxScrollDown = -(firstLine.offsetTop - containerCenter + (firstLine.clientHeight / 2));
+                const maxScrollUp = -(lastLine.offsetTop - containerCenter + (lastLine.clientHeight / 2));
+                if (currentDragY > maxScrollDown) targetIndex = 0;
+                else if (currentDragY < maxScrollUp) targetIndex = currentLyrics.length - 1;
+            }
+            if (targetIndex < 0 && currentLyrics.length > 0) targetIndex = 0;
+            if (targetIndex >= 0 && targetIndex < currentLyrics.length) {
+                audioPlayer.currentTime = currentLyrics[targetIndex].time;
+                if (!isPlaying) playTrack();
+                const vel = lyricSpring ? lyricSpring.velocity : 0;
+                animateToLyric(targetIndex, { springK: 0.04, damping: 0.78, velocity: vel });
+            } else {
+                if (lyricSpring) lyricSpring = null;
+            }
+        });
+
+        lyricsContainer.addEventListener('touchcancel', () => {
+            if (!isUserDraggingLyric) return;
+            isUserDraggingLyric = false;
+            lyricsWrapper.style.transition = 'transform 0.6s cubic-bezier(0.25, 1.5, 0.5, 1)';
+            document.querySelectorAll('.lyric-line').forEach(el => el.style.transition = '');
+
+            const containerCenter = lyricsContainer.clientHeight / 2;
+            const firstLine = document.getElementById('lyric-0');
+            const lastLine = document.getElementById(`lyric-${currentLyrics.length - 1}`);
+            let targetIndex = activeLyricIndex;
+            if (firstLine && lastLine) {
+                const maxScrollDown = -(firstLine.offsetTop - containerCenter + (firstLine.clientHeight / 2));
+                const maxScrollUp = -(lastLine.offsetTop - containerCenter + (lastLine.clientHeight / 2));
+                if (currentDragY > maxScrollDown) targetIndex = 0;
+                else if (currentDragY < maxScrollUp) targetIndex = currentLyrics.length - 1;
+            }
+            if (targetIndex < 0 && currentLyrics.length > 0) targetIndex = 0;
+            if (targetIndex >= 0 && targetIndex < currentLyrics.length) {
+                audioPlayer.currentTime = currentLyrics[targetIndex].time;
+                if (!isPlaying) playTrack();
+                const vel = lyricSpring ? lyricSpring.velocity : 0;
+                animateToLyric(targetIndex, { springK: 0.04, damping: 0.78, velocity: vel });
+            } else {
+                if (lyricSpring) lyricSpring = null;
+            }
+        });
+
+        // ---------- MÜZİK OLAYLARI ----------
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            if (!isNaN(audioPlayer.duration) && audioPlayer.duration !== Infinity) {
+                cachedDuration = audioPlayer.duration;
+                totalTimeDisplay.textContent = formatTime(cachedDuration);
+            }
+            currentTimeDisplay.textContent = "00:00";
+            seekBar.value = 0;
+            seekBar.style.background = `linear-gradient(to right, var(--ui-light) 0%, rgba(255,255,255,0.15) 0%)`;
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const d = cachedDuration || audioPlayer.duration;
+            const currentTime = audioPlayer.currentTime;
+            if (!isNaN(d) && d > 0 && d !== Infinity) {
+                currentTimeDisplay.textContent = formatTime(currentTime);
+                totalTimeDisplay.textContent = formatTime(d);
+            }
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            isPlaying = false;
+            trackCover1.classList.add('pause-anim');
+            trackCover2.classList.add('pause-anim');
+            resetIcons();
+            clearTimeout(pillTimeout);
+            clearTimeout(pillCloseTimer);
+            musicPill.classList.remove('show-pill');
+            setTimeout(() => {
+                loadRandomTrack();
+                isFirstPlay = false;
+                showPill();
+                playTrack(true);
+            }, 200);
+        });
+
+        function updateSeekBarSmoothly() {
+            const d = cachedDuration || audioPlayer.duration;
+            if (!isSeeking && d && !isNaN(d) && d !== Infinity) {
+                const progress = (audioPlayer.currentTime / d) * 100;
+                seekBar.value = progress;
+                seekBar.style.background = `linear-gradient(to right, var(--ui-light) ${progress}%, rgba(255,255,255,0.15) ${progress}%)`;
+            }
+            syncLyricPosition();
+            animationFrameId = requestAnimationFrame(updateSeekBarSmoothly);
+        }
+        animationFrameId = requestAnimationFrame(updateSeekBarSmoothly);
+
+        audioPlayer.addEventListener('seeked', () => {
+            const currentTime = audioPlayer.currentTime;
+            let targetIdx = 0;
+            for (let i = 0; i < currentLyrics.length; i++) {
+                if (currentTime >= currentLyrics[i].time - 0.3) targetIdx = i;
+                else break;
+            }
+            animateToLyric(targetIdx);
+        });
+
+        // EKSİK OLAN FONKSİYONU GERİ GETİRDİK
+        function updateThemeColor(imgUrl) {
+            const colorImg = new Image();
+            colorImg.crossOrigin = "Anonymous";
+            colorImg.src = imgUrl;
+            colorImg.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 50; canvas.height = 50;
+                    ctx.drawImage(colorImg, 0, 0, 50, 50);
+                    const data = ctx.getImageData(0, 0, 50, 50).data;
+                    let r=0, g=0, b=0, count=0;
+                    for(let i=0; i<data.length; i+=16) { r+=data[i]; g+=data[i+1]; b+=data[i+2]; count++; }
+                    r=Math.floor(r/count); g=Math.floor(g/count); b=Math.floor(b/count);
+                    const max = Math.max(r, g, b);
+                    if (max > 0 && max < 200) { const factor = 200 / max; r = Math.min(255, Math.floor(r * factor)); g = Math.min(255, Math.floor(g * factor)); b = Math.min(255, Math.floor(b * factor)); } 
+                    else if (max === 0) { r = 220; g = 186; b = 247; }
+                    
+                    document.documentElement.style.setProperty('--lyric-accent', `rgb(${r}, ${g}, ${b})`);
+                    
+                    window.albumParticleRGB = `${r}, ${g}, ${b}`;
+                    if (isLyricsMode) {
+                        window.particleRGB = window.albumParticleRGB;
+                    }
+                } catch(e) { 
+                    document.documentElement.style.setProperty('--lyric-accent', '#DCBAF7'); 
+                    window.albumParticleRGB = '220, 186, 247';
+                    if (isLyricsMode) window.particleRGB = window.albumParticleRGB;
+                }
+            };
+        }
+
+    // --- PROFİL FOTOĞRAFINDAN RENK ÇIKARMA FONKSİYONU ---
+function updateModalGlow(imgUrl) {
+    const colorImg = new Image();
+    colorImg.crossOrigin = "Anonymous";
+    colorImg.src = imgUrl;
+    colorImg.onload = () => {
+        try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 50; canvas.height = 50;
+            ctx.drawImage(colorImg, 0, 0, 50, 50);
+            const data = ctx.getImageData(0, 0, 50, 50).data;
+            let r=0, g=0, b=0, count=0;
+            for(let i=0; i<data.length; i+=16) { r+=data[i]; g+=data[i+1]; b+=data[i+2]; count++; }
+            r=Math.floor(r/count); g=Math.floor(g/count); b=Math.floor(b/count);
+            
+            const max = Math.max(r, g, b);
+            if (max > 0 && max < 200) { 
+                const factor = 200 / max; 
+                r = Math.min(255, Math.floor(r * factor)); 
+                g = Math.min(255, Math.floor(g * factor)); 
+                b = Math.min(255, Math.floor(b * factor)); 
+            } 
+            else if (max === 0) { r = 157; g = 80; b = 255; } 
+            
+            console.log("Bulunan Glow Rengi:", r, g, b); // Konsola rengi yazdırsın
+            document.documentElement.style.setProperty('--dynamic-modal-rgb', `${r}, ${g}, ${b}`);
+        } catch(e) { 
+            console.error("Glow renk çıkarma hatası:", e); // Hatayı konsola basar
+            document.documentElement.style.setProperty('--dynamic-modal-rgb', '157, 80, 255'); 
+        }
+    };
+    colorImg.onerror = (err) => {
+        console.error("Resim yüklenemedi:", err);
+    };
+}
+
+
+        function toggleLyrics() {
+            if (navigator.vibrate) navigator.vibrate(20);
+            isLyricsMode = !isLyricsMode;
+            
+            if (isLyricsMode) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                lyricBtn.classList.add('is-active');
+                lyricsContainer.classList.add('show-lyrics');
+                document.body.classList.add('theme-lyric-on');
+                const activeCoverSrc = activeCover === 1 ? trackCover1.src : trackCover2.src;
+                if (profileImgVisual) {
+                    profileImgVisual.style.backgroundImage = `url("${activeCoverSrc}")`;
+                    profileImgVisual.style.filter = 'blur(20px) brightness(0.3)';
+                    profileImgVisual.style.transform = 'scale(1.1)';
+                }
+                
+                if (window.albumParticleRGB) {
+                    window.particleRGB = window.albumParticleRGB;
+                }
+
+                if (!musicPill.classList.contains('show-pill')) seekPill.classList.add('show-seek');
+                prevBtn.classList.add('show-prev');
+                lyricBtn.classList.add('show-prev');
+                clearTimeout(advancedControlsTimer);
+                lyricsWrapper.style.transition = 'transform 0.7s cubic-bezier(0.25, 1.5, 0.5, 1)';
+                activeLyricIndex = -99;
+                if (currentLyrics.length === 0 && trackTitle.innerText !== "Bekleniyor...") {
+                    fetchLyrics(audioPlayer.src);
+                } else if (currentLyrics.length > 0) {
+                    syncLyricPosition();
+                }
+            } else {
+                lyricBtn.classList.remove('is-active');
+                lyricsContainer.classList.remove('show-lyrics');
+                document.body.classList.remove('theme-lyric-on');
+                
+                if (profileImgVisual) {
+                    const activeBg = window.currentProfileBg || 'https://kazikate.github.io/Biography/assets/Twinbio.jpg';
+                  profileImgVisual.style.backgroundImage = `url('${activeBg}')`;
+                    
+                    profileImgVisual.style.filter = ''; profileImgVisual.style.transform = '';
+                    window.dispatchEvent(new Event('scroll'));
+                }
+                resetAdvancedControlsTimer();
+                
+                // İkizinin profili aktifse onun mor/pembe rengini, değilsen senin rengini geri yükler
+                if (document.body.classList.contains('is-twin-active')) {
+                    window.particleRGB = '138, 55, 138'; 
+                } else {
+                    window.particleRGB = '157, 80, 255'; 
+                }
+            }
+        }
+
+        function resetIcons() {
+            clearTimeout(iconTimeout);
+            playIcon.classList.remove('show-icon');
+            pauseIcon.classList.remove('show-icon');
+            waveIcon.classList.remove('show-wave');
+        }
+
+        function playTrack(isSkipping = false) {
+            resetIcons();
+            audioPlayer.play().catch(e => console.log("Müzik bekleniyor..."));
+            trackCover1.classList.add('spin-anim'); trackCover1.classList.remove('pause-anim');
+            trackCover2.classList.add('spin-anim'); trackCover2.classList.remove('pause-anim');
+            toggleBtn.classList.add('is-active');
+            if (isSkipping) {
+                iconTimeout = setTimeout(() => { waveIcon.classList.add('show-wave'); }, 400);
+            } else {
+                playIcon.classList.add('show-icon');
+                iconTimeout = setTimeout(() => {
+                    playIcon.classList.remove('show-icon');
+                    waveIcon.classList.add('show-wave');
+                }, 1000);
+            }
+            isPlaying = true;
+        }
+
+        function pauseTrack() {
+            audioPlayer.pause();
+            trackCover1.classList.add('pause-anim'); trackCover2.classList.add('pause-anim');
+            resetIcons();
+            pauseIcon.classList.add('show-icon');
+            setTimeout(() => {
+                if (!isPlaying) {
+                    pauseIcon.classList.remove('show-icon');
+                    toggleBtn.classList.remove('is-active');
+                }
+            }, 1000);
+            isPlaying = false;
+        }
+
+        function parseLRC(lrcText) {
+            const lines = lrcText.split('\n');
+            const parsed = [];
+            const timeRegEx = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+            lines.forEach(line => {
+                const match = line.match(timeRegEx);
+                if (match) {
+                    const minutes = parseInt(match[1]);
+                    const seconds = parseInt(match[2]);
+                    const milliseconds = match[3].length === 2 ? parseInt(match[3]) * 10 : parseInt(match[3]);
+                    const time = (minutes * 60) + seconds + (milliseconds / 1000);
+                    let text = line.replace(timeRegEx, '').trim();
+                    if (text === '' || text === '♪' || text === '♫') text = '•••';
+                    parsed.push({ time, text });
+                }
+            });
+            const processedLyrics = [];
+            for (let i = 0; i < parsed.length; i++) {
+                processedLyrics.push(parsed[i]);
+                if (i < parsed.length - 1) {
+                    const gap = parsed[i+1].time - parsed[i].time;
+                    if (gap > 8 && parsed[i].text !== '•••') {
+                        processedLyrics.push({ time: parsed[i].time + 2, text: '•••' });
+                    }
+                }
+            }
+            if (processedLyrics.length > 0 && processedLyrics[0].time > 5) {
+                processedLyrics.unshift({ time: 0, text: '•••' });
+            }
+            return processedLyrics;
+        }
+
+        async function fetchLyrics(fileUrl) {
+            lyricFetchTicket++;
+            const myTicket = lyricFetchTicket;
+            lyricsWrapper.innerHTML = '<div class="lyric-line">Loading...</div>';
+            currentLyrics = []; activeLyricIndex = -1; lyricsWrapper.style.transform = `translateY(0px)`;
+            try {
+                const fileName = fileUrl.split('/').pop().replace('.opus', '.lrc');
+                const lrcUrl = `https://kazikate.github.io/Biography/music/lyric/${fileName}`;
+                const res = await fetch(lrcUrl);
+                if (res.ok) {
+                    const lrcText = await res.text();
+                    if (myTicket === lyricFetchTicket) {
+                        currentLyrics = parseLRC(lrcText);
+                        currentLyrics.sort((a, b) => a.time - b.time);
+                        lyricsWrapper.innerHTML = '';
+                        currentLyrics.forEach((line, index) => {
+                            const el = document.createElement('div');
+                            el.className = 'lyric-line';
+                            el.id = `lyric-${index}`.trim();
+                            if (line.text === '•••') {
+                                el.innerHTML = '<span class="lyric-dot"></span><span class="lyric-dot"></span><span class="lyric-dot"></span>';
+                                el.classList.add('instrumental');
+                            } else {
+                                el.innerText = line.text;
+                            }
+                            lyricsWrapper.appendChild(el);
+                        });
+                        activeLyricIndex = -99;
+                        syncLyricPosition();
+                        return;
+                    }
+                } else {
+                    if (myTicket === lyricFetchTicket) lyricsWrapper.innerHTML = '<div class="lyric-line">Sözler klasörde bulunamadı.</div>';
+                }
+            } catch (err) {
+                if (myTicket === lyricFetchTicket) lyricsWrapper.innerHTML = '<div class="lyric-line">Bağlantı hatası.</div>';
+            }
+        }
+
+        const playlist = [
+            { title: "Bodies", artist: "Drowning Pool", file: "https://kazikate.github.io/Biography/music/Bodies.opus" },
+            { title: "Courtesy Call", artist: "Thousand Foot Krutch", file: "https://kazikate.github.io/Biography/music/Courtesy Call.opus" },
+            { title: "Flying (Remastered)", artist: "Anathema", file: "https://kazikate.github.io/Biography/music/Flying (Remastered).opus" },
+            { title: "Sonne", artist: "Rammstein", file: "https://kazikate.github.io/Biography/music/Sonne.opus" },
+            { title: "Stricken", artist: "Disturbed", file: "https://kazikate.github.io/Biography/music/Stricken.opus" },
+            { title: "The Sound of Silence", artist: "Disturbed", file: "https://kazikate.github.io/Biography/music/The Sound of Silence.opus" },
+            { title: "Decadence", artist: "Disturbed", file: "https://kazikate.github.io/Biography/music/Decadence.opus" },
+            { title: "Sirens", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Sirens.opus" },
+            { title: "Dying Slowly", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Dying Slowly.opus" },
+            { title: "Ghost", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Ghost.opus" },
+            { title: "Devastate", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Devastate.opus" },
+            { title: "O Come, O Come Emmanuel", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/O Come, O Come Emmanuel.opus" },
+            { title: "Ash In The Wind", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Ash In The Wind.opus" },
+            { title: "Fire Inside of Me", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Fire Inside of Me.opus" },
+            { title: "Psycho In My Head", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Psycho In My Head.opus" },
+            { title: "Angels Fall Down (Live)", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Angels Fall Down (Live).opus" },
+            { title: "You Are My Hope", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/You Are My Hope.opus" },
+            { title: "One Day Too Late", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/One Day Too Late.opus" },
+            { title: "Awake and Alive", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Awake and Alive.opus" },
+            { title: "Everything Goes Black", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Everything Goes Black.opus" },
+            { title: "American Noise", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/American Noise.opus" },
+            { title: "Good to Be Alive", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Good to Be Alive.opus" },
+            { title: "Valley of Death", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Valley of Death.opus" },
+            { title: "Lucy", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Lucy.opus" },
+            { title: "Feel Invincible", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Feel Invincible.opus" },
+            { title: "Legendary", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Legendary.opus" },
+            { title: "Stars", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Stars.opus" },
+            { title: "Victorious", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Victorious.opus" },
+            { title: "The Last Night", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/The Last Night.opus" },
+            { title: "Rebirthing", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Rebirthing.opus" },
+            { title: "It's Not Me, It's You", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/It's Not Me, It's You.opus" },
+            { title: "Dead Inside", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Dead Inside.opus" },
+            { title: "Freakshow", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Freakshow.opus" },
+            { title: "What I Believe", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/What I Believe.opus" },
+            { title: "The Resistance", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/The Resistance.opus" },
+            { title: "Not Gonna Die", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Not Gonna Die.opus" },
+            { title: "Whispers in the Dark", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Whispers in the Dark.opus" },
+            { title: "Comatose", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Comatose.opus" },
+            { title: "Monster", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Monster.opus" },
+            { title: "Hero", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Hero.opus" },
+            { title: "Fighting Myself", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Fighting Myself.opus" },
+            { title: "Let Down", artist: "Dead By Sunrise", file: "https://kazikate.github.io/Biography/music/Let Down.opus" },
+            { title: "Until It's Gone", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Until It's Gone.opus" },
+            { title: "Up From the Bottom", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Up From the Bottom.opus" },
+            { title: "Two Faced", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Two Faced.opus" },
+            { title: "Good Things Go", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Good Things Go.opus" },
+            { title: "Lying from You", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Lying from You.opus" },
+            { title: "A Place for My Head", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/A Place for My Head.opus" },
+            { title: "The Emptiness Machine", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/The Emptiness Machine.opus" },
+            { title: "Heavy Is the Crown", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Heavy Is the Crown.opus" },
+            { title: "New Divide", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/New Divide.opus" },
+            { title: "One More Light", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/One More Light.opus" },
+            { title: "ROADS UNTRAVELED", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/ROADS UNTRAVELED.opus" },
+            { title: "CASTLE OF GLASS", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/CASTLE OF GLASS.opus" },
+            { title: "What I've Done", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/What I've Done.opus" },
+            { title: "Given Up", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Given Up.opus" },
+            { title: "Papercut", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Papercut.opus" },
+            { title: "One Step Closer", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/One Step Closer.opus" },
+            { title: "In the End", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/In the End.opus" },
+            { title: "Somewhere I Belong", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Somewhere I Belong.opus" },
+            { title: "Breaking the Habit", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Breaking the Habit.opus" },
+            { title: "Faint", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Faint.opus" },
+            { title: "Numb", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Numb.opus" },
+            { title: "I Don't Care", artist: "Apocalyptica", file: "https://kazikate.github.io/Biography/music/I Don't Care.opus" },
+            { title: "Kill Me Fast", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Kill Me Fast.opus" },
+            { title: "One X", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/One X.opus" },
+            { title: "Lifetime", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Lifetime.opus" },
+            { title: "Fallen Angel", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Fallen Angel.opus" },
+            { title: "Life Starts Now", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Life Starts Now.opus" },
+            { title: "World so Cold", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/World so Cold.opus" },
+            { title: "Home", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Home.opus" },
+            { title: "Get Out Alive", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Get Out Alive.opus" },
+            { title: "Pain", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Pain.opus" },
+            { title: "Time of Dying", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Time of Dying.opus" },
+            { title: "Never Too Late", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Never Too Late.opus" },
+            { title: "Riot", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Riot.opus" },
+            { title: "Animal I Have Become", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Animal I Have Become.opus" },
+            { title: "I Hate Everything About You", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/I Hate Everything About You.opus" },
+            { title: "Solway Firth", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Solway Firth.opus" },
+            { title: "[sic]", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/[sic].opus" },
+            { title: "Eyeless", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Eyeless.opus" },
+            { title: "Unsainted", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Unsainted.opus" },
+            { title: "Nero Forte", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Nero Forte.opus" },
+            { title: "Custer", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Custer.opus" },
+            { title: "Left Behind", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Left Behind.opus" },
+            { title: "People = Shit", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/People = Shit.opus" },
+            { title: "Afraid Of The Dark", artist: "Motionless In White", file: "https://kazikate.github.io/Biography/music/Afraid Of The Dark.opus" },
+            { title: "Voices", artist: "Motionless In White", file: "https://kazikate.github.io/Biography/music/Voices.opus" },
+            { title: "Another Life", artist: "Motionless In White", file: "https://kazikate.github.io/Biography/music/Another Life.opus" },
+            { title: "Until The End", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Until The End.opus" },
+            { title: "Evil Angel", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Evil Angel.opus" },
+            { title: "Dance With The Devil", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Dance With The Devil.opus" },
+            { title: "Awaken", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Awaken.opus" },
+            { title: "Circle With Me", artist: "Spiritbox", file: "https://kazikate.github.io/Biography/music/Circle With Me.opus" },
+            { title: "Decay With Me", artist: "Deathly Hours", file: "https://kazikate.github.io/Biography/music/Decay With Me.opus" },
+            { title: "Dying in Your Arms", artist: "Deathly Hours", file: "https://kazikate.github.io/Biography/music/Dying in Your Arms.opus" }
+        ];
+
+        async function loadRandomTrack() {
+            toggleBtn.classList.add('solid-bg');
+            trackLoadTicket++;
+            const myTicket = trackLoadTicket;
+            currentLyrics = [];
+            activeLyricIndex = -1;
+            if (shuffledQueue.length === 0 || currentQueueIndex >= shuffledQueue.length) {
+                shuffledQueue = Array.from({length: playlist.length}, (_, i) => i);
+                for (let i = shuffledQueue.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffledQueue[i], shuffledQueue[j]] = [shuffledQueue[j], shuffledQueue[i]];
+                }
+                currentQueueIndex = 0;
+            }
+            const trackIndex = shuffledQueue[currentQueueIndex];
+            currentQueueIndex++;
+            const randomTrack = playlist[trackIndex];
+            trackTitle.textContent = randomTrack.title;
+            trackArtist.textContent = randomTrack.artist;
+            audioPlayer.src = randomTrack.file;
+            cachedDuration = 0;
+            fetchLyrics(randomTrack.file);
+            const fileName = randomTrack.file.split('/').pop().replace('.opus', '.png');
+            const finalCoverUrl = `https://kazikate.github.io/Biography/assets/covers/${fileName}`;
+            const defaultCoverUrl = "https://i.scdn.co/image/ab67616d0000b27341e97ee9cf2ee378519e4875";
+            if (myTicket !== trackLoadTicket) return;
+            const nextCover = activeCover === 1 ? trackCover2 : trackCover1;
+            const currentCover = activeCover === 1 ? trackCover1 : trackCover2;
+            updateThemeColor(finalCoverUrl);
+            const preloader = new Image();
+            preloader.onload = () => {
+                if (myTicket !== trackLoadTicket) return;
+                nextCover.src = finalCoverUrl;
+                nextCover.style.opacity = '1';
+                currentCover.style.opacity = '0';
+                defaultCover.style.opacity = '0';
+                activeCover = activeCover === 1 ? 2 : 1;
+                if (isLyricsMode && profileImgVisual) {
+                    profileImgVisual.style.backgroundImage = `url("${finalCoverUrl}")`;
+                }
+            };
+            preloader.onerror = () => {
+                if (myTicket !== trackLoadTicket) return;
+                nextCover.src = defaultCoverUrl;
+                nextCover.style.opacity = '1';
+                currentCover.style.opacity = '0';
+                defaultCover.style.opacity = '0';
+                activeCover = activeCover === 1 ? 2 : 1;
+                if (isLyricsMode && profileImgVisual) {
+                    profileImgVisual.style.backgroundImage = `url("${defaultCoverUrl}")`;
+                }
+            };
+            preloader.src = finalCoverUrl;
+        }
+
+        // ---------- BUTON OLAYLARI ----------
+        toggleBtn.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        function handlePressStart(e) {
+            if(e.pointerType === 'mouse' && e.button !== 0) return;
+            isLongPress = false;
+            pressTimer = setTimeout(() => {
+                isLongPress = true;
+                if (isFirstPlay) return;
+                if (seekPill.classList.contains('show-seek')) {
+                    closeAdvancedControls(); shouldReopenAdvanced = false;
+                } else {
+                    if (musicPill.classList.contains('show-pill')) {
+                        clearTimeout(pillTimeout); closePill(); shouldReopenAdvanced = true;
+                    } else { openAdvancedControls(); }
+                }
+            }, 300);
+        }
+
+        function handlePressEnd() { clearTimeout(pressTimer); }
+
+        toggleBtn.addEventListener('pointerdown', handlePressStart);
+        toggleBtn.addEventListener('pointerup', handlePressEnd);
+        toggleBtn.addEventListener('pointercancel', handlePressEnd);
+
+        toggleBtn.addEventListener('click', (e) => {
+            if (isLongPress) { isLongPress = false; return; }
+            if (e.detail === 1) {
+                clickTimer = setTimeout(() => {
+                    if (isFirstPlay) { loadRandomTrack(); showPill(); isFirstPlay = false; playTrack(); }
+                    else { isPlaying ? pauseTrack() : playTrack(); }
+                }, 250);
+            }
+        });
+
+        toggleBtn.addEventListener('dblclick', () => {
+            clearTimeout(clickTimer); resetIcons();
+            document.getElementById('forward-icon').classList.add('show-forward');
+            if (seekPill.classList.contains('show-seek')) {
+                closeAdvancedControls(true);
+                shouldReopenAdvanced = true;
+            }
+            clearTimeout(pillTimeout); clearTimeout(pillCloseTimer);
+            musicPill.classList.remove('show-pill');
+            setTimeout(() => {
+                document.getElementById('forward-icon').classList.remove('show-forward');
+                loadRandomTrack(); isFirstPlay = false; showPill(); playTrack(true);
+            }, 500);
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetAdvancedControlsTimer();
+            
+            if (isFirstPlay) return;
+            
+            if (audioPlayer.currentTime > 3) {
+                audioPlayer.currentTime = 0;
+                activeLyricIndex = -99;
+                syncLyricPosition();
+                if (!isPlaying) playTrack();
+            } else {
+                clearTimeout(clickTimer); 
+                clearTimeout(pillTimeout); 
+                clearTimeout(pillCloseTimer);
+                
+                musicPill.classList.remove('show-pill'); 
+                resetIcons();
+                
+                shouldReopenAdvanced = true;
+
+                currentQueueIndex -= 2;
+                if (currentQueueIndex < 0) currentQueueIndex = playlist.length - 1;
+                
+                setTimeout(() => { 
+                    loadRandomTrack(); 
+                    showPill(); 
+                    playTrack(true); 
+                }, 500);
+            }
+        });
+
+        lyricBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleLyrics(); });
+
+        seekBar.addEventListener('pointerdown', (e) => {
+            isSeeking = true;
+            seekBar.classList.add('seekbar-active');
+            seekBar.setPointerCapture(e.pointerId);
+            resetAdvancedControlsTimer();
+        });
+
+        seekBar.addEventListener('pointerup', (e) => {
+            if (!isSeeking) return;
+            isSeeking = false;
+            seekBar.classList.remove('seekbar-active');
+            seekBar.releasePointerCapture(e.pointerId);
+            const d = cachedDuration || audioPlayer.duration;
+            if (d && !isNaN(d) && d !== Infinity) {
+                audioPlayer.currentTime = (seekBar.value / 100) * d;
+            }
+            resetAdvancedControlsTimer();
+        });
+
+        seekBar.addEventListener('input', () => {
+            isSeeking = true;
+            const val = seekBar.value;
+            seekBar.style.background = `linear-gradient(to right, var(--ui-light) ${val}%, rgba(255,255,255,0.15) ${val}%)`;
+            const d = cachedDuration || audioPlayer.duration;
+            if(d && !isNaN(d) && d !== Infinity) currentTimeDisplay.textContent = formatTime((val / 100) * d);
+            resetAdvancedControlsTimer();
+        });
+
+    // ---------- DOMContentLoaded, MODAL, PARALLAX, PARTICLES ----------
+document.addEventListener('DOMContentLoaded', () => {
+     // YENİ: Sayfa ilk açıldığı an, o anki modal resminin rengini otomatik tara ve glow yap!
+    const initialPreviewImg = document.getElementById('preview-image');
+    if (initialPreviewImg) {
+        updateModalGlow(initialPreviewImg.src);
+    }
+    
+    // YENİ SATIR (Artık tüm başlık ve yazıları kapsıyor):
+const elementsToAnimate = [profileImgContainer, ...document.querySelectorAll('.username'), ...document.querySelectorAll('.bio'), ...document.querySelectorAll('.social-icons-mini'), ...document.querySelectorAll('.link-button')].filter(el => el != null);
+
+    setTimeout(() => { elementsToAnimate.forEach(el => { el.classList.add('is-visible'); }); }, 50);
+
+    const parallaxRatio = 0.4; const maxScroll = 200; const maxBlur = 10; const maxDimOpacity = 0.6; let ticking = false;
+    function updateEffects() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrollY = Math.max(0, -document.body.getBoundingClientRect().top);
+                if (isLyricsMode) {
+                    if (scrollY > 150) toggleLyrics();
+                    profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
+                    ticking = false;
+                    return;
+                }
+                const scrollRatio = Math.min(scrollY, maxScroll) / maxScroll;
+                profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
+                profileImgVisual.style.filter = `blur(${scrollRatio * maxBlur}px)`;
+                dimOverlay.style.opacity = scrollRatio * maxDimOpacity;
+                if (scrollY > 30) { profileImgContainer.classList.add('scrolled-past'); } else { profileImgContainer.classList.remove('scrolled-past'); }
+                ticking = false;
+            }); ticking = true;
+        }
+    }
+    window.addEventListener('scroll', updateEffects, { passive: true });
+    window.addEventListener('touchmove', updateEffects, { passive: true });
+    updateEffects();
+
+    document.querySelectorAll('.link-button').forEach(btn => {
+        btn.addEventListener('click', () => { btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press'); setTimeout(() => { btn.classList.remove('press'); }, 200); });
+    });
+
+    setTimeout(() => {
+        document.body.classList.add('animations-done');
+        if (profileImgContainer) { setTimeout(() => { profileImgContainer.classList.add('show-hint'); setTimeout(() => { profileImgContainer.classList.remove('show-hint'); }, 1000); }, 300); }
+    }, 2200);
+
+    // Modal yönetimi
+    const modal = document.getElementById('image-preview-modal');
+    const modalContent = document.querySelector('.modal-content');
+    let initialDistance = 0; let currentScale = 1; let isPinching = false; const MIN_TOUCHES_FOR_PINCH = 2;
+
+    function closeModal() {
+        if (!modal.classList.contains('is-open')) return;
+        modal.classList.remove('is-open'); document.removeEventListener('keydown', handleEscape);
+        document.body.classList.remove('no-scroll'); document.body.classList.remove('is-modal-open');
+        modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
+        currentScale = 1; isPinching = false;
+        if (history.state && history.state.modal === MODAL_STATE_NAME) { if (history.length > 0) { history.back(); } }
+    }
+    function openModal() {
+        if (isLyricsMode) return;
+        if (modal.classList.contains('is-open')) return;
+        if (!history.state || history.state.modal !== MODAL_STATE_NAME) { history.pushState({ modal: MODAL_STATE_NAME }, '', window.location.href); }
+        document.body.classList.add('no-scroll'); document.body.classList.add('is-modal-open');
+        modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
+        modal.classList.add('is-open'); setTimeout(() => { modalContent.style.transform = `scale(1)`; }, 10);
+        modal.onclick = (event) => { 
+            if (event.target.id !== 'preview-image') { 
+                closeModal(); 
+            } 
+        };
+
+        document.addEventListener('keydown', handleEscape, { once: true });
+    }
+    function handleEscape(e) { if (e.key === 'Escape') closeModal(); }
+    window.addEventListener('popstate', (e) => {
+        if (modal.classList.contains('is-open') && (!e.state || e.state.modal !== MODAL_STATE_NAME)) {
+            modal.classList.remove('is-open'); document.body.classList.remove('no-scroll'); document.body.classList.remove('is-modal-open');
+            modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
+        }
+    });
+    profileImgContainer.addEventListener('click', openModal);
+    modal.addEventListener('touchstart', (e) => {
+        if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
+            e.preventDefault(); modalContent.style.transition = 'none'; initialDistance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY); isPinching = true;
+        } else { isPinching = false; }
+    }, { passive: false });
+    modal.addEventListener('touchmove', (e) => {
+        if (!isPinching) return; e.preventDefault();
+        const newDistance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+        const scaleFactor = newDistance / initialDistance; currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
+        modalContent.style.transform = `scale(${currentScale})`;
+    }, { passive: false });
+    modal.addEventListener('touchend', () => {
+        if (!isPinching) return; isPinching = false;
+        modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(1)`; currentScale = 1;
+    });
+});
+
+document.addEventListener('touchstart', () => { document.body.classList.add('is-touching'); }, { passive: true });
+document.addEventListener('mousemove', (e) => { if (e.movementX !== 0 || e.movementY !== 0) { document.body.classList.remove('is-touching'); } }, { passive: true });
+
+document.querySelectorAll('.social-icons-mini a').forEach(icon => {
+    icon.addEventListener('mousemove', (e) => {
+        if (!document.body.classList.contains('is-touching') && document.body.classList.contains('animations-done')) {
+            const rect = icon.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2; const y = e.clientY - rect.top - rect.height / 2;
+            icon.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px) scale(1.15)`; icon.style.transition = 'transform 0.1s ease-out';
+        }
+    });
+    icon.addEventListener('mouseleave', () => { icon.style.transform = ''; icon.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; });
+});
+
+// Particles
+(function() {
+    window.particleRGB = '138, 55, 138';
+
+    const canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d'); let width, height; let particles = []; let tiltX = 0; let tiltY = 0;
+    function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas); resizeCanvas();
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width; this.y = Math.random() * height;
+            this.size = Math.random() * 2.0 + 1.0; this.speedX = Math.random() * 0.5 - 0.2; this.speedY = Math.random() * -0.5 - 0.2;
+            this.opacity = Math.random() * 0.35 + 0.15;
+        }
+        update() {
+            const depth = this.size * 0.4; this.x += this.speedX + (tiltX * 0.02 * depth); this.y += this.speedY + (tiltY * 0.02 * depth);
+            if (this.y < -10) this.y = height + 10; if (this.x < -10) this.x = width + 10;
+            if (this.x > width + 10) this.x = -10; if (this.y > height + 10) this.y = -10;
+        }
+        draw() { 
+            ctx.fillStyle = `rgba(${window.particleRGB}, ${this.opacity})`; 
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+        }
+    }
+    for (let i = 0; i < 45; i++) { particles.push(new Particle()); }
+    function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+    animateParticles();
+    window.addEventListener('deviceorientation', (e) => { if(e.gamma !== null && e.beta !== null) { tiltX = e.gamma; tiltY = e.beta; } }, { passive: true });
+})();
+
+
+// Global haptik
+function stopHaptics() { clearTimeout(window.globalHoldTimer); if (navigator.vibrate) navigator.vibrate(0); }
+document.addEventListener('pointerup', stopHaptics);
+document.addEventListener('pointercancel', stopHaptics);
+window.addEventListener('scroll', stopHaptics, { passive: true });
+    
+// --- PROFİL VE FOTOĞRAF DEĞİŞTİRME FONKSİYONU (KUSURSUZ ZAMANLAMA) ---
+function toggleProfile(target) {
+    const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
+    const titleEl = currentPanel.querySelector('.username-switch');
+    
+    // 1. Tıklandığı an ikona "dön ve parla" sınıfını ekle (Dönüş başlar)
+    titleEl.classList.add('icon-spin-active');
+
+    // 2. Animasyonun tam bitiş süresi (350ms) kadar bekle ve TİTREŞİM VER
+    setTimeout(() => {
+        // İkon tam 180 derece dönüşünü bitirdiğinde titreyecek:
+        if (navigator.vibrate) navigator.vibrate(15);
+        
+        // 3. Titreşimi hissettikten çok kısa bir süre (100ms) sonra sayfayı değiştir
+        setTimeout(() => {
+            titleEl.classList.remove('icon-spin-active');
+            
+            const kazikatePanel = document.getElementById('kazikate-panel');
+            const twinPanel = document.getElementById('twin-panel');
+            const visualBg = document.querySelector('.profile-img-visual');
+            const downloadableImg = document.querySelector('.downloadable-profile-img');
+            const previewImage = document.getElementById('preview-image');
+
+            const kazikateBg = "https://kazikate.github.io/Biography/assets/Profile2.png";
+            const kazikateModal = "https://kazikate.github.io/Biography/assets/Profile.png";
+            
+            const twinBg = "https://kazikate.github.io/Biography/assets/Twinbio.jpg"; 
+            const twinModal = "https://kazikate.github.io/Biography/assets/Twinbio2.jpg";
+
+            if (target === 'twin') {
+                window.currentProfileBg = twinBg; 
+                
+                kazikatePanel.classList.remove('active-panel');
+                kazikatePanel.classList.add('hidden-panel');
+                twinPanel.classList.remove('hidden-panel');
+                twinPanel.classList.add('active-panel');
+                
+                if (!isLyricsMode) {
+                    visualBg.style.backgroundImage = `url('${twinBg}')`;
+                    window.particleRGB = '138, 55, 138'; 
+                }
+                
+                downloadableImg.src = twinBg;
+                previewImage.src = twinModal;
+                
+                updateModalGlow(twinModal);
+                document.body.classList.add('is-twin-active');
+            } else {
+                window.currentProfileBg = kazikateBg; 
+                
+                twinPanel.classList.remove('active-panel');
+                twinPanel.classList.add('hidden-panel');
+                kazikatePanel.classList.remove('hidden-panel');
+                kazikatePanel.classList.add('active-panel');
+                
+                if (!isLyricsMode) {
+                    visualBg.style.backgroundImage = `url('${kazikateBg}')`;
+                    window.particleRGB = '157, 80, 255'; 
+                }
+                
+                downloadableImg.src = kazikateBg;
+                previewImage.src = kazikateModal;
+                
+                updateModalGlow(kazikateModal);
+                document.body.classList.remove('is-twin-active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+        }, 0); // Titreşim ile sayfa değişimi arasındaki o milimetrik boşluk
+        
+    }, 300); // Dönme animasyonunun bittiği o an!
+}
+
+  
+  </script>
+
+    <div class="bottom-blur-layer"></div>
+</body>
+</html>
