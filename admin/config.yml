@@ -17,15 +17,15 @@ collections:
         name: "twin"
         file: "twin.json"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
             fields:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Mini)", name: "icon", widget: "image", media_folder: "/assets/twin/icons/mini", public_folder: "/assets/twin/icons/mini"}
+              - {label: "İkon (Mini)", name: "icon", widget: "image"}
           - label: "Bağlantılar (Normal İkonlar)"
             name: "links"
             widget: "list"
@@ -33,7 +33,7 @@ collections:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Normal)", name: "bg", widget: "image", media_folder: "/assets/twin/icons/normal", public_folder: "/assets/twin/icons/normal"}
+              - {label: "İkon (Normal)", name: "bg", widget: "image"}
 
   # ==========================================
   # 2. KAZIKATE PROFİLİ MENÜSÜ
@@ -45,15 +45,15 @@ collections:
         name: "kazikate"
         file: "kazikate.json"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/kazikate/profile", public_folder: "/assets/kazikate/profile"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/kazikate/profile", public_folder: "/assets/kazikate/profile"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
             fields:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Mini)", name: "icon", widget: "image", media_folder: "/assets/kazikate/icons/mini", public_folder: "/assets/kazikate/icons/mini"}
+              - {label: "İkon (Mini)", name: "icon", widget: "image"}
           - label: "Bağlantılar (Normal İkonlar)"
             name: "links"
             widget: "list"
@@ -61,7 +61,7 @@ collections:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Normal)", name: "bg", widget: "image", media_folder: "/assets/kazikate/icons/normal", public_folder: "/assets/kazikate/icons/normal"}
+              - {label: "İkon (Normal)", name: "bg", widget: "image"}
 
   # ==========================================
   # 3. MÜZİK LİSTESİ MENÜSÜ
