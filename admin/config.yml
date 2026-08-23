@@ -1,7 +1,7 @@
 backend:
   name: github
-  repo: kazikate/Kate-Marifairy
-  branch: main
+  repo: kazikate/Biography 
+  branch: main 
 
 media_folder: "/assets"
 public_folder: "/assets"
@@ -16,8 +16,8 @@ collections:
         media_folder: "/assets/twin/profile"
         public_folder: "/assets/twin/profile"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
+          - {label: "Profil Fotoğrafı", name: "twin_profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "twin_modalPhoto", widget: "image"}
 
           - label: "Mini İkonlar"
             name: "miniIcons"
@@ -45,8 +45,8 @@ collections:
         media_folder: "/assets/kazikate/profile"
         public_folder: "/assets/kazikate/profile"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
+          - {label: "Profil Fotoğrafı", name: "kazi_profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "kazi_modalPhoto", widget: "image"}
 
           - label: "Mini İkonlar"
             name: "miniIcons"
