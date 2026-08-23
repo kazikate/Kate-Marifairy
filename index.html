@@ -1828,13 +1828,15 @@
     });
 
     // ---------- IKON VE LİNK FONKSİYONLARI (YENİ İSİMLERLE) ----------
-    function renderMiniIcons(containerId, iconsArray) {
+        function renderMiniIcons(containerId, iconsArray) {
         const container = document.getElementById(containerId);
         if (!container) return;
         if (!iconsArray || iconsArray.length === 0) return;
 
         container.innerHTML = iconsArray.map(icon => {
-            const iconUrl = icon.icon || icon.twin_icon || icon.kazi_icon || '';
+            let iconUrl = icon.icon || icon.twin_icon || icon.kazi_icon || '';
+            if (iconUrl.startsWith('/')) iconUrl = iconUrl.substring(1); // Eğik çizgiyi temizle
+            
             const label = icon.platform || 'Platform';
             if (!iconUrl) return '';
             return `
@@ -1851,7 +1853,9 @@
         if (!linksArray || linksArray.length === 0) return;
 
         container.innerHTML = linksArray.map((link, index) => {
-            const iconUrl = link.bg || link.twin_bg || link.kazi_bg || '';
+            let iconUrl = link.bg || link.twin_bg || link.kazi_bg || '';
+            if (iconUrl.startsWith('/')) iconUrl = iconUrl.substring(1); // Eğik çizgiyi temizle
+            
             if (!iconUrl) return '';
             return `
                 <a href="${link.url}" target="_blank" rel="noopener" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
@@ -1877,9 +1881,11 @@
             elementsToAnimate.forEach(el => el.classList.add('is-visible'));
         }, 50);
 
-        async function loadData() {
+               async function loadData() {
+            const cacheBuster = `?v=${new Date().getTime()}`; // Önbellek kırıcı
+
             try {
-                const musicRes = await fetch('music.json');
+                const musicRes = await fetch('music.json' + cacheBuster);
                 if (!musicRes.ok) throw new Error(`music.json yüklenemedi`);
                 const musicData = await musicRes.json();
                 if (musicData.playlist && Array.isArray(musicData.playlist)) {
@@ -1888,7 +1894,7 @@
             } catch (err) { console.error('Müzik listesi hatası:', err); }
 
             try {
-                const kazikateRes = await fetch('kazikate.json');
+                const kazikateRes = await fetch('kazikate.json' + cacheBuster);
                 if (!kazikateRes.ok) throw new Error(`kazikate.json yüklenemedi`);
                 kazikateData = await kazikateRes.json();
                 if (kazikateData.miniIcons) renderMiniIcons('kazikate-mini-icons', kazikateData.miniIcons);
@@ -1896,14 +1902,17 @@
             } catch (err) { console.error('Kazikate profili hatası:', err); }
 
             try {
-                const twinRes = await fetch('twin.json');
+                const twinRes = await fetch('twin.json' + cacheBuster);
                 if (!twinRes.ok) throw new Error(`twin.json yüklenemedi`);
                 twinData = await twinRes.json();
                 if (twinData.miniIcons) renderMiniIcons('twin-mini-icons', twinData.miniIcons);
                 if (twinData.links) renderLinks('twin-links', twinData.links);
 
-                const defaultTwinPhoto = twinData.twin_profilePhoto || twinData.profilePhoto;
-                const defaultTwinModal = twinData.twin_modalPhoto || twinData.modalPhoto;
+                let defaultTwinPhoto = twinData.twin_profilePhoto || twinData.profilePhoto;
+                let defaultTwinModal = twinData.twin_modalPhoto || twinData.modalPhoto;
+                
+                if (defaultTwinPhoto && defaultTwinPhoto.startsWith('/')) defaultTwinPhoto = defaultTwinPhoto.substring(1);
+                if (defaultTwinModal && defaultTwinModal.startsWith('/')) defaultTwinModal = defaultTwinModal.substring(1);
 
                 if (defaultTwinPhoto) {
                     document.querySelector('.profile-img-visual').style.backgroundImage = `url('${defaultTwinPhoto}')`;
@@ -1923,6 +1932,7 @@
                 });
             }, 50);
         }
+
 
         loadData();
 
