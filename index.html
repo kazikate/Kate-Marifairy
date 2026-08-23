@@ -1890,8 +1890,9 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
     if (!container) return;
 
     container.innerHTML = iconsArray.map(icon => {
-        const iconUrl = icon.icon || 'https://via.placeholder.com/36'; // fallback
+        const iconUrl = icon.icon || ''; // JSON'daki 'icon' alanı
         const label = icon.platform || 'Platform';
+        if (!iconUrl) return '';
         return `
             <a href="${icon.url}" target="_blank" rel="noopener" aria-label="${label}">
                 <img src="${iconUrl}" alt="${label}" class="mini-icon" loading="lazy">
@@ -1905,7 +1906,8 @@ function renderLinks(containerId, linksArray) {
     if (!container) return;
 
     container.innerHTML = linksArray.map((link, index) => {
-        const iconUrl = link.bg || 'https://via.placeholder.com/50';
+        const iconUrl = link.bg || '';
+        if (!iconUrl) return '';
         return `
             <a href="${link.url}" target="_blank" rel="noopener" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
                 <div class="link-img-placeholder" style="background-image: url('${iconUrl}');"></div>
