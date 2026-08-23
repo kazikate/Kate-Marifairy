@@ -7,9 +7,6 @@ media_folder: "/assets"
 public_folder: "/assets"
 
 collections:
-  # ==========================================
-  # 1. TWIN PROFİLİ MENÜSÜ
-  # ==========================================
   - name: "twin_ayarlari"
     label: "Twin Profili"
     files:
@@ -17,15 +14,16 @@ collections:
         name: "twin"
         file: "twin.json"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
             fields:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Mini)", name: "icon", widget: "image"}
+              # İSİM VE KLASÖR TAMAMEN TWIN'E ÖZEL
+              - {label: "İkon (Mini)", name: "twin_icon", widget: "image", media_folder: "/assets/twin/icons/mini", public_folder: "/assets/twin/icons/mini"}
           - label: "Bağlantılar (Normal İkonlar)"
             name: "links"
             widget: "list"
@@ -33,11 +31,9 @@ collections:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Normal)", name: "bg", widget: "image"}
+              # İSİM VE KLASÖR TAMAMEN TWIN'E ÖZEL
+              - {label: "İkon (Normal)", name: "twin_bg", widget: "image", media_folder: "/assets/twin/icons/normal", public_folder: "/assets/twin/icons/normal"}
 
-  # ==========================================
-  # 2. KAZIKATE PROFİLİ MENÜSÜ
-  # ==========================================
   - name: "kazikate_ayarlari"
     label: "Kazikate Profili"
     files:
@@ -45,15 +41,16 @@ collections:
         name: "kazikate"
         file: "kazikate.json"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/kazikate/profile", public_folder: "/assets/kazikate/profile"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/kazikate/profile", public_folder: "/assets/kazikate/profile"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
             fields:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Mini)", name: "icon", widget: "image"}
+              # İSİM VE KLASÖR TAMAMEN KAZIKATE'YE ÖZEL
+              - {label: "İkon (Mini)", name: "kazi_icon", widget: "image", media_folder: "/assets/kazikate/icons/mini", public_folder: "/assets/kazikate/icons/mini"}
           - label: "Bağlantılar (Normal İkonlar)"
             name: "links"
             widget: "list"
@@ -61,11 +58,9 @@ collections:
               - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "İkon (Normal)", name: "bg", widget: "image"}
+              # İSİM VE KLASÖR TAMAMEN KAZIKATE'YE ÖZEL
+              - {label: "İkon (Normal)", name: "kazi_bg", widget: "image", media_folder: "/assets/kazikate/icons/normal", public_folder: "/assets/kazikate/icons/normal"}
 
-  # ==========================================
-  # 3. MÜZİK LİSTESİ MENÜSÜ
-  # ==========================================
   - name: "muzik_ayarlari"
     label: "Müzik Listesi"
     files:
