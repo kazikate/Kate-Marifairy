@@ -1,8 +1,10 @@
 backend:
   name: github
-  # DİKKAT: Buraya ana reponu DEĞİL, Twin sitenin kurulu olduğu reponun tam adını yazmalısın!
   repo: kazikate/Kate-Marifairy
-  branch: main 
+  branch: main
+  base_url: https://kate-cms.altunazad60.workers.dev
+  auth_endpoint: auth
+
 
 media_folder: "assets" 
 public_folder: "assets"
