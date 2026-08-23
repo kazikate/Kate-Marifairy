@@ -1876,27 +1876,33 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
             return cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
         }
 
-        // CMS'den gelen eksik linkleri tam GitHub URL'sine çevirir
-        function getFullImageUrl(path) {
+        // İKON VE LİNKLER İÇİN UZAK URL (Otomatik oluşturulanlar buradan çekilir)
+        const REMOTE_ASSETS_URL = "https://kazikate.github.io/Biography/assets/";
+
+        // PROFİL FOTOĞRAFLARI İÇİN YEREL KONTROL (Eğer URL tam değilse, lokal klasörden al)
+        function getProfileImageUrl(path) {
             if (!path) return '';
-            if (path.startsWith('http')) return path; 
-            return `https://kazikate.github.io/Biography/${path.replace(/^\/+/, '')}`;
+            if (path.startsWith('http')) return path; // Zaten tam bir URL ise dokunma
+            
+            // Yolu temizle ve yerel dosyadan çektiğini garantile
+            const cleanPath = path.replace(/^\/+/, ''); // Baştaki "/" işaretini kaldırır
+            return `./${cleanPath}`; // Yerel dizine (örneğin ./assets/Twinbio.jpg) yönlendirir
         }
 
         function renderMiniIcons(containerId, iconsArray) {
             const container = document.getElementById(containerId);
             if (!container || !Array.isArray(iconsArray)) return;
             
-            const baseUrl = "https://kazikate.github.io/Biography/assets/";
-            
             container.innerHTML = iconsArray.map(icon => {
                 const safeName = getSafeFileName(icon.platform);
-                const imgSrc = icon.icon || `${baseUrl}${safeName}mini.png`;
+                
+                // Eğer manuel 'icon' linki girilmişse onu, yoksa otomatik uzak linki kullan
+                const imgSrc = icon.icon || `${REMOTE_ASSETS_URL}${safeName}mini.png`;
                 const autoCssClass = icon.cssClass || `${safeName.toLowerCase()}-mini-icon`;
                 
                 return `
                 <a href="${icon.url || '#'}" target="_blank" aria-label="${icon.platform || 'Link'}" class="${autoCssClass}">
-                    <img src="${imgSrc}" alt="${icon.platform || ''}" class="mini-icon" onerror="this.style.display='none'">
+                    <img src="${imgSrc}" alt="${icon.platform || ''}" class="mini-icon" style="display:block;" onerror="this.style.display='none'">
                 </a>
                 `;
             }).join('\n');
@@ -1906,11 +1912,11 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
             const container = document.getElementById(containerId);
             if (!container || !Array.isArray(linksArray)) return;
             
-            const baseUrl = "https://kazikate.github.io/Biography/assets/";
-            
             container.innerHTML = linksArray.map((link, index) => {
                 const safeName = getSafeFileName(link.platform);
-                const bgSrc = link.bg || `${baseUrl}${safeName}.png`;
+                
+                // Eğer manuel 'bg' linki girilmişse onu, yoksa otomatik uzak linki kullan
+                const bgSrc = link.bg || `${REMOTE_ASSETS_URL}${safeName}.png`;
 
                 return `
                 <a href="${link.url || '#'}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
@@ -2006,10 +2012,11 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                     const downloadableImg = document.querySelector('.downloadable-profile-img');
                     const previewImage = document.getElementById('preview-image');
                     
-                    const kazikateBg = getFullImageUrl(kazikateData.profilePhoto);
-                    const kazikateModal = getFullImageUrl(kazikateData.modalPhoto);
-                    const twinBg = getFullImageUrl(twinData.profilePhoto); 
-                    const twinModal = getFullImageUrl(twinData.modalPhoto);
+                    // Profil Fotoğrafları için LOKAL dizin kontrolü
+                    const kazikateBg = getProfileImageUrl(kazikateData.profilePhoto);
+                    const kazikateModal = getProfileImageUrl(kazikateData.modalPhoto);
+                    const twinBg = getProfileImageUrl(twinData.profilePhoto); 
+                    const twinModal = getProfileImageUrl(twinData.modalPhoto);
 
                     if (target === 'twin') {
                         window.currentProfileBg = twinBg; 
@@ -2035,9 +2042,6 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
             }, 300); 
         }
 
-        // ==========================================
-        // YÜKLEME KISMI (DOM) - EN ALTTA KALMALI
-        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
             const elementsToAnimate = [
                 profileImgContainer, 
@@ -2064,9 +2068,9 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                 renderMiniIcons('twin-mini-icons', twin.miniIcons);
                 renderLinks('twin-links', twin.links);
 
-                // TWIN VERSİYONU İÇİN: İlk açılışta KATE (TWIN) fotoğraflarını ayarla
-                const initialTwinBg = getFullImageUrl(twin.profilePhoto);
-                const initialTwinModal = getFullImageUrl(twin.modalPhoto);
+                // TWIN VERSİYONU İÇİN: İlk açılışta KATE (TWIN) LOKAL fotoğraflarını ayarla
+                const initialTwinBg = getProfileImageUrl(twin.profilePhoto);
+                const initialTwinModal = getProfileImageUrl(twin.modalPhoto);
 
                 document.querySelector('.profile-img-visual').style.backgroundImage = `url('${initialTwinBg}')`;
                 document.querySelector('.downloadable-profile-img').src = initialTwinBg;
