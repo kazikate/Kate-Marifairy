@@ -2092,6 +2092,126 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                         profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
                         profileImgVisual.style.filter = `blur(${scrollRatio * maxBlur}px)`;
                         dimOverlay.style.opacity = scrollRatio * maxDimOpacity;
+        // ==========================================
+        // YARDIMCI FONKSİYON VE DOM YÜKLEME KISMI
+        // ==========================================
+
+        // CMS'den gelen eksik linkleri tam GitHub URL'sine çevirir
+        function getFullImageUrl(path) {
+            if (!path) return '';
+            if (path.startsWith('http')) return path; // Zaten tam linkse dokunma
+            return `https://kazikate.github.io/Biography/${path.replace(/^\/+/, '')}`;
+        }
+            
+        function toggleProfile(target) {
+            if (!kazikateData || !twinData) return; 
+            
+            const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
+            const titleEl = currentPanel.querySelector('.username-switch');
+            
+            titleEl.classList.add('icon-spin-active');
+            setTimeout(() => {
+                if (navigator.vibrate) navigator.vibrate(15);
+                setTimeout(() => {
+                    titleEl.classList.remove('icon-spin-active');
+                    const kazikatePanel = document.getElementById('kazikate-panel');
+                    const twinPanel = document.getElementById('twin-panel');
+                    const visualBg = document.querySelector('.profile-img-visual');
+                    const downloadableImg = document.querySelector('.downloadable-profile-img');
+                    const previewImage = document.getElementById('preview-image');
+                    
+                    // Linkleri tam URL formatına zorla çeviriyoruz
+                    const kazikateBg = getFullImageUrl(kazikateData.profilePhoto);
+                    const kazikateModal = getFullImageUrl(kazikateData.modalPhoto);
+                    const twinBg = getFullImageUrl(twinData.profilePhoto); 
+                    const twinModal = getFullImageUrl(twinData.modalPhoto);
+
+                    if (target === 'twin') {
+                        window.currentProfileBg = twinBg; 
+                        kazikatePanel.classList.remove('active-panel'); kazikatePanel.classList.add('hidden-panel');
+                        twinPanel.classList.remove('hidden-panel'); twinPanel.classList.add('active-panel');
+                        
+                        if (!isLyricsMode) { visualBg.style.backgroundImage = `url('${twinBg}')`; window.particleRGB = '138, 55, 138'; }
+                        
+                        downloadableImg.src = twinBg; previewImage.src = twinModal;
+                        updateModalGlow(twinModal); document.body.classList.add('is-twin-active');
+                    } else {
+                        window.currentProfileBg = kazikateBg; 
+                        twinPanel.classList.remove('active-panel'); twinPanel.classList.add('hidden-panel');
+                        kazikatePanel.classList.remove('hidden-panel'); kazikatePanel.classList.add('active-panel');
+                        
+                        if (!isLyricsMode) { visualBg.style.backgroundImage = `url('${kazikateBg}')`; window.particleRGB = '157, 80, 255'; }
+                        
+                        downloadableImg.src = kazikateBg; previewImage.src = kazikateModal;
+                        updateModalGlow(kazikateModal); document.body.classList.remove('is-twin-active');
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 0); 
+            }, 300); 
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elementsToAnimate = [
+                profileImgContainer, 
+                ...document.querySelectorAll('.username'), 
+                ...document.querySelectorAll('.bio')
+            ].filter(el => el != null);
+            
+            setTimeout(() => { elementsToAnimate.forEach(el => { el.classList.add('is-visible'); }); }, 50);
+
+            // 3 AYRI DOSYAYI AYNI ANDA ÇEK
+            Promise.all([
+                fetch('music.json').then(res => res.json()),
+                fetch('kazikate.json').then(res => res.json()),
+                fetch('twin.json').then(res => res.json())
+            ])
+            .then(([music, kazikate, twin]) => {
+                playlist = music.playlist;
+                kazikateData = kazikate;
+                twinData = twin;
+                
+                renderMiniIcons('kazikate-mini-icons', kazikate.miniIcons);
+                renderLinks('kazikate-links', kazikate.links);
+
+                renderMiniIcons('twin-mini-icons', twin.miniIcons);
+                renderLinks('twin-links', twin.links);
+
+                // TWIN VERSİYONU İÇİN: İlk açılışta KATE (TWIN) fotoğraflarını ayarla
+                const initialTwinBg = getFullImageUrl(twin.profilePhoto);
+                const initialTwinModal = getFullImageUrl(twin.modalPhoto);
+
+                document.querySelector('.profile-img-visual').style.backgroundImage = `url('${initialTwinBg}')`;
+                document.querySelector('.downloadable-profile-img').src = initialTwinBg;
+                const initialPreviewImg = document.getElementById('preview-image');
+                initialPreviewImg.src = initialTwinModal;
+                updateModalGlow(initialTwinModal);
+                window.currentProfileBg = initialTwinBg;
+                window.particleRGB = '138, 55, 138';
+
+                setTimeout(() => {
+                    document.querySelectorAll('#kazikate-mini-icons, #twin-mini-icons, .link-button').forEach(el => {
+                        el.classList.add('is-visible');
+                    });
+                }, 50);
+            })
+            .catch(err => {
+                console.error("JSON yükleme hatası:", err);
+            });
+
+            const parallaxRatio = 0.4; const maxScroll = 200; const maxBlur = 10; const maxDimOpacity = 0.6; let ticking = false;
+            function updateEffects() {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollY = Math.max(0, -document.body.getBoundingClientRect().top);
+                        if (isLyricsMode) {
+                            if (scrollY > 150) toggleLyrics();
+                            profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
+                            ticking = false; return;
+                        }
+                        const scrollRatio = Math.min(scrollY, maxScroll) / maxScroll;
+                        profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
+                        profileImgVisual.style.filter = `blur(${scrollRatio * maxBlur}px)`;
+                        dimOverlay.style.opacity = scrollRatio * maxDimOpacity;
                         if (scrollY > 30) { profileImgContainer.classList.add('scrolled-past'); } else { profileImgContainer.classList.remove('scrolled-past'); }
                         ticking = false;
                     }); ticking = true;
@@ -2152,6 +2272,7 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                 modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(1)`; currentScale = 1;
             });
         });
+
     </script>
     <div class="bottom-blur-layer"></div>
 </body>
