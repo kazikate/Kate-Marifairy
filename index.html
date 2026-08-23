@@ -2021,34 +2021,34 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                 modalContent.style.transform = `scale(${currentScale})`;
             }, { passive: false });
 
-                    // ---------- JSON ÇEKME VE DOM İŞLEMLERİ ----------
+              // ---------- JSON ÇEKME VE DOM İŞLEMLERİ ----------
         
-               // Yardımcı Fonksiyon: Boşlukları siler, ilk harfi büyük, geri kalanını küçük yapar (Örn: "instagram" -> "Instagram")
+        // Yardımcı Fonksiyon: İlk harfi büyük, kalanı küçük yapar. (Örn: "pinterest" -> "Pinterest")
         function getSafeFileName(name) {
-            if (!name) return 'default';
-            
-            // Boşlukları kaldır
+            if (!name || typeof name !== 'string') return 'Default';
             let cleanName = name.replace(/\s+/g, '');
-            if (cleanName.length === 0) return 'default';
-            
-            // İlk harfi büyük (İngilizce 'I' gibi), kalanları küçük yap
+            if (cleanName.length === 0) return 'Default';
             return cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
         }
 
         function renderMiniIcons(containerId, iconsArray) {
             const container = document.getElementById(containerId);
-            if (!container || !iconsArray) return;
+            if (!container || !Array.isArray(iconsArray)) return;
             
+            // İkonların çekildiği DOĞRU dizin (Senin koduna ve ekran görüntüsüne göre)
             const baseUrl = "https://kazikate.github.io/Biography/assets/";
             
             container.innerHTML = iconsArray.map(icon => {
-                // Platform adından otomatik dosya ismi oluştur: "instagram" + "mini.png"
                 const safeName = getSafeFileName(icon.platform);
-                const imgSrc = `${baseUrl}${safeName}mini.png`;
+                
+                // ESKİ VERİ UYUMU: Eğer JSON'da manuel girilmiş bir "icon" URL'si varsa onu kullan.
+                // YENİ SİSTEM: Yoksa, "baseUrl + Pinterestmini.png" şeklinde otomatik oluştur.
+                const imgSrc = icon.icon || `${baseUrl}${safeName}mini.png`;
+                const autoCssClass = icon.cssClass || `${safeName.toLowerCase()}-mini-icon`;
                 
                 return `
-                <a href="${icon.url}" target="_blank" aria-label="${icon.platform}">
-                    <img src="${imgSrc}" alt="${icon.platform}" class="mini-icon" onerror="this.style.display='none'">
+                <a href="${icon.url || '#'}" target="_blank" aria-label="${icon.platform || 'Link'}" class="${autoCssClass}">
+                    <img src="${imgSrc}" alt="${icon.platform || ''}" class="mini-icon" onerror="this.style.display='none'">
                 </a>
                 `;
             }).join('\n');
@@ -2056,20 +2056,23 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
 
         function renderLinks(containerId, linksArray) {
             const container = document.getElementById(containerId);
-            if (!container || !linksArray) return;
+            if (!container || !Array.isArray(linksArray)) return;
             
+            // İkonların çekildiği DOĞRU dizin
             const baseUrl = "https://kazikate.github.io/Biography/assets/";
             
             container.innerHTML = linksArray.map((link, index) => {
-                // Platform adından otomatik arka plan oluştur: "instagram" + ".png"
                 const safeName = getSafeFileName(link.platform);
-                const bgSrc = `${baseUrl}${safeName}.png`;
+                
+                // ESKİ VERİ UYUMU: Eğer JSON'da manuel girilmiş bir "bg" URL'si varsa onu kullan.
+                // YENİ SİSTEM: Yoksa, otomatik olarak .png uzantılı halini üret.
+                const bgSrc = link.bg || `${baseUrl}${safeName}.png`;
 
                 return `
-                <a href="${link.url}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
+                <a href="${link.url || '#'}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
                     <div class="link-img-placeholder" style="background-image: url('${bgSrc}');"></div>
                     <div class="link-text-details">
-                        <span class="link-platform">${link.platform}</span>
+                        <span class="link-platform">${link.platform || 'Bağlantı'}</span>
                         ${link.username ? `<span class="link-username">${link.username}</span>` : ''}
                     </div>
                 </a>
