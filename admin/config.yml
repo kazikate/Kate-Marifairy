@@ -1,7 +1,7 @@
 backend:
   name: github
   # DİKKAT: Buraya ana reponu DEĞİL, Twin sitenin kurulu olduğu reponun tam adını yazmalısın!
-  repo: kazikate/Twin-Reposunun-Adi 
+  repo: kazikate/Kate-Marifairy
   branch: main 
 
 media_folder: "assets" 
