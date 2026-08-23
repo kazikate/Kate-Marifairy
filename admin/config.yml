@@ -14,47 +14,41 @@ collections:
         name: "twin"
         file: "twin.json"
         fields:
-          - {label: "Profil Fotoğrafı URL", name: "profilePhoto", widget: "string"}
-          - {label: "Modal Fotoğrafı URL", name: "modalPhoto", widget: "string"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
             fields:
-              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "Platform Adı (Örn: Instagram veya Rastgele)", name: "platform", widget: "string"}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "CSS Sınıfı", name: "cssClass", widget: "string"}
-              - {label: "İkon URL", name: "icon", widget: "string"}
-          - label: "Bağlantılar"
+          - label: "Bağlantılar (Normal İkonlar)"
             name: "links"
             widget: "list"
             fields:
-              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "Arka Plan Resmi URL", name: "bg", widget: "string"}
 
       - label: "Kazikate Profili"
         name: "kazikate"
         file: "kazikate.json"
         fields:
-          - {label: "Profil Fotoğrafı URL", name: "profilePhoto", widget: "string"}
-          - {label: "Modal Fotoğrafı URL", name: "modalPhoto", widget: "string"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
             fields:
-              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "CSS Sınıfı", name: "cssClass", widget: "string"}
-              - {label: "İkon URL", name: "icon", widget: "string"}
-          - label: "Bağlantılar"
+          - label: "Bağlantılar (Normal İkonlar)"
             name: "links"
             widget: "list"
             fields:
-              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "Platform Adı", name: "platform", widget: "string"}
               - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
               - {label: "URL (Link)", name: "url", widget: "string"}
-              - {label: "Arka Plan Resmi URL", name: "bg", widget: "string"}
 
       - label: "Müzik Listesi"
         name: "music"
