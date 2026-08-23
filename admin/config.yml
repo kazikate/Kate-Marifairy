@@ -13,9 +13,11 @@ collections:
       - label: "Twin Profilini Düzenle"
         name: "twin"
         file: "twin.json"
+        media_folder: "/assets/twin/profile"
+        public_folder: "/assets/twin/profile"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
 
           - label: "Mini İkonlar"
             name: "miniIcons"
@@ -40,9 +42,11 @@ collections:
       - label: "Kazikate Profilini Düzenle"
         name: "kazikate"
         file: "kazikate.json"
+        media_folder: "/assets/kazikate/profile"
+        public_folder: "/assets/kazikate/profile"
         fields:
-          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/kazikate/profile", public_folder: "/assets/kazikate/profile"}
-          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/kazikate/profile", public_folder: "/assets/kazikate/profile"}
+          - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image"}
+          - {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image"}
 
           - label: "Mini İkonlar"
             name: "miniIcons"
