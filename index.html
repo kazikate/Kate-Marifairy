@@ -1827,13 +1827,14 @@
         resetAdvancedControlsTimer();
     });
 
-    function renderMiniIcons(containerId, iconsArray) {
+        function renderMiniIcons(containerId, iconsArray) {
         const container = document.getElementById(containerId);
         if (!container) return;
         if (!iconsArray || iconsArray.length === 0) return;
 
         container.innerHTML = iconsArray.map(icon => {
-            const iconUrl = icon.icon || '';
+            // YENİ: Hem eski 'icon' adını hem de yeni 'twin_icon' / 'kazi_icon' adlarını tanır
+            const iconUrl = icon.icon || icon.twin_icon || icon.kazi_icon || '';
             const label = icon.platform || 'Platform';
             if (!iconUrl) return '';
             return `
@@ -1850,7 +1851,8 @@
         if (!linksArray || linksArray.length === 0) return;
 
         container.innerHTML = linksArray.map((link, index) => {
-            const iconUrl = link.bg || '';
+            // YENİ: Hem eski 'bg' adını hem de yeni 'twin_bg' / 'kazi_bg' adlarını tanır
+            const iconUrl = link.bg || link.twin_bg || link.kazi_bg || '';
             if (!iconUrl) return '';
             return `
                 <a href="${link.url}" target="_blank" rel="noopener" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
@@ -1863,6 +1865,7 @@
             `;
         }).join('\n');
     }
+
 
     // ---------- DOM YÜKLEMESİ VE JSON ----------
     document.addEventListener('DOMContentLoaded', () => {
