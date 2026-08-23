@@ -2252,73 +2252,82 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('pointercancel', stopHaptics);
     window.addEventListener('scroll', stopHaptics, { passive: true });
 
-       // --- Profil Geçişi (toggleProfile) ---
-    window.toggleProfile = function(targetProfile) {
-        const twinPanel = document.getElementById('twin-panel');
-        const kazikatePanel = document.getElementById('kazikate-panel');
-        const body = document.body;
-        const visual = document.querySelector('.profile-img-visual');
-        const modalImg = document.getElementById('preview-image');
-        const downloadableImg = document.querySelector('.downloadable-profile-img');
+     
+            // --- Profil Geçişi (toggleProfile) ---
+    window.toggleProfile = function(target) {
+        const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
+        const titleEl = currentPanel.querySelector('.username-switch');
+        
+        // 1. Tıklandığı an ikona "dön ve parla" sınıfını ekle (Dönüş başlar)
+        titleEl.classList.add('icon-spin-active');
 
-        let activeSwitch;
-
-        if (targetProfile === 'kazikate') {
-            // Twin'den Kazikate'ye Geçiş
-            twinPanel.classList.remove('active-panel');
-            twinPanel.classList.add('hidden-panel');
-            kazikatePanel.classList.remove('hidden-panel');
-            kazikatePanel.classList.add('active-panel');
-            body.classList.remove('is-twin-active');
+        // 2. Animasyonun tam bitiş süresi (350ms) kadar bekle ve TİTREŞİM VER
+        setTimeout(() => {
+            // İkon tam 180 derece dönüşünü bitirdiğinde titreyecek:
+            if (navigator.vibrate) navigator.vibrate(15);
             
-            // Kazikate JSON'undan verileri çekip arka planları değiştir
-            if (kazikateData) {
-                if (kazikateData.profilePhoto) {
-                    visual.style.backgroundImage = `url('${kazikateData.profilePhoto}')`;
-                    downloadableImg.src = kazikateData.profilePhoto;
-                    window.currentProfileBg = kazikateData.profilePhoto;
-                }
-                if (kazikateData.modalPhoto) {
-                    modalImg.src = kazikateData.modalPhoto;
-                    if(typeof updateModalGlow === 'function') updateModalGlow(kazikateData.modalPhoto);
-                }
-            }
-            window.particleRGB = '157, 80, 255'; // Kazikate tema rengi (Mor)
-            activeSwitch = kazikatePanel.querySelector('.username-switch');
-            
-        } else if (targetProfile === 'twin') {
-            // Kazikate'den Twin'e Geçiş
-            kazikatePanel.classList.remove('active-panel');
-            kazikatePanel.classList.add('hidden-panel');
-            twinPanel.classList.remove('hidden-panel');
-            twinPanel.classList.add('active-panel');
-            body.classList.add('is-twin-active');
-
-            // Twin JSON'undan verileri çekip arka planları değiştir
-            if (twinData) {
-                if (twinData.profilePhoto) {
-                    visual.style.backgroundImage = `url('${twinData.profilePhoto}')`;
-                    downloadableImg.src = twinData.profilePhoto;
-                    window.currentProfileBg = twinData.profilePhoto;
-                }
-                if (twinData.modalPhoto) {
-                    modalImg.src = twinData.modalPhoto;
-                    if(typeof updateModalGlow === 'function') updateModalGlow(twinData.modalPhoto);
-                }
-            }
-            window.particleRGB = '138, 55, 138'; // Twin tema rengi (Pembe/Mor)
-            activeSwitch = twinPanel.querySelector('.username-switch');
-        }
-
-        // Tıklanan ismin yanındaki yenileme ikonunu döndür (Şık efekt)
-        if (activeSwitch) {
-            activeSwitch.classList.add('icon-spin-active');
+            // 3. Titreşimi hissettikten çok kısa bir süre (100ms) sonra sayfayı değiştir
             setTimeout(() => {
-                activeSwitch.classList.remove('icon-spin-active');
-            }, 400);
-        }
-    };
-});
+                titleEl.classList.remove('icon-spin-active');
+                
+                const kazikatePanel = document.getElementById('kazikate-panel');
+                const twinPanel = document.getElementById('twin-panel');
+                const visualBg = document.querySelector('.profile-img-visual');
+                const downloadableImg = document.querySelector('.downloadable-profile-img');
+                const previewImage = document.getElementById('preview-image');
+
+                // JSON'dan verileri çek (Eğer JSON yüklenemezse fallback olarak eski linkleri tuttum, site asla çökmez)
+                const kazikateBg = (typeof kazikateData !== 'undefined' && kazikateData && kazikateData.profilePhoto) ? kazikateData.profilePhoto : "https://kazikate.github.io/Biography/assets/Profile2.png";
+                const kazikateModal = (typeof kazikateData !== 'undefined' && kazikateData && kazikateData.modalPhoto) ? kazikateData.modalPhoto : "https://kazikate.github.io/Biography/assets/Profile.png";
+                
+                const twinBg = (typeof twinData !== 'undefined' && twinData && twinData.profilePhoto) ? twinData.profilePhoto : "https://kazikate.github.io/Biography/assets/Twinbio.jpg"; 
+                const twinModal = (typeof twinData !== 'undefined' && twinData && twinData.modalPhoto) ? twinData.modalPhoto : "https://kazikate.github.io/Biography/assets/Twinbio2.jpg";
+
+                if (target === 'twin') {
+                    window.currentProfileBg = twinBg; 
+                    
+                    kazikatePanel.classList.remove('active-panel');
+                    kazikatePanel.classList.add('hidden-panel');
+                    twinPanel.classList.remove('hidden-panel');
+                    twinPanel.classList.add('active-panel');
+                    
+                    if (!isLyricsMode) {
+                        visualBg.style.backgroundImage = `url('${twinBg}')`;
+                        window.particleRGB = '138, 55, 138'; 
+                    }
+                    
+                    downloadableImg.src = twinBg;
+                    previewImage.src = twinModal;
+                    
+                    if(typeof updateModalGlow === 'function') updateModalGlow(twinModal);
+                    document.body.classList.add('is-twin-active');
+                } else {
+                    window.currentProfileBg = kazikateBg; 
+                    
+                    twinPanel.classList.remove('active-panel');
+                    twinPanel.classList.add('hidden-panel');
+                    kazikatePanel.classList.remove('hidden-panel');
+                    kazikatePanel.classList.add('active-panel');
+                    
+                    if (!isLyricsMode) {
+                        visualBg.style.backgroundImage = `url('${kazikateBg}')`;
+                        window.particleRGB = '157, 80, 255'; 
+                    }
+                    
+                    downloadableImg.src = kazikateBg;
+                    previewImage.src = kazikateModal;
+                    
+                    if(typeof updateModalGlow === 'function') updateModalGlow(kazikateModal);
+                    document.body.classList.remove('is-twin-active');
+                }
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            }, 0); // Titreşim ile sayfa değişimi arasındaki o milimetrik boşluk
+            
+        }, 300); // Dönme animasyonunun bittiği o an!
+    }
+
 
 </script>
 
