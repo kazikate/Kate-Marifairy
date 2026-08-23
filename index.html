@@ -1885,21 +1885,16 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
         resetAdvancedControlsTimer();
     });
 
-    // ---------- YENİ RENDER FONKSİYONLARI ----------
     function renderMiniIcons(containerId, iconsArray) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     container.innerHTML = iconsArray.map(icon => {
-        const platform = icon.platform ? normalizePlatformName(icon.platform) : '';
-        if (!platform) return '';
-
-        const iconFileName = platform + 'mini.png';
-        const iconUrl = ICON_BASE_URL + iconFileName;
-
+        const iconUrl = icon.icon || 'https://via.placeholder.com/36'; // fallback
+        const label = icon.platform || 'Platform';
         return `
-            <a href="${icon.url}" target="_blank" rel="noopener" aria-label="${icon.platform.trim()}">
-                <img src="${iconUrl}" alt="${icon.platform.trim()}" class="mini-icon" loading="lazy">
+            <a href="${icon.url}" target="_blank" rel="noopener" aria-label="${label}">
+                <img src="${iconUrl}" alt="${label}" class="mini-icon" loading="lazy">
             </a>
         `;
     }).join('\n');
@@ -1910,12 +1905,7 @@ function renderLinks(containerId, linksArray) {
     if (!container) return;
 
     container.innerHTML = linksArray.map((link, index) => {
-        const platform = link.platform ? normalizePlatformName(link.platform) : '';
-        if (!platform) return '';
-
-        const iconFileName = platform + '.png';
-        const iconUrl = ICON_BASE_URL + iconFileName;
-
+        const iconUrl = link.bg || 'https://via.placeholder.com/50';
         return `
             <a href="${link.url}" target="_blank" rel="noopener" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
                 <div class="link-img-placeholder" style="background-image: url('${iconUrl}');"></div>
