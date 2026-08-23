@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+
+    <style>
+    body.is-loading .content-wrapper {
+        opacity: 0 !important;
+        pointer-events: none;
+    }
+    </style>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kate Marifairy - Biography</title>
@@ -914,16 +922,10 @@
             pointer-events: none !important;
              }
     
-  /* İçerik başlangıçta gizli kalacak, yüklendikten sonra yumuşakça görünecek */
 .content-wrapper {
     opacity: 0;
     transition: opacity 0.6s ease;
 }
-
-body.is-loading .content-wrapper {
-    opacity: 0 !important;
-}
-
 body:not(.is-loading) .content-wrapper {
     opacity: 1;
 }
