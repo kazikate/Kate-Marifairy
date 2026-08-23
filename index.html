@@ -2252,10 +2252,74 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('pointercancel', stopHaptics);
     window.addEventListener('scroll', stopHaptics, { passive: true });
 
-    // --- Profil Geçişi (toggleProfile) ---
-    // Bu fonksiyon zaten global alanda tanımlı, burada sadece referans veriyoruz.
-    // Eğer yukarıda tanımlı değilse, aşağıya ekleyebilirsiniz.
+       // --- Profil Geçişi (toggleProfile) ---
+    window.toggleProfile = function(targetProfile) {
+        const twinPanel = document.getElementById('twin-panel');
+        const kazikatePanel = document.getElementById('kazikate-panel');
+        const body = document.body;
+        const visual = document.querySelector('.profile-img-visual');
+        const modalImg = document.getElementById('preview-image');
+        const downloadableImg = document.querySelector('.downloadable-profile-img');
+
+        let activeSwitch;
+
+        if (targetProfile === 'kazikate') {
+            // Twin'den Kazikate'ye Geçiş
+            twinPanel.classList.remove('active-panel');
+            twinPanel.classList.add('hidden-panel');
+            kazikatePanel.classList.remove('hidden-panel');
+            kazikatePanel.classList.add('active-panel');
+            body.classList.remove('is-twin-active');
+            
+            // Kazikate JSON'undan verileri çekip arka planları değiştir
+            if (kazikateData) {
+                if (kazikateData.profilePhoto) {
+                    visual.style.backgroundImage = `url('${kazikateData.profilePhoto}')`;
+                    downloadableImg.src = kazikateData.profilePhoto;
+                    window.currentProfileBg = kazikateData.profilePhoto;
+                }
+                if (kazikateData.modalPhoto) {
+                    modalImg.src = kazikateData.modalPhoto;
+                    if(typeof updateModalGlow === 'function') updateModalGlow(kazikateData.modalPhoto);
+                }
+            }
+            window.particleRGB = '157, 80, 255'; // Kazikate tema rengi (Mor)
+            activeSwitch = kazikatePanel.querySelector('.username-switch');
+            
+        } else if (targetProfile === 'twin') {
+            // Kazikate'den Twin'e Geçiş
+            kazikatePanel.classList.remove('active-panel');
+            kazikatePanel.classList.add('hidden-panel');
+            twinPanel.classList.remove('hidden-panel');
+            twinPanel.classList.add('active-panel');
+            body.classList.add('is-twin-active');
+
+            // Twin JSON'undan verileri çekip arka planları değiştir
+            if (twinData) {
+                if (twinData.profilePhoto) {
+                    visual.style.backgroundImage = `url('${twinData.profilePhoto}')`;
+                    downloadableImg.src = twinData.profilePhoto;
+                    window.currentProfileBg = twinData.profilePhoto;
+                }
+                if (twinData.modalPhoto) {
+                    modalImg.src = twinData.modalPhoto;
+                    if(typeof updateModalGlow === 'function') updateModalGlow(twinData.modalPhoto);
+                }
+            }
+            window.particleRGB = '138, 55, 138'; // Twin tema rengi (Pembe/Mor)
+            activeSwitch = twinPanel.querySelector('.username-switch');
+        }
+
+        // Tıklanan ismin yanındaki yenileme ikonunu döndür (Şık efekt)
+        if (activeSwitch) {
+            activeSwitch.classList.add('icon-spin-active');
+            setTimeout(() => {
+                activeSwitch.classList.remove('icon-spin-active');
+            }, 400);
+        }
+    };
 });
+
 </script>
 
         
