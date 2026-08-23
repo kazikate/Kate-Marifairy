@@ -1834,7 +1834,7 @@
         if (!iconsArray || iconsArray.length === 0) return;
 
         container.innerHTML = iconsArray.map(icon => {
-            let iconUrl = icon.icon || icon.twin_icon || icon.kazi_icon || '';
+            let iconUrl = icon.twin_icon || icon.kazi_icon || icon.icon || '';
             if (iconUrl.startsWith('/')) iconUrl = iconUrl.substring(1); // Eğik çizgiyi temizle
             
             const label = icon.platform || 'Platform';
@@ -1852,8 +1852,8 @@
         if (!container) return;
         if (!linksArray || linksArray.length === 0) return;
 
-        container.innerHTML = linksArray.map((link, index) => {
-            let iconUrl = link.bg || link.twin_bg || link.kazi_bg || '';
+        container.innerHTML = linksArray.map((link, index) => {  
+        let iconUrl = link.twin_bg || link.kazi_bg || link.bg || '';
             if (iconUrl.startsWith('/')) iconUrl = iconUrl.substring(1); // Eğik çizgiyi temizle
             
             if (!iconUrl) return '';
