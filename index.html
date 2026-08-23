@@ -167,70 +167,63 @@
         }
         .bio.is-visible { opacity: 0.8; transform: translateY(0); transition-delay: 0.5s; }
 
-        /* --- İKON VE LİNK BOŞLUKLARINI ZORLA DÜZENLEME --- */
-.bio {
-    margin-bottom: 5px !important; /* Biyografi yazısının alt boşluğunu kıs (ikonlara yer aç) */
-}
+        .bio {
+            margin-bottom: 5px !important;
+        }
 
-.social-icons-mini {
-    margin-top: 10px !important; /* İkonları biyografiye iyice yaklaştır (-13px hissini verir) */
-    margin-bottom: 10px !important; /* İkonları altındaki link haplarından uzaklaştır */
-}
+        .social-icons-mini {
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+        }
 
-.links-section {
-    padding-top: 1px; /* Üstten ekstra itme kuvveti uygular */
-}
+        .links-section {
+            padding-top: 1px;
+        }
 
-            /* --- DİNAMİK İKON DİZİLİMİ (FLEXBOX) --- */
+        .social-icons-mini {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 2px;
+            margin-bottom: 28px;
+            margin: 15px auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            max-width: 600px;
+        }
 
-.social-icons-mini {
-    display: flex;                /* İkonları yan yana esnek bir kutuya koyar */
-    justify-content: center;      /* Kaç ikon olursa olsun tam ekranın ORTASINA hizalar */
-    align-items: center;          /* Dikeyde de tam ortalar */
-    flex-wrap: wrap;              /* Eğer çok fazla ikon eklersen ve ekrana sığmazsa otomatik alt satıra geçer */
-    gap: 15px;                    /* İkonların arasına otomatik ve EŞİT 15px boşluk koyar */
-    /* ESKİ MESAFEYİ GERİ GETİREN KISIM */
-    margin-top: 2px;      /* Biyografiye olan eski yakınlığı */
-    margin-bottom: 28px;  /* Altındaki büyük link haplarına olan uzaklığı */
-      
-    margin: 15px auto;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    max-width: 600px;
-}
+        .social-icons-mini.is-visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+            transition-delay: 0.7s; 
+        }
 
-.social-icons-mini.is-visible { 
-    opacity: 1; 
-    transform: translateY(0); 
-    transition-delay: 0.7s; 
-}
+        .social-icons-mini a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: transform 0.2s, opacity 0.2s;
+            line-height: 0;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0 !important;
+        }
 
-.social-icons-mini a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: transform 0.2s, opacity 0.2s;
-    line-height: 0;
-    -webkit-tap-highlight-color: transparent;
-    margin: 0 !important; /* Eski margin ayarlarını sıfırlayıp Gap'e bırakıyoruz */
-}
+        .social-icons-mini a:hover { 
+            transform: scale(1.15); 
+        }
 
-.social-icons-mini a:hover { 
-    transform: scale(1.15); 
-}
-
-/* Tüm ikonlar için standart, yuvarlak ve eşit boyut */
-.social-icons-mini .mini-icon {
-    width: 36px;  
-    height: 36px;
-    object-fit: visible; /* İkonun kırpılmadan çerçevenin içine tam oturmasını sağlar */
-  
-}
+        .social-icons-mini .mini-icon {
+            width: 36px;  
+            height: 36px;
+            object-fit: visible;
+        }
         
         .links-section {
-            padding-top: 10px; /* Üstten ekstra itme boşluğu */
+            padding-top: 10px;
         }
 
         .link-button {
@@ -1877,35 +1870,169 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
         });
 
         // ---------- JSON ÇEKME VE DOM İŞLEMLERİ ----------
+        
+        function getSafeFileName(name) {
+            if (!name || typeof name !== 'string') return 'Default';
+            let cleanName = name.replace(/\s+/g, '');
+            if (cleanName.length === 0) return 'Default';
+            return cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
+        }
+
         function renderMiniIcons(containerId, iconsArray) {
             const container = document.getElementById(containerId);
-            if (!container) return;
+            if (!container || !Array.isArray(iconsArray)) return;
             
-            container.innerHTML = iconsArray.map(icon => `
-                <a href="${icon.url}" aria-label="${icon.platform}" class="${icon.cssClass}">
-                    <img src="${icon.icon}" alt="${icon.platform}" class="mini-icon">
+            const baseUrl = "https://kazikate.github.io/Biography/assets/";
+            
+            container.innerHTML = iconsArray.map(icon => {
+                const safeName = getSafeFileName(icon.platform);
+                const imgSrc = icon.icon || `${baseUrl}${safeName}mini.png`;
+                const autoCssClass = icon.cssClass || `${safeName.toLowerCase()}-mini-icon`;
+                
+                return `
+                <a href="${icon.url || '#'}" target="_blank" aria-label="${icon.platform || 'Link'}" class="${autoCssClass}">
+                    <img src="${imgSrc}" alt="${icon.platform || ''}" class="mini-icon" onerror="this.style.display='none'">
                 </a>
-            `).join('\n');
+                `;
+            }).join('\n');
         }
 
         function renderLinks(containerId, linksArray) {
             const container = document.getElementById(containerId);
-            if (!container) return;
+            if (!container || !Array.isArray(linksArray)) return;
             
-            container.innerHTML = linksArray.map((link, index) => `
-                <a href="${link.url}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
-                    <div class="link-img-placeholder" style="background-image: url('${link.bg}');"></div>
+            const baseUrl = "https://kazikate.github.io/Biography/assets/";
+            
+            container.innerHTML = linksArray.map((link, index) => {
+                const safeName = getSafeFileName(link.platform);
+                const bgSrc = link.bg || `${baseUrl}${safeName}.png`;
+
+                return `
+                <a href="${link.url || '#'}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
+                    <div class="link-img-placeholder" style="background-image: url('${bgSrc}');"></div>
                     <div class="link-text-details">
-                        <span class="link-platform">${link.platform}</span>
+                        <span class="link-platform">${link.platform || 'Bağlantı'}</span>
                         ${link.username ? `<span class="link-username">${link.username}</span>` : ''}
                     </div>
                 </a>
-            `).join('\n');
+                `;
+            }).join('\n');
         }
 
         let kazikateData = null;
         let twinData = null;
 
+        document.addEventListener('touchstart', () => { document.body.classList.add('is-touching'); }, { passive: true });
+        document.addEventListener('mousemove', (e) => { if (e.movementX !== 0 || e.movementY !== 0) { document.body.classList.remove('is-touching'); } }, { passive: true });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!document.body.classList.contains('is-touching') && document.body.classList.contains('animations-done')) {
+                if (e.target.closest('.social-icons-mini a')) {
+                    const icon = e.target.closest('.social-icons-mini a');
+                    const rect = icon.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2; const y = e.clientY - rect.top - rect.height / 2;
+                    icon.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px) scale(1.15)`; icon.style.transition = 'transform 0.1s ease-out';
+                }
+            }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.social-icons-mini a')) {
+                const icon = e.target.closest('.social-icons-mini a');
+                icon.style.transform = ''; icon.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.link-button');
+            if (btn) {
+                btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press'); setTimeout(() => { btn.classList.remove('press'); }, 200);
+            }
+        });
+
+        (function() {
+            window.particleRGB = '138, 55, 138'; 
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let width, height; let particles = []; let tiltX = 0; let tiltY = 0;
+            function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resizeCanvas); resizeCanvas();
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width; this.y = Math.random() * height;
+                    this.size = Math.random() * 2.0 + 1.0; this.speedX = Math.random() * 0.5 - 0.2; this.speedY = Math.random() * -0.5 - 0.2;
+                    this.opacity = Math.random() * 0.35 + 0.15;
+                }
+                update() {
+                    const depth = this.size * 0.4; this.x += this.speedX + (tiltX * 0.02 * depth); this.y += this.speedY + (tiltY * 0.02 * depth);
+                    if (this.y < -10) this.y = height + 10; if (this.x < -10) this.x = width + 10;
+                    if (this.x > width + 10) this.x = -10; if (this.y > height + 10) this.y = -10;
+                }
+                draw() { 
+                    ctx.fillStyle = `rgba(${window.particleRGB}, ${this.opacity})`; 
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+                }
+            }
+            for (let i = 0; i < 45; i++) { particles.push(new Particle()); }
+            function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+            animateParticles();
+            window.addEventListener('deviceorientation', (e) => { if(e.gamma !== null && e.beta !== null) { tiltX = e.gamma; tiltY = e.beta; } }, { passive: true });
+        })();
+
+        function stopHaptics() { clearTimeout(window.globalHoldTimer); if (navigator.vibrate) navigator.vibrate(0); }
+        document.addEventListener('pointerup', stopHaptics);
+        document.addEventListener('pointercancel', stopHaptics);
+        window.addEventListener('scroll', stopHaptics, { passive: true });
+            
+        function toggleProfile(target) {
+            if (!kazikateData || !twinData) return; 
+            
+            const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
+            const titleEl = currentPanel.querySelector('.username-switch');
+            
+            titleEl.classList.add('icon-spin-active');
+            setTimeout(() => {
+                if (navigator.vibrate) navigator.vibrate(15);
+                setTimeout(() => {
+                    titleEl.classList.remove('icon-spin-active');
+                    const kazikatePanel = document.getElementById('kazikate-panel');
+                    const twinPanel = document.getElementById('twin-panel');
+                    const visualBg = document.querySelector('.profile-img-visual');
+                    const downloadableImg = document.querySelector('.downloadable-profile-img');
+                    const previewImage = document.getElementById('preview-image');
+                    
+                    const kazikateBg = kazikateData.profilePhoto;
+                    const kazikateModal = kazikateData.modalPhoto;
+                    const twinBg = twinData.profilePhoto; 
+                    const twinModal = twinData.modalPhoto;
+
+                    if (target === 'twin') {
+                        window.currentProfileBg = twinBg; 
+                        kazikatePanel.classList.remove('active-panel'); kazikatePanel.classList.add('hidden-panel');
+                        twinPanel.classList.remove('hidden-panel'); twinPanel.classList.add('active-panel');
+                        
+                        if (!isLyricsMode) { visualBg.style.backgroundImage = `url('${twinBg}')`; window.particleRGB = '138, 55, 138'; }
+                        
+                        downloadableImg.src = twinBg; previewImage.src = twinModal;
+                        updateModalGlow(twinModal); document.body.classList.add('is-twin-active');
+                    } else {
+                        window.currentProfileBg = kazikateBg; 
+                        twinPanel.classList.remove('active-panel'); twinPanel.classList.add('hidden-panel');
+                        kazikatePanel.classList.remove('hidden-panel'); kazikatePanel.classList.add('active-panel');
+                        
+                        if (!isLyricsMode) { visualBg.style.backgroundImage = `url('${kazikateBg}')`; window.particleRGB = '157, 80, 255'; }
+                        
+                        downloadableImg.src = kazikateBg; previewImage.src = kazikateModal;
+                        updateModalGlow(kazikateModal); document.body.classList.remove('is-twin-active');
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 0); 
+            }, 300); 
+        }
+
+        // ==========================================
+        // İSTEĞİN ÜZERİNE DOM YÜKLEME KISMI EN ALTTA
+        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
             const elementsToAnimate = [
                 profileImgContainer, 
@@ -2020,66 +2147,11 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                 const scaleFactor = newDistance / initialDistance; currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
                 modalContent.style.transform = `scale(${currentScale})`;
             }, { passive: false });
-
-              // ---------- JSON ÇEKME VE DOM İŞLEMLERİ ----------
-        
-        // Yardımcı Fonksiyon: İlk harfi büyük, kalanı küçük yapar. (Örn: "pinterest" -> "Pinterest")
-        function getSafeFileName(name) {
-            if (!name || typeof name !== 'string') return 'Default';
-            let cleanName = name.replace(/\s+/g, '');
-            if (cleanName.length === 0) return 'Default';
-            return cleanName.charAt(0).toUpperCase() + cleanName.slice(1).toLowerCase();
-        }
-
-        function renderMiniIcons(containerId, iconsArray) {
-            const container = document.getElementById(containerId);
-            if (!container || !Array.isArray(iconsArray)) return;
-            
-            // İkonların çekildiği DOĞRU dizin (Senin koduna ve ekran görüntüsüne göre)
-            const baseUrl = "https://kazikate.github.io/Biography/assets/";
-            
-            container.innerHTML = iconsArray.map(icon => {
-                const safeName = getSafeFileName(icon.platform);
-                
-                // ESKİ VERİ UYUMU: Eğer JSON'da manuel girilmiş bir "icon" URL'si varsa onu kullan.
-                // YENİ SİSTEM: Yoksa, "baseUrl + Pinterestmini.png" şeklinde otomatik oluştur.
-                const imgSrc = icon.icon || `${baseUrl}${safeName}mini.png`;
-                const autoCssClass = icon.cssClass || `${safeName.toLowerCase()}-mini-icon`;
-                
-                return `
-                <a href="${icon.url || '#'}" target="_blank" aria-label="${icon.platform || 'Link'}" class="${autoCssClass}">
-                    <img src="${imgSrc}" alt="${icon.platform || ''}" class="mini-icon" onerror="this.style.display='none'">
-                </a>
-                `;
-            }).join('\n');
-        }
-
-        function renderLinks(containerId, linksArray) {
-            const container = document.getElementById(containerId);
-            if (!container || !Array.isArray(linksArray)) return;
-            
-            // İkonların çekildiği DOĞRU dizin
-            const baseUrl = "https://kazikate.github.io/Biography/assets/";
-            
-            container.innerHTML = linksArray.map((link, index) => {
-                const safeName = getSafeFileName(link.platform);
-                
-                // ESKİ VERİ UYUMU: Eğer JSON'da manuel girilmiş bir "bg" URL'si varsa onu kullan.
-                // YENİ SİSTEM: Yoksa, otomatik olarak .png uzantılı halini üret.
-                const bgSrc = link.bg || `${baseUrl}${safeName}.png`;
-
-                return `
-                <a href="${link.url || '#'}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
-                    <div class="link-img-placeholder" style="background-image: url('${bgSrc}');"></div>
-                    <div class="link-text-details">
-                        <span class="link-platform">${link.platform || 'Bağlantı'}</span>
-                        ${link.username ? `<span class="link-username">${link.username}</span>` : ''}
-                    </div>
-                </a>
-                `;
-            }).join('\n');
-        }
-
+            modal.addEventListener('touchend', () => {
+                if (!isPinching) return; isPinching = false;
+                modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(1)`; currentScale = 1;
+            });
+        });
     </script>
     <div class="bottom-blur-layer"></div>
 </body>
