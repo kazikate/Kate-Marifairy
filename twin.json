@@ -1,0 +1,23 @@
+{
+  "profilePhoto": "https://kazikate.github.io/Biography/assets/Twinbio.jpg",
+  "modalPhoto": "https://kazikate.github.io/Biography/assets/Twinbio2.jpg",
+  "miniIcons": [
+    { "platform": "Instagram", "url": "https://www.instagram.com/kate_marifairy", "cssClass": "instagram-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Instagrammini.png" },
+    { "platform": "Twitter", "url": "https://x.com/katemarifairy", "cssClass": "twitter-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Twittermini.png" },
+    { "platform": "Facebook", "url": "https://m.facebook.com/kate.marifairy/", "cssClass": "facebook-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Facebookmini.png" },
+    { "platform": "Youtube", "url": "https://m.youtube.com/@Kate_Marifairy", "cssClass": "youtube-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Youtubemini.png" },
+    { "platform": "TikTok", "url": "https://www.tiktok.com/@katemarifairy", "cssClass": "tiktok-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Tiktokmini.png" },
+    { "platform": "Pinterest", "url": "https://www.pinterest.com/kate_marifairy/", "cssClass": "pinterest-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Pinterestmini.png" },
+    { "platform": "Spotify", "url": "https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m", "cssClass": "spotify-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/twin/Spotifymini.png" }
+  ],
+  "links": [
+    { "platform": "Instagram", "username": "@kate_marifairy", "url": "https://www.instagram.com/kate_marifairy", "bg": "https://kazikate.github.io/Biography/assets/twin/Instagram.png" },
+    { "platform": "Twitter", "username": "@katemarifairy", "url": "https://x.com/katemarifairy", "bg": "https://kazikate.github.io/Biography/assets/twin/Twitter.png" },
+    { "platform": "Bluesky", "username": "@katemarifairy.bsky.social", "url": "https://bsky.app/profile/katemarifairy.bsky.social", "bg": "https://kazikate.github.io/Biography/assets/twin/Bluesky.png" },
+    { "platform": "Steam", "username": "Kate Marifairy", "url": "https://steamcommunity.com/profiles/76561199183309979/", "bg": "https://kazikate.github.io/Biography/assets/twin/Steam.png" },
+    { "platform": "Facebook", "username": "", "url": "https://m.facebook.com/kate.marifairy/", "bg": "https://kazikate.github.io/Biography/assets/twin/Facebook.png" },
+    { "platform": "Pinterest", "username": "", "url": "https://www.pinterest.com/kate_marifairy/", "bg": "https://kazikate.github.io/Biography/assets/twin/Pinterest.png" },
+    { "platform": "Youtube", "username": "", "url": "https://m.youtube.com/@Kate_Marifairy", "bg": "https://kazikate.github.io/Biography/assets/twin/Youtube.png" },
+    { "platform": "Spotify", "username": "", "url": "https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m", "bg": "https://kazikate.github.io/Biography/assets/twin/Spotify.png" }
+  ]
+}
