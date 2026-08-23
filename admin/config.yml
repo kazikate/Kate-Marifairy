@@ -1,0 +1,70 @@
+backend:
+  name: github
+  # DİKKAT: Buraya ana reponu DEĞİL, Twin sitenin kurulu olduğu reponun tam adını yazmalısın!
+  repo: kazikate/Twin-Reposunun-Adi 
+  branch: main 
+
+media_folder: "assets" 
+public_folder: "assets"
+
+collections:
+  - name: "site_icerik"
+    label: "Site İçeriği Yönetimi"
+    files:
+      - file: "music.json"
+        label: "Müzik Listesi"
+        name: "music"
+        fields:
+          - label: "Şarkılar"
+            name: "playlist"
+            widget: "list"
+            fields:
+              - {label: "Şarkı Adı", name: "title", widget: "string"}
+              - {label: "Sanatçı", name: "artist", widget: "string"}
+              - {label: "Şarkı Dosya Linki (.opus)", name: "file", widget: "string"}
+
+      - file: "kazikate.json"
+        label: "Kazikate Profili"
+        name: "kazikate"
+        fields:
+          - {label: "Ana Profil Fotoğrafı Linki", name: "profilePhoto", widget: "string"}
+          - {label: "Tıklanınca Açılan Büyük Fotoğraf Linki", name: "modalPhoto", widget: "string"}
+          - label: "Mini İkonlar"
+            name: "miniIcons"
+            widget: "list"
+            fields:
+              - {label: "Platform Adı", name: "platform", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "CSS Sınıfı (Örn: twitter-mini-icon)", name: "cssClass", widget: "string"}
+              - {label: "İkon Resim Linki", name: "icon", widget: "string"}
+          - label: "Büyük Buton Linkler"
+            name: "links"
+            widget: "list"
+            fields:
+              - {label: "Platform Adı", name: "platform", widget: "string"}
+              - {label: "Kullanıcı Adı (İsteğe Bağlı)", name: "username", widget: "string", required: false}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "Arka Plan Resim Linki", name: "bg", widget: "string"}
+
+      - file: "twin.json"
+        label: "Kate Marifairy Profili"
+        name: "twin"
+        fields:
+          - {label: "Ana Profil Fotoğrafı Linki", name: "profilePhoto", widget: "string"}
+          - {label: "Tıklanınca Açılan Büyük Fotoğraf Linki", name: "modalPhoto", widget: "string"}
+          - label: "Mini İkonlar"
+            name: "miniIcons"
+            widget: "list"
+            fields:
+              - {label: "Platform Adı", name: "platform", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "CSS Sınıfı (Örn: twitter-mini-icon)", name: "cssClass", widget: "string"}
+              - {label: "İkon Resim Linki", name: "icon", widget: "string"}
+          - label: "Büyük Buton Linkler"
+            name: "links"
+            widget: "list"
+            fields:
+              - {label: "Platform Adı", name: "platform", widget: "string"}
+              - {label: "Kullanıcı Adı (İsteğe Bağlı)", name: "username", widget: "string", required: false}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "Arka Plan Resim Linki", name: "bg", widget: "string"}
