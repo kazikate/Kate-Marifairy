@@ -5,36 +5,43 @@
     {
       "platform": "Instagram",
       "url": "https://www.instagram.com/kate_marifairy",
+      "twin_icon": "/assets/twin/icons/mini/Instagrammini.png",
       "icon": "assets/twin/icons/mini/Instagrammini.png"
     },
     {
       "platform": "Twitter",
       "url": "https://x.com/katemarifairy",
+      "twin_icon": "/assets/twin/icons/mini/Twittermini.png",
       "icon": "assets/twin/icons/mini/Twittermini.png"
     },
     {
       "platform": "Facebook",
       "url": "https://m.facebook.com/kate.marifairy/",
+      "twin_icon": "/assets/twin/icons/mini/Facebookmini.png",
       "icon": "assets/twin/icons/mini/Facebookmini.png"
     },
     {
       "platform": "Youtube",
       "url": "https://m.youtube.com/@Kate_Marifairy",
+      "twin_icon": "/assets/twin/icons/mini/Youtubemini.png",
       "icon": "assets/twin/icons/mini/Youtubemini.png"
     },
     {
       "platform": "TikTok",
       "url": "https://www.tiktok.com/@katemarifairy",
+      "twin_icon": "/assets/twin/icons/mini/Tiktokmini.png",
       "icon": "assets/twin/icons/mini/Tiktokmini.png"
     },
     {
       "platform": "Pinterest",
       "url": "https://www.pinterest.com/kate_marifairy/",
+      "twin_icon": "/assets/twin/icons/mini/Pinterestmini.png",
       "icon": "assets/twin/icons/mini/Pinterestmini.png"
     },
     {
       "platform": "Spotify",
       "url": "https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m",
+      "twin_icon": "/assets/twin/icons/mini/Spotifymini.png",
       "icon": "assets/twin/icons/mini/Spotifymini.png"
     }
   ],
@@ -43,48 +50,56 @@
       "platform": "Instagram",
       "username": "@kate_marifairy",
       "url": "https://www.instagram.com/kate_marifairy",
+      "twin_bg": "/assets/twin/icons/normal/Instagram.png",
       "bg": "assets/twin/icons/Instagram.png"
     },
     {
       "platform": "Twitter",
       "username": "@katemarifairy",
       "url": "https://x.com/katemarifairy",
+      "twin_bg": "/assets/twin/icons/normal/Twitter.png",
       "bg": "assets/twin/icons/Twitter.png"
     },
     {
       "platform": "Bluesky",
       "username": "@katemarifairy.bsky.social",
       "url": "https://bsky.app/profile/katemarifairy.bsky.social",
+      "twin_bg": "/assets/twin/icons/normal/Bluesky.png",
       "bg": "assets/twin/icons/Bluesky.png"
     },
     {
       "platform": "Steam",
       "username": "Kate Marifairy",
       "url": "https://steamcommunity.com/profiles/76561199183309979/",
+      "twin_bg": "/assets/twin/icons/normal/Steam.png",
       "bg": "assets/twin/icons/Steam.png"
     },
     {
       "platform": "Facebook",
       "username": "",
       "url": "https://m.facebook.com/kate.marifairy/",
+      "twin_bg": "/assets/twin/icons/normal/Facebook.png",
       "bg": "assets/twin/icons/Facebook.png"
     },
     {
       "platform": "Pinterest",
       "username": "",
       "url": "https://www.pinterest.com/kate_marifairy/",
+      "twin_bg": "/assets/twin/icons/normal/Pinterest.png",
       "bg": "assets/twin/icons/Pinterest.png"
     },
     {
       "platform": "Youtube",
       "username": "",
       "url": "https://m.youtube.com/@Kate_Marifairy",
+      "twin_bg": "/assets/twin/icons/normal/Youtube.png",
       "bg": "assets/twin/icons/Youtube.png"
     },
     {
       "platform": "Spotify",
       "username": "",
       "url": "https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m",
+      "twin_bg": "/assets/twin/icons/normal/Spotify.png",
       "bg": "assets/twin/icons/Spotify.png"
     }
   ]
