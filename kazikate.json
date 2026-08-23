@@ -1,6 +1,6 @@
 {
   "profilePhoto": "https://kazikate.github.io/Biography/assets/Profile2.png",
-  "modalPhoto": "https://kazikate.github.io/Biography/assets/Profile.png",
+  "modalPhoto": "/assets/shoom_unfiltered_3958644646375330875.jpg",
   "miniIcons": [
     {
       "platform": "Instagram",
@@ -43,6 +43,10 @@
       "url": "https://github.com/kazikate",
       "cssClass": "website-mini-icon",
       "icon": "https://kazikate.github.io/Biography/assets/Githubmini.png"
+    },
+    {
+      "platform": "Pinterest",
+      "url": "https://www.pinterest.com/altunazad60/"
     }
   ],
   "links": [
