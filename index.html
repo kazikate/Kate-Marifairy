@@ -118,10 +118,10 @@
         }
 
         .profile-img-visual {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background-image: url('https://kazikate.github.io/Biography/assets/Twinbio.jpg');
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-image: url('https://kazikate.github.io/Biography/assets/Twinbio.jpg');
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
@@ -154,29 +154,70 @@
             max-width: 600px;
         }
         .username.is-visible { opacity: 1; transform: translateY(30px); transition-delay: 0.3s; }
+        
         .bio {
             font-size: 0.97em;
             font-weight: 550;
             opacity: 0;
-            
-            /* YENİ: Biyografiyi daraltıp sağdan-soldan boşluk bırakma ayarları */
-            max-width: 90%; /* Ekranın sadece %85'ini kaplar, kenarlardan pay bırakır */
-            margin: 5px auto 20px auto; /* auto sayesinde kutu daralsa da TAM ORTADA kalır */
-            line-height: 1.5; /* Metin uzunsa satır aralıklarını hafif açıp okumayı rahatlatır */
-            
+            max-width: 90%; 
+            margin: 5px auto 20px auto; 
+            line-height: 1.5; 
             transform: translateY(18px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-
         .bio.is-visible { opacity: 0.8; transform: translateY(0); transition-delay: 0.5s; }
+
+        /* --- DİNAMİK İKON DİZİLİMİ (FLEXBOX) & BOŞLUK HACKLERİ --- */
+        .bio {
+            margin-bottom: 5px !important; /* Biyografi altı boşluk (İkonlara yer aç) */
+        }
+
         .social-icons-mini {
-            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px; /* İkonlar arası otomatik boşluk */
+            
+            margin-top: 0px !important; /* İkonları biyografiye yaklaştır */
+            margin-bottom: 30px !important; /* Büyük linklerden uzaklaştır */
+            
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
             max-width: 600px;
+            width: 100%;
         }
-        .social-icons-mini.is-visible { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+
+        .social-icons-mini.is-visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+            transition-delay: 0.7s; 
+        }
+
+        .social-icons-mini a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: transform 0.2s, opacity 0.2s;
+            line-height: 0;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0 !important; /* Eski marginleri sıfırla, işi Gap'e bırak */
+        }
+        .social-icons-mini a:hover { transform: scale(1.15); }
+
+        .social-icons-mini .mini-icon {
+            width: 48px;  
+            height: 48px;
+            object-fit: visible; /* Kırpılmayı engelle */
+            /* border-radius: 50%; <--- Bunu tamamen kaldırdık! */
+        }
+        
+        .links-section {
+            padding-top: 10px; /* Üstten ekstra itme boşluğu */
+        }
+
         .link-button {
             display: flex;
             align-items: center;
@@ -197,15 +238,7 @@
             -webkit-tap-highlight-color: transparent;
         }
         .link-button.is-visible { opacity: 1; transform: translateY(0); }
-        .link-button:nth-child(1) { transition-delay: 0.9s; }
-        .link-button:nth-child(2) { transition-delay: 1.0s; }
-        .link-button:nth-child(3) { transition-delay: 1.1s; }
-        .link-button:nth-child(4) { transition-delay: 1.2s; }
-        .link-button:nth-child(5) { transition-delay: 1.3s; }
-        .link-button:nth-child(6) { transition-delay: 1.4s; }
-        .link-button:nth-child(7) { transition-delay: 1.5s; }
-        .link-button:nth-child(8) { transition-delay: 1.6s; }
-  
+
         @keyframes press-link {
             0% { transform: scale(1) translateZ(0); }
             50% { transform: scale(0.98) translateZ(0); }
@@ -213,14 +246,6 @@
         }
         .link-button.press { animation: press-link 0.2s ease-out; pointer-events: none; }
 
-        .social-icons-mini a {
-            display: inline-block;
-            opacity: 1;
-            transition: transform 0.2s, opacity 0.2s;
-            line-height: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .social-icons-mini a:hover { opacity: 1; transform: scale(1.1); }
         .bio-emoji {
             width: 1.2em;
             height: 1.2em;
@@ -279,18 +304,8 @@
         @media (min-width: 700px) {
             .profile-img-container, .content-wrapper, .bottom-blur-layer { max-width: 500px; }
             .container { max-width: 800px; padding: 0 0 40px 0; }
-            
-            /* 1. Masaüstünde profil alanını 1:1 kare yap */
-            .profile-img-container {
-                height: 550px !important; 
-            }
-            
-            /* 2. İçerik kutusunun kayma mesafesini ayarla */
-            .content-wrapper {
-                margin-top: 410px !important; 
-            } /* <-- BU PARANTEZ EKSİKTİ, EKLENDİ */
-
-            /* MÜZİK ÇALARI KUSURSUZ HİZALAYAN KOD */
+            .profile-img-container { height: 550px !important; }
+            .content-wrapper { margin-top: 410px !important; } 
             #music-widget {
                 left: 50% !important;
                 transform: translateX(calc(-50% + 15px)) !important; 
@@ -841,12 +856,7 @@
     visibility: visible;
     transform: translateY(0) scale(1);
 }
-/* ===================================================
-   İSİM DEĞİŞTİRME İKONU (MOBİL + MASAÜSTÜ + ÖZELLEŞTİRME)
-=================================================== */
-/* ===================================================
-   İSİM DEĞİŞTİRME İKONU (KESİN ÖZELLEŞTİRME)
-=================================================== */
+
 .username-switch {
     cursor: pointer;
     position: relative;
@@ -854,28 +864,19 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* İKONUN KENDİSİ, BOYUTU VE KONUMU */
 .username-switch::after {
     content: '\f2f1' !important;
     font-family: 'Font Awesome 5 Free', 'Font Awesome 6 Free' !important;
     font-weight: 900 !important;
-    
-    /* 1. BOYUT (Şu an büyüttüm, istersen değiştir) */
     font-size: 0.40em !important; 
-    
-    /* 2. SAĞA/SOLA KONUM (İsme yapışmasın diye biraz daha sağa ittim) */
     right: -25px !important; 
-    
-    /* 3. YUKARI/AŞAĞI KONUM */
     top: 56% !important; 
-    
     position: absolute !important;
     transform: translateY(-50%) rotate(0deg);
     opacity: 0.3; 
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.4s ease !important;
 }
 
-/* MASAÜSTÜ (Hover) VE MOBİL (Active) PARLAMA DURUMU */
 .username-switch:hover::after,
 .username-switch:active::after {
     opacity: 1;
@@ -883,28 +884,6 @@
     text-shadow: 0 0 12px currentColor; 
 }
 
-/* TIKLANDIĞI AN ÇALIŞACAK ZORUNLU ANİMASYON SINIFI */
-.username-switch.icon-spin-active::after {
-    opacity: 1 !important;
-    transform: translateY(-50%) rotate(180deg) !important;
-    text-shadow: 0 0 15px currentColor !important;
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, text-shadow 0.2s !important;
-}
-
-
-/* MASAÜSTÜ HOVER (Fare) VE MOBİL ACTIVE (Dokunma) ANINDAKİ EFEKT */
-.username-switch:hover::after,
-.username-switch:active::after {
-    opacity: 1; /* Tamamen belirginleşir */
-    
-    /* 4. DÖNÜŞ: 180 derece döner. Daha çok dönsün istersen 360deg yapabilirsin */
-    transform: translateY(-50%) rotate(180deg); 
-    
-    /* 5. PARLAMA (GLOW): İkonun etrafına kendi renginde bir ışık saçar */
-    text-shadow: 0 0 12px currentColor; 
-}
-
-    /* JS ile tıklama anında devreye girecek zorunlu dönme sınıfı */
 .username-switch.icon-spin-active::after {
     opacity: 1 !important;
     transform: translateY(-50%) rotate(180deg) !important;
@@ -955,97 +934,21 @@ body.is-twin-active:not(.theme-lyric-on) {
 
 #twin-panel .link-img-placeholder {
     background-color: #211821; 
-    /* İçeriye doğru hafif gölge */
 }
 
-#twin-panel .social-icons-mini a {
-    border-radius: 50%; 
-    padding: 2px; 
-}
-
-#twin-panel .social-icons-mini .mini-icon {
-    border-radius: 50%;
-    vertical-align: middle;
-}
-
-#twin-panel .social-icons-mini a {
-    margin: 0px; 
-}
-    
-#twin-panel .instagram-mini-icon .mini-icon { 
-    width: 47px; height: 47px; transform: translateY(-13px) translateX(13px); 
-}
-#twin-panel .twitter-mini-icon .mini-icon { 
-    width: 55px; height: 55px; transform: translateY(-14px) translateX(7px); 
-}
-#twin-panel .facebook-mini-icon .mini-icon { 
-    width: 49px; height: 49px; transform: translateY(-13px) translateX(0px); 
-}
-#twin-panel .tiktok-mini-icon .mini-icon { 
-    width: 47px; height: 47px; transform: translateY(-13px) translateX(-11px); 
-}
-#twin-panel .spotify-mini-icon .mini-icon { 
-    width: 42px; height: 42px; transform: translateY(-13px) translateX(-14px); 
-}
-#twin-panel .youtube-mini-icon .mini-icon { 
-    width: 50px; height: 50px; transform: translateY(-13px) translateX(-4px); 
-}
-#twin-panel .pinterest-mini-icon .mini-icon { 
-    width: 43px; height: 43px; transform: translateY(-16px) translateX(-15px); 
-}
-
-#kazikate-panel .social-icons-mini a {
-    margin: 0 2px; 
-}
-    
-#kazikate-panel .social-icons-mini .mini-icon {
-    border-radius: 50%;
-    vertical-align: middle;
-}
-
-#kazikate-panel .instagram-mini-icon .mini-icon { 
-    width: 47px; height: 47px; transform: translateY(-13px) translateX(16px); 
-}
-#kazikate-panel .twitter-mini-icon .mini-icon { 
-    width: 55px; height: 55px; transform: translateY(-14px) translateX(7px); 
-}
-#kazikate-panel .threads-mini-icon .mini-icon { 
-    width: 49px; height: 49px; transform: translateY(-13px) translateX(-2px); 
-}
-#kazikate-panel .tiktok-mini-icon .mini-icon { 
-    width: 47px; height: 47px; transform: translateY(-13px) translateX(-12px); 
-}
-#kazikate-panel .spotify-mini-icon .mini-icon { 
-    width: 42px; height: 42px; transform: translateY(-13px) translateX(-14px); 
-}
-#kazikate-panel .youtube-music-mini-icon .mini-icon { 
-    width: 45px; height: 45px; transform: translateY(-13px) translateX(-14px); 
-}
-#kazikate-panel .website-mini-icon .mini-icon { 
-    width: 48px; height: 48px; transform: translateY(-13px) translateX(-17px); 
-}
-    
 @media (hover: hover) {
-    .profile-img-container:not(.scrolled-past):hover .profile-hover-layer {
-        opacity: 1 !important;
-    }
-    .profile-img-container:not(.scrolled-past):hover .profile-hover-layer i {
-        transform: scale(1) !important;
-    }
+    .profile-img-container:not(.scrolled-past):hover .profile-hover-layer { opacity: 1 !important; }
+    .profile-img-container:not(.scrolled-past):hover .profile-hover-layer i { transform: scale(1) !important; }
 }
   
-:root {
-    --dynamic-modal-rgb: 157, 80, 255; 
-}
+:root { --dynamic-modal-rgb: 157, 80, 255; }
 
 .modal-circle-mask {
     box-shadow: 0 0 50px rgba(var(--dynamic-modal-rgb), 0.6) !important;
     transition: box-shadow 0.8s ease; 
 }
 
-body.is-twin-active .profile-hover-layer i {
-    color: #f6baf7 !important; 
-}
+body.is-twin-active .profile-hover-layer i { color: #f6baf7 !important; }
 
 body.is-touching .profile-img-container:hover .profile-hover-layer,
 body.is-touching .profile-img-container:hover .profile-hover-layer i {
@@ -1054,11 +957,9 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
     pointer-events: none !important;
 }
 
-
     </style>
 </head>
 <body class="is-twin-active">
-
 
     <div id="music-widget">
         <div class="music-pill" id="music-pill">
@@ -1122,7 +1023,6 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
 <div class="content-wrapper">
     <div class="container">
         
-        <!-- YENİ EKLENEN: İki profili üst üste düzgün tutacak kutu -->
         <div class="panel-wrapper">
             
             <!-- ================= 1. KAZIKATE PROFİLİ ================= -->
@@ -1131,113 +1031,32 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
                     <h1 class="username username-switch" onclick="toggleProfile('twin')">Kazikate</h1>
                     <p class="bio">Future RN <img src="https://kazikate.github.io/Biography/assets/Syringe.png" alt="Şırınga Emojisi" class="bio-emoji"> • Lost in Music <img src="https://kazikate.github.io/Biography/assets/Music.png" alt="Müzik Emojisi" class="bio-emoji"></p>
                     
-                    <div class="social-icons-mini">
-                        <a href="https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5" aria-label="Instagram" class="instagram-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Instagrammini.png" alt="Instagram" class="mini-icon"></a>
-                        <a href="https://x.com/kazikate1" aria-label="Twitter (X)" class="twitter-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Twittermini.png" alt="Twitter" class="mini-icon"></a>
-                        <a href="https://www.threads.com/@azadaltunnn" aria-label="Threads" class="threads-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Threadsmini.png" alt="Threads" class="mini-icon"></a>
-                        <a href="https://www.tiktok.com/@kazikate1" aria-label="TikTok" class="tiktok-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Tiktokmini.png" alt="TikTok" class="mini-icon"></a>
-                        <a href="https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa" aria-label="Spotify" class="spotify-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Spotifymini.png" alt="Spotify" class="mini-icon"></a>
-                        <a href="https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s" aria-label="YouTube Music" class="youtube-music-mini-icon"><img src="https://kazikate.github.io/Biography/assets/YTMusicmini.png" alt="YouTube Music" class="mini-icon"></a>
-                        <a href="https://github.com/kazikate" aria-label="Website" class="website-mini-icon"><img src="https://kazikate.github.io/Biography/assets/Githubmini.png" alt="Website" class="mini-icon"></a>
-                    </div>
+                    <div class="social-icons-mini" id="kazikate-mini-icons"></div>
                 </header>
                 
-                <div class="links-section">
-                    <a href="https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Instagram.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">Instagram</span><span class="link-username">@azadaltunnn</span></div>
-                    </a>
-                    <a href="https://x.com/kazikate1" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Twitter.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">Twitter</span><span class="link-username">@kazikate1</span></div>
-                    </a>
-                    <a href="https://www.threads.com/@azadaltunnn" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Threads.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">Threads</span><span class="link-username">@azadaltunnn</span></div>
-                    </a>
-                    <a href="https://www.tiktok.com/@kazikate1" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Tiktok.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">TikTok</span><span class="link-username">@kazikate1</span></div>
-                    </a>
-                    <a href="https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Spotify.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">Spotify</span></div>
-                    </a>
-                    <a href="https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/YTMusic.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">Youtube Music</span></div>
-                    </a>
-                    <a href="https://github.com/kazikate" target="_blank" class="link-button">
-                        <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/Github.png');"></div>
-                        <div class="link-text-details"><span class="link-platform">GitHub</span></div>
-                    </a>
-                </div>
+                <div class="links-section" id="kazikate-links"></div>
                 
                 <footer class="footer-links"><span style="opacity: 0.8;">●</span><span class="footer-text" style="margin: 0 1px;">Created by Kazikate</span></footer>
             </div>
             
-<!-- ================= 2. İKİZİNİN PROFİLİ ================= -->
-<div id="twin-panel" class="view-panel active-panel">
-    <header class="profile-header">
-        <h1 class="username username-switch" onclick="toggleProfile('kazikate')">Kate Marifairy</h1>
-        <p class="bio">Peri Kraliçe, Gryffindor, Gamer, Roleplayer, Yazar, Şair, Linkin Park ve JoJo fan</p>
-        
-        <div class="social-icons-mini">
-            <a href="https://www.instagram.com/kate_marifairy" aria-label="Instagram" class="instagram-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Instagrammini.png" alt="Instagram" class="mini-icon"></a>
-            <a href="https://x.com/katemarifairy" aria-label="Twitter" class="twitter-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Twittermini.png" alt="Twitter" class="mini-icon"></a>
-            <a href="https://m.facebook.com/kate.marifairy/" aria-label="Facebook" class="facebook-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Facebookmini.png" alt="Facebook" class="mini-icon"></a>
-            <a href="https://m.youtube.com/@Kate_Marifairy" aria-label="Youtube" class="youtube-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Youtubemini.png" alt="Youtube" class="mini-icon"></a>
-            <a href="https://www.tiktok.com/@katemarifairy" aria-label="TikTok" class="tiktok-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Tiktokmini.png" alt="TikTok" class="mini-icon"></a>
-            <a href="https://www.pinterest.com/kate_marifairy/" aria-label="Pinterest" class="pinterest-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Pinterest.png" alt="YouTube Music" class="mini-icon"></a>
-            <a href="https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m" aria-label="Spotify" class="spotify-mini-icon"><img src="https://kazikate.github.io/Biography/assets/twin/Spotifymini.png" alt="Spotify" class="mini-icon"></a>
-        </div>
-    </header>
-    
-    <div class="links-section">
-        <a href="https://www.instagram.com/kate_marifairy" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Instagram.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Instagram</span><span class="link-username">@kate_marifairy</span></div>
-        </a>
-        <a href="https://x.com/katemarifairy" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Twitter.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Twitter</span><span class="link-username">@katemarifairy</span></div>
-        </a>
-        <a href="https://bsky.app/profile/katemarifairy.bsky.social" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Bluesky.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Bluesky</span><span class="link-username">@katemarifairy.bsky.social</span></div>
-        </a>
-        <a href="https://steamcommunity.com/profiles/76561199183309979/" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Steam.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Steam</span><span class="link-username">Kate Marifairy</span></div>
-        </a>
-        <a href="https://m.facebook.com/kate.marifairy/" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Facebook.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Facebook</span></div>
-        </a>
-        <a href="https://www.pinterest.com/kate_marifairy/" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Pinterest.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Pinterest</span></div>
-        </a>
-        <a href="https://m.youtube.com/@Kate_Marifairy" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Youtube.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Youtube</span></div>
-        </a>
-        <a href="https://open.spotify.com/user/312kgx2jfk4rx5fptxmch32ruu7m" target="_blank" class="link-button">
-            <div class="link-img-placeholder" style="background-image: url('https://kazikate.github.io/Biography/assets/twin/Spotify.png');"></div>
-            <div class="link-text-details"><span class="link-platform">Spotify</span></div>
-        </a>
-    </div>
-    
-    <footer class="footer-links"><span style="opacity: 0.8;">●</span><span class="footer-text" style="margin: 0 1px;">Created for Kate by Kazikate</span></footer>
-</div>
-
+            <!-- ================= 2. İKİZİNİN PROFİLİ ================= -->
+            <div id="twin-panel" class="view-panel active-panel">
+                <header class="profile-header">
+                    <h1 class="username username-switch" onclick="toggleProfile('kazikate')">Kate Marifairy</h1>
+                    <p class="bio">Peri Kraliçe, Gryffindor, Gamer, Roleplayer, Yazar, Şair, Linkin Park ve JoJo fan</p>
+                    
+                    <div class="social-icons-mini" id="twin-mini-icons"></div>
+                </header>
+                
+                <div class="links-section" id="twin-links"></div>
+                
+                <footer class="footer-links"><span style="opacity: 0.8;">●</span><span class="footer-text" style="margin: 0 1px;">Created for Kate by Kazikate</span></footer>
+            </div>
             
-        </div> <!-- panel-wrapper SONU -->
+        </div> 
 
     </div>
 </div>
-
-
 
     <div id="image-preview-modal" class="image-preview-modal">
         <div class="modal-content">
@@ -1303,6 +1122,7 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
         let lyricStartY = 0;
         let initialTransformY = 0;
         let lyricSpring = null;
+        let playlist = []; 
 
         // ---------- FAYDALI FONKSİYONLAR ----------
         function formatTime(seconds) {
@@ -1660,7 +1480,6 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
             animateToLyric(targetIdx);
         });
 
-        // EKSİK OLAN FONKSİYONU GERİ GETİRDİK
         function updateThemeColor(imgUrl) {
             const colorImg = new Image();
             colorImg.crossOrigin = "Anonymous";
@@ -1693,43 +1512,36 @@ body.is-touching .profile-img-container:hover .profile-hover-layer i {
             };
         }
 
-    // --- PROFİL FOTOĞRAFINDAN RENK ÇIKARMA FONKSİYONU ---
-function updateModalGlow(imgUrl) {
-    const colorImg = new Image();
-    colorImg.crossOrigin = "Anonymous";
-    colorImg.src = imgUrl;
-    colorImg.onload = () => {
-        try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 50; canvas.height = 50;
-            ctx.drawImage(colorImg, 0, 0, 50, 50);
-            const data = ctx.getImageData(0, 0, 50, 50).data;
-            let r=0, g=0, b=0, count=0;
-            for(let i=0; i<data.length; i+=16) { r+=data[i]; g+=data[i+1]; b+=data[i+2]; count++; }
-            r=Math.floor(r/count); g=Math.floor(g/count); b=Math.floor(b/count);
-            
-            const max = Math.max(r, g, b);
-            if (max > 0 && max < 200) { 
-                const factor = 200 / max; 
-                r = Math.min(255, Math.floor(r * factor)); 
-                g = Math.min(255, Math.floor(g * factor)); 
-                b = Math.min(255, Math.floor(b * factor)); 
-            } 
-            else if (max === 0) { r = 157; g = 80; b = 255; } 
-            
-            console.log("Bulunan Glow Rengi:", r, g, b); // Konsola rengi yazdırsın
-            document.documentElement.style.setProperty('--dynamic-modal-rgb', `${r}, ${g}, ${b}`);
-        } catch(e) { 
-            console.error("Glow renk çıkarma hatası:", e); // Hatayı konsola basar
-            document.documentElement.style.setProperty('--dynamic-modal-rgb', '157, 80, 255'); 
+        function updateModalGlow(imgUrl) {
+            const colorImg = new Image();
+            colorImg.crossOrigin = "Anonymous";
+            colorImg.src = imgUrl;
+            colorImg.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 50; canvas.height = 50;
+                    ctx.drawImage(colorImg, 0, 0, 50, 50);
+                    const data = ctx.getImageData(0, 0, 50, 50).data;
+                    let r=0, g=0, b=0, count=0;
+                    for(let i=0; i<data.length; i+=16) { r+=data[i]; g+=data[i+1]; b+=data[i+2]; count++; }
+                    r=Math.floor(r/count); g=Math.floor(g/count); b=Math.floor(b/count);
+                    
+                    const max = Math.max(r, g, b);
+                    if (max > 0 && max < 200) { 
+                        const factor = 200 / max; 
+                        r = Math.min(255, Math.floor(r * factor)); 
+                        g = Math.min(255, Math.floor(g * factor)); 
+                        b = Math.min(255, Math.floor(b * factor)); 
+                    } 
+                    else if (max === 0) { r = 157; g = 80; b = 255; } 
+                    
+                    document.documentElement.style.setProperty('--dynamic-modal-rgb', `${r}, ${g}, ${b}`);
+                } catch(e) { 
+                    document.documentElement.style.setProperty('--dynamic-modal-rgb', '157, 80, 255'); 
+                }
+            };
         }
-    };
-    colorImg.onerror = (err) => {
-        console.error("Resim yüklenemedi:", err);
-    };
-}
-
 
         function toggleLyrics() {
             if (navigator.vibrate) navigator.vibrate(20);
@@ -1776,7 +1588,6 @@ function updateModalGlow(imgUrl) {
                 }
                 resetAdvancedControlsTimer();
                 
-                // İkizinin profili aktifse onun mor/pembe rengini, değilsen senin rengini geri yükler
                 if (document.body.classList.contains('is-twin-active')) {
                     window.particleRGB = '138, 55, 138'; 
                 } else {
@@ -1895,106 +1706,8 @@ function updateModalGlow(imgUrl) {
             }
         }
 
-        const playlist = [
-            { title: "Bodies", artist: "Drowning Pool", file: "https://kazikate.github.io/Biography/music/Bodies.opus" },
-            { title: "Courtesy Call", artist: "Thousand Foot Krutch", file: "https://kazikate.github.io/Biography/music/Courtesy Call.opus" },
-            { title: "Flying (Remastered)", artist: "Anathema", file: "https://kazikate.github.io/Biography/music/Flying (Remastered).opus" },
-            { title: "Sonne", artist: "Rammstein", file: "https://kazikate.github.io/Biography/music/Sonne.opus" },
-            { title: "Stricken", artist: "Disturbed", file: "https://kazikate.github.io/Biography/music/Stricken.opus" },
-            { title: "The Sound of Silence", artist: "Disturbed", file: "https://kazikate.github.io/Biography/music/The Sound of Silence.opus" },
-            { title: "Decadence", artist: "Disturbed", file: "https://kazikate.github.io/Biography/music/Decadence.opus" },
-            { title: "Sirens", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Sirens.opus" },
-            { title: "Dying Slowly", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Dying Slowly.opus" },
-            { title: "Ghost", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Ghost.opus" },
-            { title: "Devastate", artist: "Saint Asonia", file: "https://kazikate.github.io/Biography/music/Devastate.opus" },
-            { title: "O Come, O Come Emmanuel", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/O Come, O Come Emmanuel.opus" },
-            { title: "Ash In The Wind", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Ash In The Wind.opus" },
-            { title: "Fire Inside of Me", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Fire Inside of Me.opus" },
-            { title: "Psycho In My Head", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Psycho In My Head.opus" },
-            { title: "Angels Fall Down (Live)", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Angels Fall Down (Live).opus" },
-            { title: "You Are My Hope", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/You Are My Hope.opus" },
-            { title: "One Day Too Late", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/One Day Too Late.opus" },
-            { title: "Awake and Alive", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Awake and Alive.opus" },
-            { title: "Everything Goes Black", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Everything Goes Black.opus" },
-            { title: "American Noise", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/American Noise.opus" },
-            { title: "Good to Be Alive", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Good to Be Alive.opus" },
-            { title: "Valley of Death", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Valley of Death.opus" },
-            { title: "Lucy", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Lucy.opus" },
-            { title: "Feel Invincible", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Feel Invincible.opus" },
-            { title: "Legendary", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Legendary.opus" },
-            { title: "Stars", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Stars.opus" },
-            { title: "Victorious", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Victorious.opus" },
-            { title: "The Last Night", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/The Last Night.opus" },
-            { title: "Rebirthing", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Rebirthing.opus" },
-            { title: "It's Not Me, It's You", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/It's Not Me, It's You.opus" },
-            { title: "Dead Inside", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Dead Inside.opus" },
-            { title: "Freakshow", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Freakshow.opus" },
-            { title: "What I Believe", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/What I Believe.opus" },
-            { title: "The Resistance", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/The Resistance.opus" },
-            { title: "Not Gonna Die", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Not Gonna Die.opus" },
-            { title: "Whispers in the Dark", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Whispers in the Dark.opus" },
-            { title: "Comatose", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Comatose.opus" },
-            { title: "Monster", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Monster.opus" },
-            { title: "Hero", artist: "Skillet", file: "https://kazikate.github.io/Biography/music/Hero.opus" },
-            { title: "Fighting Myself", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Fighting Myself.opus" },
-            { title: "Let Down", artist: "Dead By Sunrise", file: "https://kazikate.github.io/Biography/music/Let Down.opus" },
-            { title: "Until It's Gone", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Until It's Gone.opus" },
-            { title: "Up From the Bottom", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Up From the Bottom.opus" },
-            { title: "Two Faced", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Two Faced.opus" },
-            { title: "Good Things Go", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Good Things Go.opus" },
-            { title: "Lying from You", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Lying from You.opus" },
-            { title: "A Place for My Head", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/A Place for My Head.opus" },
-            { title: "The Emptiness Machine", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/The Emptiness Machine.opus" },
-            { title: "Heavy Is the Crown", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Heavy Is the Crown.opus" },
-            { title: "New Divide", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/New Divide.opus" },
-            { title: "One More Light", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/One More Light.opus" },
-            { title: "ROADS UNTRAVELED", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/ROADS UNTRAVELED.opus" },
-            { title: "CASTLE OF GLASS", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/CASTLE OF GLASS.opus" },
-            { title: "What I've Done", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/What I've Done.opus" },
-            { title: "Given Up", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Given Up.opus" },
-            { title: "Papercut", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Papercut.opus" },
-            { title: "One Step Closer", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/One Step Closer.opus" },
-            { title: "In the End", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/In the End.opus" },
-            { title: "Somewhere I Belong", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Somewhere I Belong.opus" },
-            { title: "Breaking the Habit", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Breaking the Habit.opus" },
-            { title: "Faint", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Faint.opus" },
-            { title: "Numb", artist: "Linkin Park", file: "https://kazikate.github.io/Biography/music/Numb.opus" },
-            { title: "I Don't Care", artist: "Apocalyptica", file: "https://kazikate.github.io/Biography/music/I Don't Care.opus" },
-            { title: "Kill Me Fast", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Kill Me Fast.opus" },
-            { title: "One X", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/One X.opus" },
-            { title: "Lifetime", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Lifetime.opus" },
-            { title: "Fallen Angel", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Fallen Angel.opus" },
-            { title: "Life Starts Now", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Life Starts Now.opus" },
-            { title: "World so Cold", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/World so Cold.opus" },
-            { title: "Home", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Home.opus" },
-            { title: "Get Out Alive", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Get Out Alive.opus" },
-            { title: "Pain", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Pain.opus" },
-            { title: "Time of Dying", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Time of Dying.opus" },
-            { title: "Never Too Late", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Never Too Late.opus" },
-            { title: "Riot", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Riot.opus" },
-            { title: "Animal I Have Become", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/Animal I Have Become.opus" },
-            { title: "I Hate Everything About You", artist: "Three Days Grace", file: "https://kazikate.github.io/Biography/music/I Hate Everything About You.opus" },
-            { title: "Solway Firth", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Solway Firth.opus" },
-            { title: "[sic]", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/[sic].opus" },
-            { title: "Eyeless", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Eyeless.opus" },
-            { title: "Unsainted", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Unsainted.opus" },
-            { title: "Nero Forte", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Nero Forte.opus" },
-            { title: "Custer", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Custer.opus" },
-            { title: "Left Behind", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/Left Behind.opus" },
-            { title: "People = Shit", artist: "Slipknot", file: "https://kazikate.github.io/Biography/music/People = Shit.opus" },
-            { title: "Afraid Of The Dark", artist: "Motionless In White", file: "https://kazikate.github.io/Biography/music/Afraid Of The Dark.opus" },
-            { title: "Voices", artist: "Motionless In White", file: "https://kazikate.github.io/Biography/music/Voices.opus" },
-            { title: "Another Life", artist: "Motionless In White", file: "https://kazikate.github.io/Biography/music/Another Life.opus" },
-            { title: "Until The End", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Until The End.opus" },
-            { title: "Evil Angel", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Evil Angel.opus" },
-            { title: "Dance With The Devil", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Dance With The Devil.opus" },
-            { title: "Awaken", artist: "Breaking Benjamin", file: "https://kazikate.github.io/Biography/music/Awaken.opus" },
-            { title: "Circle With Me", artist: "Spiritbox", file: "https://kazikate.github.io/Biography/music/Circle With Me.opus" },
-            { title: "Decay With Me", artist: "Deathly Hours", file: "https://kazikate.github.io/Biography/music/Decay With Me.opus" },
-            { title: "Dying in Your Arms", artist: "Deathly Hours", file: "https://kazikate.github.io/Biography/music/Dying in Your Arms.opus" }
-        ];
-
         async function loadRandomTrack() {
+            if (playlist.length === 0) return;
             toggleBtn.classList.add('solid-bg');
             trackLoadTicket++;
             const myTicket = trackLoadTicket;
@@ -2102,32 +1815,19 @@ function updateModalGlow(imgUrl) {
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             resetAdvancedControlsTimer();
-            
             if (isFirstPlay) return;
-            
             if (audioPlayer.currentTime > 3) {
                 audioPlayer.currentTime = 0;
                 activeLyricIndex = -99;
                 syncLyricPosition();
                 if (!isPlaying) playTrack();
             } else {
-                clearTimeout(clickTimer); 
-                clearTimeout(pillTimeout); 
-                clearTimeout(pillCloseTimer);
-                
-                musicPill.classList.remove('show-pill'); 
-                resetIcons();
-                
+                clearTimeout(clickTimer); clearTimeout(pillTimeout); clearTimeout(pillCloseTimer);
+                musicPill.classList.remove('show-pill'); resetIcons();
                 shouldReopenAdvanced = true;
-
                 currentQueueIndex -= 2;
                 if (currentQueueIndex < 0) currentQueueIndex = playlist.length - 1;
-                
-                setTimeout(() => { 
-                    loadRandomTrack(); 
-                    showPill(); 
-                    playTrack(true); 
-                }, 500);
+                setTimeout(() => { loadRandomTrack(); showPill(); playTrack(true); }, 500);
             }
         });
 
@@ -2161,234 +1861,264 @@ function updateModalGlow(imgUrl) {
             resetAdvancedControlsTimer();
         });
 
-    // ---------- DOMContentLoaded, MODAL, PARALLAX, PARTICLES ----------
-document.addEventListener('DOMContentLoaded', () => {
-     // YENİ: Sayfa ilk açıldığı an, o anki modal resminin rengini otomatik tara ve glow yap!
-    const initialPreviewImg = document.getElementById('preview-image');
-    if (initialPreviewImg) {
-        updateModalGlow(initialPreviewImg.src);
-    }
-    
-    // YENİ SATIR (Artık tüm başlık ve yazıları kapsıyor):
-const elementsToAnimate = [profileImgContainer, ...document.querySelectorAll('.username'), ...document.querySelectorAll('.bio'), ...document.querySelectorAll('.social-icons-mini'), ...document.querySelectorAll('.link-button')].filter(el => el != null);
-
-    setTimeout(() => { elementsToAnimate.forEach(el => { el.classList.add('is-visible'); }); }, 50);
-
-    const parallaxRatio = 0.4; const maxScroll = 200; const maxBlur = 10; const maxDimOpacity = 0.6; let ticking = false;
-    function updateEffects() {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const scrollY = Math.max(0, -document.body.getBoundingClientRect().top);
-                if (isLyricsMode) {
-                    if (scrollY > 150) toggleLyrics();
-                    profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
-                    ticking = false;
-                    return;
-                }
-                const scrollRatio = Math.min(scrollY, maxScroll) / maxScroll;
-                profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
-                profileImgVisual.style.filter = `blur(${scrollRatio * maxBlur}px)`;
-                dimOverlay.style.opacity = scrollRatio * maxDimOpacity;
-                if (scrollY > 30) { profileImgContainer.classList.add('scrolled-past'); } else { profileImgContainer.classList.remove('scrolled-past'); }
-                ticking = false;
-            }); ticking = true;
-        }
-    }
-    window.addEventListener('scroll', updateEffects, { passive: true });
-    window.addEventListener('touchmove', updateEffects, { passive: true });
-    updateEffects();
-
-    document.querySelectorAll('.link-button').forEach(btn => {
-        btn.addEventListener('click', () => { btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press'); setTimeout(() => { btn.classList.remove('press'); }, 200); });
-    });
-
-    setTimeout(() => {
-        document.body.classList.add('animations-done');
-        if (profileImgContainer) { setTimeout(() => { profileImgContainer.classList.add('show-hint'); setTimeout(() => { profileImgContainer.classList.remove('show-hint'); }, 1000); }, 300); }
-    }, 2200);
-
-    // Modal yönetimi
-    const modal = document.getElementById('image-preview-modal');
-    const modalContent = document.querySelector('.modal-content');
-    let initialDistance = 0; let currentScale = 1; let isPinching = false; const MIN_TOUCHES_FOR_PINCH = 2;
-
-    function closeModal() {
-        if (!modal.classList.contains('is-open')) return;
-        modal.classList.remove('is-open'); document.removeEventListener('keydown', handleEscape);
-        document.body.classList.remove('no-scroll'); document.body.classList.remove('is-modal-open');
-        modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
-        currentScale = 1; isPinching = false;
-        if (history.state && history.state.modal === MODAL_STATE_NAME) { if (history.length > 0) { history.back(); } }
-    }
-    function openModal() {
-        if (isLyricsMode) return;
-        if (modal.classList.contains('is-open')) return;
-        if (!history.state || history.state.modal !== MODAL_STATE_NAME) { history.pushState({ modal: MODAL_STATE_NAME }, '', window.location.href); }
-        document.body.classList.add('no-scroll'); document.body.classList.add('is-modal-open');
-        modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
-        modal.classList.add('is-open'); setTimeout(() => { modalContent.style.transform = `scale(1)`; }, 10);
-        modal.onclick = (event) => { 
-            if (event.target.id !== 'preview-image') { 
-                closeModal(); 
-            } 
-        };
-
-        document.addEventListener('keydown', handleEscape, { once: true });
-    }
-    function handleEscape(e) { if (e.key === 'Escape') closeModal(); }
-    window.addEventListener('popstate', (e) => {
-        if (modal.classList.contains('is-open') && (!e.state || e.state.modal !== MODAL_STATE_NAME)) {
-            modal.classList.remove('is-open'); document.body.classList.remove('no-scroll'); document.body.classList.remove('is-modal-open');
-            modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
-        }
-    });
-    profileImgContainer.addEventListener('click', openModal);
-    modal.addEventListener('touchstart', (e) => {
-        if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
-            e.preventDefault(); modalContent.style.transition = 'none'; initialDistance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY); isPinching = true;
-        } else { isPinching = false; }
-    }, { passive: false });
-    modal.addEventListener('touchmove', (e) => {
-        if (!isPinching) return; e.preventDefault();
-        const newDistance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
-        const scaleFactor = newDistance / initialDistance; currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
-        modalContent.style.transform = `scale(${currentScale})`;
-    }, { passive: false });
-    modal.addEventListener('touchend', () => {
-        if (!isPinching) return; isPinching = false;
-        modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(1)`; currentScale = 1;
-    });
-});
-
-document.addEventListener('touchstart', () => { document.body.classList.add('is-touching'); }, { passive: true });
-document.addEventListener('mousemove', (e) => { if (e.movementX !== 0 || e.movementY !== 0) { document.body.classList.remove('is-touching'); } }, { passive: true });
-
-document.querySelectorAll('.social-icons-mini a').forEach(icon => {
-    icon.addEventListener('mousemove', (e) => {
-        if (!document.body.classList.contains('is-touching') && document.body.classList.contains('animations-done')) {
-            const rect = icon.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2; const y = e.clientY - rect.top - rect.height / 2;
-            icon.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px) scale(1.15)`; icon.style.transition = 'transform 0.1s ease-out';
-        }
-    });
-    icon.addEventListener('mouseleave', () => { icon.style.transform = ''; icon.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; });
-});
-
-// Particles
-(function() {
-    window.particleRGB = '138, 55, 138';
-
-    const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d'); let width, height; let particles = []; let tiltX = 0; let tiltY = 0;
-    function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resizeCanvas); resizeCanvas();
-    class Particle {
-        constructor() {
-            this.x = Math.random() * width; this.y = Math.random() * height;
-            this.size = Math.random() * 2.0 + 1.0; this.speedX = Math.random() * 0.5 - 0.2; this.speedY = Math.random() * -0.5 - 0.2;
-            this.opacity = Math.random() * 0.35 + 0.15;
-        }
-        update() {
-            const depth = this.size * 0.4; this.x += this.speedX + (tiltX * 0.02 * depth); this.y += this.speedY + (tiltY * 0.02 * depth);
-            if (this.y < -10) this.y = height + 10; if (this.x < -10) this.x = width + 10;
-            if (this.x > width + 10) this.x = -10; if (this.y > height + 10) this.y = -10;
-        }
-        draw() { 
-            ctx.fillStyle = `rgba(${window.particleRGB}, ${this.opacity})`; 
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
-        }
-    }
-    for (let i = 0; i < 45; i++) { particles.push(new Particle()); }
-    function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
-    animateParticles();
-    window.addEventListener('deviceorientation', (e) => { if(e.gamma !== null && e.beta !== null) { tiltX = e.gamma; tiltY = e.beta; } }, { passive: true });
-})();
-
-
-// Global haptik
-function stopHaptics() { clearTimeout(window.globalHoldTimer); if (navigator.vibrate) navigator.vibrate(0); }
-document.addEventListener('pointerup', stopHaptics);
-document.addEventListener('pointercancel', stopHaptics);
-window.addEventListener('scroll', stopHaptics, { passive: true });
-    
-// --- PROFİL VE FOTOĞRAF DEĞİŞTİRME FONKSİYONU (KUSURSUZ ZAMANLAMA) ---
-function toggleProfile(target) {
-    const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
-    const titleEl = currentPanel.querySelector('.username-switch');
-    
-    // 1. Tıklandığı an ikona "dön ve parla" sınıfını ekle (Dönüş başlar)
-    titleEl.classList.add('icon-spin-active');
-
-    // 2. Animasyonun tam bitiş süresi (350ms) kadar bekle ve TİTREŞİM VER
-    setTimeout(() => {
-        // İkon tam 180 derece dönüşünü bitirdiğinde titreyecek:
-        if (navigator.vibrate) navigator.vibrate(15);
-        
-        // 3. Titreşimi hissettikten çok kısa bir süre (100ms) sonra sayfayı değiştir
-        setTimeout(() => {
-            titleEl.classList.remove('icon-spin-active');
+        // ---------- JSON ÇEKME VE DOM İŞLEMLERİ ----------
+        function renderMiniIcons(containerId, iconsArray) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
             
-            const kazikatePanel = document.getElementById('kazikate-panel');
-            const twinPanel = document.getElementById('twin-panel');
-            const visualBg = document.querySelector('.profile-img-visual');
-            const downloadableImg = document.querySelector('.downloadable-profile-img');
-            const previewImage = document.getElementById('preview-image');
+            container.innerHTML = iconsArray.map(icon => `
+                <a href="${icon.url}" aria-label="${icon.platform}" class="${icon.cssClass}">
+                    <img src="${icon.icon}" alt="${icon.platform}" class="mini-icon">
+                </a>
+            `).join('\n');
+        }
 
-            const kazikateBg = "https://kazikate.github.io/Biography/assets/Profile2.png";
-            const kazikateModal = "https://kazikate.github.io/Biography/assets/Profile.png";
+        function renderLinks(containerId, linksArray) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
             
-            const twinBg = "https://kazikate.github.io/Biography/assets/Twinbio.jpg"; 
-            const twinModal = "https://kazikate.github.io/Biography/assets/Twinbio2.jpg";
+            container.innerHTML = linksArray.map((link, index) => `
+                <a href="${link.url}" target="_blank" class="link-button" style="transition-delay: ${0.9 + (index * 0.1)}s;">
+                    <div class="link-img-placeholder" style="background-image: url('${link.bg}');"></div>
+                    <div class="link-text-details">
+                        <span class="link-platform">${link.platform}</span>
+                        ${link.username ? `<span class="link-username">${link.username}</span>` : ''}
+                    </div>
+                </a>
+            `).join('\n');
+        }
 
-            if (target === 'twin') {
-                window.currentProfileBg = twinBg; 
+        let kazikateData = null;
+        let twinData = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elementsToAnimate = [
+                profileImgContainer, 
+                ...document.querySelectorAll('.username'), 
+                ...document.querySelectorAll('.bio')
+            ].filter(el => el != null);
+            
+            setTimeout(() => { elementsToAnimate.forEach(el => { el.classList.add('is-visible'); }); }, 50);
+
+            // 3 AYRI DOSYAYI AYNI ANDA ÇEK
+            Promise.all([
+                fetch('music.json').then(res => res.json()),
+                fetch('kazikate.json').then(res => res.json()),
+                fetch('twin.json').then(res => res.json())
+            ])
+            .then(([music, kazikate, twin]) => {
+                playlist = music.playlist;
+                kazikateData = kazikate;
+                twinData = twin;
                 
-                kazikatePanel.classList.remove('active-panel');
-                kazikatePanel.classList.add('hidden-panel');
-                twinPanel.classList.remove('hidden-panel');
-                twinPanel.classList.add('active-panel');
-                
-                if (!isLyricsMode) {
-                    visualBg.style.backgroundImage = `url('${twinBg}')`;
-                    window.particleRGB = '138, 55, 138'; 
+                renderMiniIcons('kazikate-mini-icons', kazikate.miniIcons);
+                renderLinks('kazikate-links', kazikate.links);
+
+                renderMiniIcons('twin-mini-icons', twin.miniIcons);
+                renderLinks('twin-links', twin.links);
+
+                // TWIN VERSİYONU İÇİN: İlk açılışta KATE (TWIN) fotoğraflarını ayarla
+                document.querySelector('.profile-img-visual').style.backgroundImage = `url('${twin.profilePhoto}')`;
+                document.querySelector('.downloadable-profile-img').src = twin.profilePhoto;
+                const initialPreviewImg = document.getElementById('preview-image');
+                initialPreviewImg.src = twin.modalPhoto;
+                updateModalGlow(twin.modalPhoto);
+                window.currentProfileBg = twin.profilePhoto;
+                window.particleRGB = '138, 55, 138';
+
+                setTimeout(() => {
+                    document.querySelectorAll('#kazikate-mini-icons, #twin-mini-icons, .link-button').forEach(el => {
+                        el.classList.add('is-visible');
+                    });
+                }, 50);
+            })
+            .catch(err => {
+                console.error("JSON yükleme hatası:", err);
+            });
+
+            const parallaxRatio = 0.4; const maxScroll = 200; const maxBlur = 10; const maxDimOpacity = 0.6; let ticking = false;
+            function updateEffects() {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollY = Math.max(0, -document.body.getBoundingClientRect().top);
+                        if (isLyricsMode) {
+                            if (scrollY > 150) toggleLyrics();
+                            profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
+                            ticking = false; return;
+                        }
+                        const scrollRatio = Math.min(scrollY, maxScroll) / maxScroll;
+                        profileImgContainer.style.transform = `translate3d(-50%, ${scrollY * parallaxRatio}px, 0)`;
+                        profileImgVisual.style.filter = `blur(${scrollRatio * maxBlur}px)`;
+                        dimOverlay.style.opacity = scrollRatio * maxDimOpacity;
+                        if (scrollY > 30) { profileImgContainer.classList.add('scrolled-past'); } else { profileImgContainer.classList.remove('scrolled-past'); }
+                        ticking = false;
+                    }); ticking = true;
                 }
-                
-                downloadableImg.src = twinBg;
-                previewImage.src = twinModal;
-                
-                updateModalGlow(twinModal);
-                document.body.classList.add('is-twin-active');
-            } else {
-                window.currentProfileBg = kazikateBg; 
-                
-                twinPanel.classList.remove('active-panel');
-                twinPanel.classList.add('hidden-panel');
-                kazikatePanel.classList.remove('hidden-panel');
-                kazikatePanel.classList.add('active-panel');
-                
-                if (!isLyricsMode) {
-                    visualBg.style.backgroundImage = `url('${kazikateBg}')`;
-                    window.particleRGB = '157, 80, 255'; 
-                }
-                
-                downloadableImg.src = kazikateBg;
-                previewImage.src = kazikateModal;
-                
-                updateModalGlow(kazikateModal);
-                document.body.classList.remove('is-twin-active');
             }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-        }, 0); // Titreşim ile sayfa değişimi arasındaki o milimetrik boşluk
+            window.addEventListener('scroll', updateEffects, { passive: true });
+            window.addEventListener('touchmove', updateEffects, { passive: true });
+            updateEffects();
+
+            setTimeout(() => {
+                document.body.classList.add('animations-done');
+                if (profileImgContainer) { setTimeout(() => { profileImgContainer.classList.add('show-hint'); setTimeout(() => { profileImgContainer.classList.remove('show-hint'); }, 1000); }, 300); }
+            }, 2200);
+
+            const modal = document.getElementById('image-preview-modal');
+            const modalContent = document.querySelector('.modal-content');
+            let initialDistance = 0; let currentScale = 1; let isPinching = false; const MIN_TOUCHES_FOR_PINCH = 2;
+
+            function closeModal() {
+                if (!modal.classList.contains('is-open')) return;
+                modal.classList.remove('is-open'); document.removeEventListener('keydown', handleEscape);
+                document.body.classList.remove('no-scroll'); document.body.classList.remove('is-modal-open');
+                modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
+                currentScale = 1; isPinching = false;
+                if (history.state && history.state.modal === MODAL_STATE_NAME) { if (history.length > 0) { history.back(); } }
+            }
+            function openModal() {
+                if (isLyricsMode) return;
+                if (modal.classList.contains('is-open')) return;
+                if (!history.state || history.state.modal !== MODAL_STATE_NAME) { history.pushState({ modal: MODAL_STATE_NAME }, '', window.location.href); }
+                document.body.classList.add('no-scroll'); document.body.classList.add('is-modal-open');
+                modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
+                modal.classList.add('is-open'); setTimeout(() => { modalContent.style.transform = `scale(1)`; }, 10);
+                modal.onclick = (event) => { if (event.target.id !== 'preview-image') { closeModal(); } };
+                document.addEventListener('keydown', handleEscape, { once: true });
+            }
+            function handleEscape(e) { if (e.key === 'Escape') closeModal(); }
+            window.addEventListener('popstate', (e) => {
+                if (modal.classList.contains('is-open') && (!e.state || e.state.modal !== MODAL_STATE_NAME)) {
+                    modal.classList.remove('is-open'); document.body.classList.remove('no-scroll'); document.body.classList.remove('is-modal-open');
+                    modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(0)`;
+                }
+            });
+            profileImgContainer.addEventListener('click', openModal);
+            modal.addEventListener('touchstart', (e) => {
+                if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
+                    e.preventDefault(); modalContent.style.transition = 'none'; initialDistance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY); isPinching = true;
+                } else { isPinching = false; }
+            }, { passive: false });
+            modal.addEventListener('touchmove', (e) => {
+                if (!isPinching) return; e.preventDefault();
+                const newDistance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+                const scaleFactor = newDistance / initialDistance; currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
+                modalContent.style.transform = `scale(${currentScale})`;
+            }, { passive: false });
+            modal.addEventListener('touchend', () => {
+                if (!isPinching) return; isPinching = false;
+                modalContent.style.transition = SPRING_TRANSITION; modalContent.style.transform = `scale(1)`; currentScale = 1;
+            });
+        });
+
+        document.addEventListener('touchstart', () => { document.body.classList.add('is-touching'); }, { passive: true });
+        document.addEventListener('mousemove', (e) => { if (e.movementX !== 0 || e.movementY !== 0) { document.body.classList.remove('is-touching'); } }, { passive: true });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!document.body.classList.contains('is-touching') && document.body.classList.contains('animations-done')) {
+                if (e.target.closest('.social-icons-mini a')) {
+                    const icon = e.target.closest('.social-icons-mini a');
+                    const rect = icon.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2; const y = e.clientY - rect.top - rect.height / 2;
+                    icon.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px) scale(1.15)`; icon.style.transition = 'transform 0.1s ease-out';
+                }
+            }
+        });
         
-    }, 300); // Dönme animasyonunun bittiği o an!
-}
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('.social-icons-mini a')) {
+                const icon = e.target.closest('.social-icons-mini a');
+                icon.style.transform = ''; icon.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.link-button');
+            if (btn) {
+                btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press'); setTimeout(() => { btn.classList.remove('press'); }, 200);
+            }
+        });
 
-  
-  </script>
+        (function() {
+            window.particleRGB = '138, 55, 138'; 
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d'); let width, height; let particles = []; let tiltX = 0; let tiltY = 0;
+            function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resizeCanvas); resizeCanvas();
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width; this.y = Math.random() * height;
+                    this.size = Math.random() * 2.0 + 1.0; this.speedX = Math.random() * 0.5 - 0.2; this.speedY = Math.random() * -0.5 - 0.2;
+                    this.opacity = Math.random() * 0.35 + 0.15;
+                }
+                update() {
+                    const depth = this.size * 0.4; this.x += this.speedX + (tiltX * 0.02 * depth); this.y += this.speedY + (tiltY * 0.02 * depth);
+                    if (this.y < -10) this.y = height + 10; if (this.x < -10) this.x = width + 10;
+                    if (this.x > width + 10) this.x = -10; if (this.y > height + 10) this.y = -10;
+                }
+                draw() { 
+                    ctx.fillStyle = `rgba(${window.particleRGB}, ${this.opacity})`; 
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+                }
+            }
+            for (let i = 0; i < 45; i++) { particles.push(new Particle()); }
+            function animateParticles() { ctx.clearRect(0, 0, width, height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+            animateParticles();
+            window.addEventListener('deviceorientation', (e) => { if(e.gamma !== null && e.beta !== null) { tiltX = e.gamma; tiltY = e.beta; } }, { passive: true });
+        })();
 
+        function stopHaptics() { clearTimeout(window.globalHoldTimer); if (navigator.vibrate) navigator.vibrate(0); }
+        document.addEventListener('pointerup', stopHaptics);
+        document.addEventListener('pointercancel', stopHaptics);
+        window.addEventListener('scroll', stopHaptics, { passive: true });
+            
+        function toggleProfile(target) {
+            if (!kazikateData || !twinData) return; 
+            
+            const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
+            const titleEl = currentPanel.querySelector('.username-switch');
+            
+            titleEl.classList.add('icon-spin-active');
+            setTimeout(() => {
+                if (navigator.vibrate) navigator.vibrate(15);
+                setTimeout(() => {
+                    titleEl.classList.remove('icon-spin-active');
+                    const kazikatePanel = document.getElementById('kazikate-panel');
+                    const twinPanel = document.getElementById('twin-panel');
+                    const visualBg = document.querySelector('.profile-img-visual');
+                    const downloadableImg = document.querySelector('.downloadable-profile-img');
+                    const previewImage = document.getElementById('preview-image');
+                    
+                    const kazikateBg = kazikateData.profilePhoto;
+                    const kazikateModal = kazikateData.modalPhoto;
+                    const twinBg = twinData.profilePhoto; 
+                    const twinModal = twinData.modalPhoto;
+
+                    if (target === 'twin') {
+                        window.currentProfileBg = twinBg; 
+                        kazikatePanel.classList.remove('active-panel'); kazikatePanel.classList.add('hidden-panel');
+                        twinPanel.classList.remove('hidden-panel'); twinPanel.classList.add('active-panel');
+                        
+                        if (!isLyricsMode) { visualBg.style.backgroundImage = `url('${twinBg}')`; window.particleRGB = '138, 55, 138'; }
+                        
+                        downloadableImg.src = twinBg; previewImage.src = twinModal;
+                        updateModalGlow(twinModal); document.body.classList.add('is-twin-active');
+                    } else {
+                        window.currentProfileBg = kazikateBg; 
+                        twinPanel.classList.remove('active-panel'); twinPanel.classList.add('hidden-panel');
+                        kazikatePanel.classList.remove('hidden-panel'); kazikatePanel.classList.add('active-panel');
+                        
+                        if (!isLyricsMode) { visualBg.style.backgroundImage = `url('${kazikateBg}')`; window.particleRGB = '157, 80, 255'; }
+                        
+                        downloadableImg.src = kazikateBg; previewImage.src = kazikateModal;
+                        updateModalGlow(kazikateModal); document.body.classList.remove('is-twin-active');
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 0); 
+            }, 300); 
+        }
+    </script>
     <div class="bottom-blur-layer"></div>
 </body>
 </html>
