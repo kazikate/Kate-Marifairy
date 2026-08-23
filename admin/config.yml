@@ -14,8 +14,8 @@ collections:
         name: "twin"
         file: "twin.json"
         fields:
-        - {label: "Profil Fotoğrafı", name: "twinProfilePhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
-- {label: "Modal Fotoğrafı", name: "twinModalPhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
+       - {label: "Profil Fotoğrafı", name: "profilePhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
+- {label: "Modal Fotoğrafı", name: "modalPhoto", widget: "image", media_folder: "/assets/twin/profile", public_folder: "/assets/twin/profile"}
           - label: "Mini İkonlar"
             name: "miniIcons"
             widget: "list"
