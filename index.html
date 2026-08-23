@@ -912,10 +912,24 @@
             opacity: 0 !important;
             transform: scale(0.5) !important;
             pointer-events: none !important;
-        }
-    </style>
+             }
+    
+  /* İçerik başlangıçta gizli kalacak, yüklendikten sonra yumuşakça görünecek */
+.content-wrapper {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+body.is-loading .content-wrapper {
+    opacity: 0 !important;
+}
+
+body:not(.is-loading) .content-wrapper {
+    opacity: 1;
+}
+  </style>
 </head>
-<body class="is-twin-active">
+<body class="is-twin-active is-loading">
 
     <div id="music-widget">
         <div class="music-pill" id="music-pill">
@@ -1932,6 +1946,8 @@
                 document.querySelectorAll('#kazikate-mini-icons, #twin-mini-icons, .link-button').forEach(el => {
                     el.classList.add('is-visible');
                 });
+              // Tüm veriler yüklendi, içeriği göster
+document.body.classList.remove('is-loading');
             }, 50);
         }
 
