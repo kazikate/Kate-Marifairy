@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: kazikate/Kate-Marifairy
+  name: git-gateway
   branch: main
-  
 
 
 media_folder: "assets" 
