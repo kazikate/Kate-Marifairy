@@ -2,8 +2,7 @@ backend:
   name: github
   repo: kazikate/Kate-Marifairy
   branch: main
-  base_url: https://kate-cms.altunazad60.workers.dev
-  auth_endpoint: auth
+  
 
 
 media_folder: "assets" 
