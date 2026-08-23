@@ -2,21 +2,95 @@
   "profilePhoto": "https://kazikate.github.io/Biography/assets/Profile2.png",
   "modalPhoto": "https://kazikate.github.io/Biography/assets/Profile.png",
   "miniIcons": [
-    { "platform": "Instagram", "url": "https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5", "cssClass": "instagram-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/Instagrammini.png" },
-    { "platform": "Twitter (X)", "url": "https://x.com/kazikate1", "cssClass": "twitter-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/Twittermini.png" },
-    { "platform": "Threads", "url": "https://www.threads.com/@azadaltunnn", "cssClass": "threads-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/Threadsmini.png" },
-    { "platform": "TikTok", "url": "https://www.tiktok.com/@kazikate1", "cssClass": "tiktok-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/Tiktokmini.png" },
-    { "platform": "Spotify", "url": "https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa", "cssClass": "spotify-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/Spotifymini.png" },
-    { "platform": "YouTube Music", "url": "https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s", "cssClass": "youtube-music-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/YTMusicmini.png" },
-    { "platform": "Website", "url": "https://github.com/kazikate", "cssClass": "website-mini-icon", "icon": "https://kazikate.github.io/Biography/assets/Githubmini.png" }
+    {
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5",
+      "cssClass": "instagram-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/Instagrammini.png"
+    },
+    {
+      "platform": "Twitter (X)",
+      "url": "https://x.com/kazikate1",
+      "cssClass": "twitter-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/Twittermini.png"
+    },
+    {
+      "platform": "Threads",
+      "url": "https://www.threads.com/@azadaltunnn",
+      "cssClass": "threads-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/Threadsmini.png"
+    },
+    {
+      "platform": "TikTok",
+      "url": "https://www.tiktok.com/@kazikate1",
+      "cssClass": "tiktok-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/Tiktokmini.png"
+    },
+    {
+      "platform": "Spotify",
+      "url": "https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa",
+      "cssClass": "spotify-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/Spotifymini.png"
+    },
+    {
+      "platform": "YouTube Music",
+      "url": "https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s",
+      "cssClass": "youtube-music-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/YTMusicmini.png"
+    },
+    {
+      "platform": "Website",
+      "url": "https://github.com/kazikate",
+      "cssClass": "website-mini-icon",
+      "icon": "https://kazikate.github.io/Biography/assets/Githubmini.png"
+    },
+    {
+      "platform": "Pinterest",
+      "url": "https://www.pinterest.com/altunazad60/"
+    }
   ],
   "links": [
-    { "platform": "Instagram", "username": "@azadaltunnn", "url": "https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5", "bg": "https://kazikate.github.io/Biography/assets/Instagram.png" },
-    { "platform": "Twitter", "username": "@kazikate1", "url": "https://x.com/kazikate1", "bg": "https://kazikate.github.io/Biography/assets/Twitter.png" },
-    { "platform": "Threads", "username": "@azadaltunnn", "url": "https://www.threads.com/@azadaltunnn", "bg": "https://kazikate.github.io/Biography/assets/Threads.png" },
-    { "platform": "TikTok", "username": "@kazikate1", "url": "https://www.tiktok.com/@kazikate1", "bg": "https://kazikate.github.io/Biography/assets/Tiktok.png" },
-    { "platform": "Spotify", "username": "", "url": "https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa", "bg": "https://kazikate.github.io/Biography/assets/Spotify.png" },
-    { "platform": "Youtube Music", "username": "", "url": "https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s", "bg": "https://kazikate.github.io/Biography/assets/YTMusic.png" },
-    { "platform": "GitHub", "username": "", "url": "https://github.com/kazikate", "bg": "https://kazikate.github.io/Biography/assets/Github.png" }
+    {
+      "platform": "Instagram",
+      "username": "@azadaltunnn",
+      "url": "https://www.instagram.com/azadaltunnn?igsh=ZW5lNDZpbGFjNnY5",
+      "bg": "https://kazikate.github.io/Biography/assets/Instagram.png"
+    },
+    {
+      "platform": "Twitter",
+      "username": "@kazikate1",
+      "url": "https://x.com/kazikate1",
+      "bg": "https://kazikate.github.io/Biography/assets/Twitter.png"
+    },
+    {
+      "platform": "Threads",
+      "username": "@azadaltunnn",
+      "url": "https://www.threads.com/@azadaltunnn",
+      "bg": "https://kazikate.github.io/Biography/assets/Threads.png"
+    },
+    {
+      "platform": "TikTok",
+      "username": "@kazikate1",
+      "url": "https://www.tiktok.com/@kazikate1",
+      "bg": "https://kazikate.github.io/Biography/assets/Tiktok.png"
+    },
+    {
+      "platform": "Spotify",
+      "username": "",
+      "url": "https://open.spotify.com/user/31pdqunuwoyquyi7zehdstr67usa",
+      "bg": "https://kazikate.github.io/Biography/assets/Spotify.png"
+    },
+    {
+      "platform": "Youtube Music",
+      "username": "",
+      "url": "https://music.youtube.com/channel/UCtvvu-chsDwmnMvsb_1Lr7A?si=krFvASE0MXbVfw0s",
+      "bg": "https://kazikate.github.io/Biography/assets/YTMusic.png"
+    },
+    {
+      "platform": "GitHub",
+      "username": "",
+      "url": "https://github.com/kazikate",
+      "bg": "https://kazikate.github.io/Biography/assets/Github.png"
+    }
   ]
 }
