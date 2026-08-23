@@ -30,3 +30,68 @@ logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
 site_url: https://kazikate.github.io
+
+media_folder: "assets"
+public_folder: "/assets"
+
+collections:
+  - name: "site_ayarlari"
+    label: "Site Yönetimi"
+    files:
+      - label: "Twin Profili"
+        name: "twin"
+        file: "twin.json"
+        fields:
+          - {label: "Profil Fotoğrafı URL", name: "profilePhoto", widget: "string"}
+          - {label: "Modal Fotoğrafı URL", name: "modalPhoto", widget: "string"}
+          - label: "Mini İkonlar"
+            name: "miniIcons"
+            widget: "list"
+            fields:
+              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "URL (Link)", name: "url", widget: "string"}
+              - {label: "CSS Sınıfı", name: "cssClass", widget: "string"}
+              - {label: "İkon URL", name: "icon", widget: "string"}
+          - label: "Bağlantılar"
+            name: "links"
+            widget: "list"
+            fields:
+              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
+              - {label: "URL (Link)", name: "url", widget: "string"}
+              - {label: "Arka Plan Resmi URL", name: "bg", widget: "string"}
+
+      - label: "Kazikate Profili"
+        name: "kazikate"
+        file: "kazikate.json"
+        fields:
+          - {label: "Profil Fotoğrafı URL", name: "profilePhoto", widget: "string"}
+          - {label: "Modal Fotoğrafı URL", name: "modalPhoto", widget: "string"}
+          - label: "Mini İkonlar"
+            name: "miniIcons"
+            widget: "list"
+            fields:
+              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "URL (Link)", name: "url", widget: "string"}
+              - {label: "CSS Sınıfı", name: "cssClass", widget: "string"}
+              - {label: "İkon URL", name: "icon", widget: "string"}
+          - label: "Bağlantılar"
+            name: "links"
+            widget: "list"
+            fields:
+              - {label: "Platform", name: "platform", widget: "string"}
+              - {label: "Kullanıcı Adı", name: "username", widget: "string", required: false}
+              - {label: "URL (Link)", name: "url", widget: "string"}
+              - {label: "Arka Plan Resmi URL", name: "bg", widget: "string"}
+
+      - label: "Müzik Listesi"
+        name: "music"
+        file: "music.json"
+        fields:
+          - label: "Şarkılar (Playlist)"
+            name: "playlist"
+            widget: "list"
+            fields:
+              - {label: "Şarkı Adı", name: "title", widget: "string"}
+              - {label: "Sanatçı", name: "artist", widget: "string"}
+              - {label: "Şarkı Dosyası (URL)", name: "file", widget: "string"}
