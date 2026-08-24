@@ -138,6 +138,26 @@
             will-change: filter, transform;
         }
 
+        /* Profil fotoğrafı giriş animasyonu */
+@keyframes profile-reveal {
+    0% {
+        transform: scale(1.35);
+        filter: blur(30px) brightness(0.35);
+    }
+    60% {
+        transform: scale(0.98);
+        filter: blur(6px) brightness(0.85);
+    }
+    100% {
+        transform: scale(1);
+        filter: blur(0px) brightness(1);
+    }
+}
+
+.profile-img-visual.reveal-anim {
+    animation: profile-reveal 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform, filter;
+}
         body.is-modal-open .profile-img-visual { transform: scale(1.08); }
         .dim-overlay {
             position: absolute;
@@ -1900,58 +1920,79 @@ body:not(.is-loading) .content-wrapper {
         }, 50);
 
                async function loadData() {
-            const cacheBuster = `?v=${new Date().getTime()}`; // Önbellek kırıcı
+    const cacheBuster = `?v=${new Date().getTime()}`;
 
-            try {
-                const musicRes = await fetch('music.json' + cacheBuster);
-                if (!musicRes.ok) throw new Error(`music.json yüklenemedi`);
-                const musicData = await musicRes.json();
-                if (musicData.playlist && Array.isArray(musicData.playlist)) {
-                    playlist = musicData.playlist;
-                }
-            } catch (err) { console.error('Müzik listesi hatası:', err); }
-
-            try {
-                const kazikateRes = await fetch('kazikate.json' + cacheBuster);
-                if (!kazikateRes.ok) throw new Error(`kazikate.json yüklenemedi`);
-                kazikateData = await kazikateRes.json();
-                if (kazikateData.miniIcons) renderMiniIcons('kazikate-mini-icons', kazikateData.miniIcons);
-                if (kazikateData.links) renderLinks('kazikate-links', kazikateData.links);
-            } catch (err) { console.error('Kazikate profili hatası:', err); }
-
-            try {
-                const twinRes = await fetch('twin.json' + cacheBuster);
-                if (!twinRes.ok) throw new Error(`twin.json yüklenemedi`);
-                twinData = await twinRes.json();
-                if (twinData.miniIcons) renderMiniIcons('twin-mini-icons', twinData.miniIcons);
-                if (twinData.links) renderLinks('twin-links', twinData.links);
-
-                let defaultTwinPhoto = twinData.twin_profilePhoto || twinData.profilePhoto;
-                let defaultTwinModal = twinData.twin_modalPhoto || twinData.modalPhoto;
-                
-                if (defaultTwinPhoto && defaultTwinPhoto.startsWith('/')) defaultTwinPhoto = defaultTwinPhoto.substring(1);
-                if (defaultTwinModal && defaultTwinModal.startsWith('/')) defaultTwinModal = defaultTwinModal.substring(1);
-
-                if (defaultTwinPhoto) {
-                    document.querySelector('.profile-img-visual').style.backgroundImage = `url('${defaultTwinPhoto}')`;
-                    document.querySelector('.downloadable-profile-img').src = defaultTwinPhoto;
-                    window.currentProfileBg = defaultTwinPhoto;
-                }
-                if (defaultTwinModal) {
-                    document.getElementById('preview-image').src = defaultTwinModal;
-                    updateModalGlow(defaultTwinModal);
-                }
-                window.particleRGB = '138, 55, 138';
-            } catch (err) { console.error('Twin profili hatası:', err); }
-
-            setTimeout(() => {
-                document.querySelectorAll('#kazikate-mini-icons, #twin-mini-icons, .link-button').forEach(el => {
-                    el.classList.add('is-visible');
-                });
-              // Tüm veriler yüklendi, içeriği göster
-document.body.classList.remove('is-loading');
-            }, 50);
+    try {
+        const musicRes = await fetch('music.json' + cacheBuster);
+        if (!musicRes.ok) throw new Error(`music.json yüklenemedi`);
+        const musicData = await musicRes.json();
+        if (musicData.playlist && Array.isArray(musicData.playlist)) {
+            playlist = musicData.playlist;
         }
+    } catch (err) { console.error('Müzik listesi hatası:', err); }
+
+    try {
+        const kazikateRes = await fetch('kazikate.json' + cacheBuster);
+        if (!kazikateRes.ok) throw new Error(`kazikate.json yüklenemedi`);
+        kazikateData = await kazikateRes.json();
+        if (kazikateData.miniIcons) renderMiniIcons('kazikate-mini-icons', kazikateData.miniIcons);
+        if (kazikateData.links) renderLinks('kazikate-links', kazikateData.links);
+    } catch (err) { console.error('Kazikate profili hatası:', err); }
+
+    try {
+        const twinRes = await fetch('twin.json' + cacheBuster);
+        if (!twinRes.ok) throw new Error(`twin.json yüklenemedi`);
+        twinData = await twinRes.json();
+        if (twinData.miniIcons) renderMiniIcons('twin-mini-icons', twinData.miniIcons);
+        if (twinData.links) renderLinks('twin-links', twinData.links);
+
+        let defaultTwinPhoto = twinData.twin_profilePhoto || twinData.profilePhoto;
+        let defaultTwinModal = twinData.twin_modalPhoto || twinData.modalPhoto;
+        
+        if (defaultTwinPhoto && defaultTwinPhoto.startsWith('/')) defaultTwinPhoto = defaultTwinPhoto.substring(1);
+        if (defaultTwinModal && defaultTwinModal.startsWith('/')) defaultTwinModal = defaultTwinModal.substring(1);
+
+        if (defaultTwinPhoto) {
+            document.querySelector('.profile-img-visual').style.backgroundImage = `url('${defaultTwinPhoto}')`;
+            document.querySelector('.downloadable-profile-img').src = defaultTwinPhoto;
+            window.currentProfileBg = defaultTwinPhoto;
+
+            // Giriş animasyonunu tetikle
+            const visualBg = document.querySelector('.profile-img-visual');
+            visualBg.classList.remove('reveal-anim');
+            void visualBg.offsetWidth;
+            visualBg.classList.add('reveal-anim');
+            setTimeout(() => visualBg.classList.remove('reveal-anim'), 1600);
+        }
+        if (defaultTwinModal) {
+            document.getElementById('preview-image').src = defaultTwinModal;
+            updateModalGlow(defaultTwinModal);
+        }
+        window.particleRGB = '138, 55, 138';
+    } catch (err) { console.error('Twin profili hatası:', err); }
+
+    // Kazikate profil resimlerini önceden yükle
+    let kaziPhotoForPreload = "https://kazikate.github.io/Biography/assets/Profile2.png";
+    let kaziModalForPreload = "https://kazikate.github.io/Biography/assets/Profile.png";
+
+    if (kazikateData && kazikateData.kazi_profilePhoto) kaziPhotoForPreload = kazikateData.kazi_profilePhoto;
+    if (kazikateData && kazikateData.kazi_modalPhoto) kaziModalForPreload = kazikateData.kazi_modalPhoto;
+
+    if (kaziPhotoForPreload.startsWith('/')) kaziPhotoForPreload = kaziPhotoForPreload.substring(1);
+    if (kaziModalForPreload.startsWith('/')) kaziModalForPreload = kaziModalForPreload.substring(1);
+
+    const preloadKaziImg = new Image();
+    preloadKaziImg.src = kaziPhotoForPreload;
+    const preloadKaziModalImg = new Image();
+    preloadKaziModalImg.src = kaziModalForPreload;
+
+    setTimeout(() => {
+        document.querySelectorAll('#kazikate-mini-icons, #twin-mini-icons, .link-button').forEach(el => {
+            el.classList.add('is-visible');
+        });
+        document.body.classList.remove('is-loading');
+    }, 50);
+               }
 
 
         loadData();
