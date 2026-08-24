@@ -1122,13 +1122,6 @@ body:not(.is-loading) .content-wrapper {
     let kazikateData = null;
     let twinData = null;
 
-    // Blob URL'leri için kalıcı önbellek
-window.preloadedImages = {
-    kazi: null,
-    kaziModal: null,
-    twin: null,
-    twinModal: null
-};
     function normalizePlatformName(name) {
         const cleaned = name.replace(/\s+/g, '').toLowerCase();
         return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
@@ -1142,24 +1135,6 @@ window.preloadedImages = {
         return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     }
 
-    async function cacheImageAsBlob(url, key) {
-    // Zaten blob URL varsa tekrar indirme
-    if (window.preloadedImages[key]) return window.preloadedImages[key];
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Resim indirilemedi: ${url}`);
-        const blob = await response.blob();
-        const blobUrl = URL.createObjectURL(blob);
-        window.preloadedImages[key] = blobUrl;
-        return blobUrl;
-    } catch (err) {
-        console.warn('Blob önbelleğe alınamadı, orijinal URL kullanılacak:', err);
-        window.preloadedImages[key] = url; // Fallback
-        return url;
-    }
-    }
-    
     function closeAdvancedControls(forceHideSeekbarOnly = false) {
         if (isLyricsMode) {
             if (forceHideSeekbarOnly) seekPill.classList.remove('show-seek');
@@ -1947,29 +1922,26 @@ window.preloadedImages = {
                async function loadData() {
     const cacheBuster = `?v=${new Date().getTime()}`;
 
-    // Müzik listesini yükle
     try {
         const musicRes = await fetch('music.json' + cacheBuster);
-        if (!musicRes.ok) throw new Error('music.json yüklenemedi');
+        if (!musicRes.ok) throw new Error(`music.json yüklenemedi`);
         const musicData = await musicRes.json();
         if (musicData.playlist && Array.isArray(musicData.playlist)) {
             playlist = musicData.playlist;
         }
     } catch (err) { console.error('Müzik listesi hatası:', err); }
 
-    // Kazikate verilerini yükle
     try {
         const kazikateRes = await fetch('kazikate.json' + cacheBuster);
-        if (!kazikateRes.ok) throw new Error('kazikate.json yüklenemedi');
+        if (!kazikateRes.ok) throw new Error(`kazikate.json yüklenemedi`);
         kazikateData = await kazikateRes.json();
         if (kazikateData.miniIcons) renderMiniIcons('kazikate-mini-icons', kazikateData.miniIcons);
         if (kazikateData.links) renderLinks('kazikate-links', kazikateData.links);
     } catch (err) { console.error('Kazikate profili hatası:', err); }
 
-    // Twin verilerini yükle ve blob olarak önbelleğe al
     try {
         const twinRes = await fetch('twin.json' + cacheBuster);
-        if (!twinRes.ok) throw new Error('twin.json yüklenemedi');
+        if (!twinRes.ok) throw new Error(`twin.json yüklenemedi`);
         twinData = await twinRes.json();
         if (twinData.miniIcons) renderMiniIcons('twin-mini-icons', twinData.miniIcons);
         if (twinData.links) renderLinks('twin-links', twinData.links);
@@ -1980,36 +1952,40 @@ window.preloadedImages = {
         if (defaultTwinPhoto && defaultTwinPhoto.startsWith('/')) defaultTwinPhoto = defaultTwinPhoto.substring(1);
         if (defaultTwinModal && defaultTwinModal.startsWith('/')) defaultTwinModal = defaultTwinModal.substring(1);
 
-        // Blob olarak önbelleğe al (bekle, çünkü başlangıçta bunları göstereceğiz)
-        const twinBlobUrl = await cacheImageAsBlob(defaultTwinPhoto, 'twin');
-        const twinModalBlobUrl = await cacheImageAsBlob(defaultTwinModal, 'twinModal');
+        if (defaultTwinPhoto) {
+            document.querySelector('.profile-img-visual').style.backgroundImage = `url('${defaultTwinPhoto}')`;
+            document.querySelector('.downloadable-profile-img').src = defaultTwinPhoto;
+            window.currentProfileBg = defaultTwinPhoto;
 
-        if (twinBlobUrl) {
-            document.querySelector('.profile-img-visual').style.backgroundImage = `url('${twinBlobUrl}')`;
-            document.querySelector('.downloadable-profile-img').src = twinBlobUrl;
-            window.currentProfileBg = twinBlobUrl;
+            // Giriş animasyonunu tetikle
+            const visualBg = document.querySelector('.profile-img-visual');
+            visualBg.classList.remove('reveal-anim');
+            void visualBg.offsetWidth;
+            visualBg.classList.add('reveal-anim');
+            setTimeout(() => visualBg.classList.remove('reveal-anim'), 1600);
         }
-        if (twinModalBlobUrl) {
-            document.getElementById('preview-image').src = twinModalBlobUrl;
-            updateModalGlow(twinModalBlobUrl);
+        if (defaultTwinModal) {
+            document.getElementById('preview-image').src = defaultTwinModal;
+            updateModalGlow(defaultTwinModal);
         }
         window.particleRGB = '138, 55, 138';
-
-        // Kazikate resimlerini arka planda blob olarak önbelleğe al (beklemeden başlat)
-        const kaziPhotoForPreload = kazikateData?.kazi_profilePhoto || "https://kazikate.github.io/Biography/assets/Profile2.png";
-        const kaziModalForPreload = kazikateData?.kazi_modalPhoto || "https://kazikate.github.io/Biography/assets/Profile.png";
-
-        // URL'lerin başındaki '/' temizle (eğer varsa)
-        const cleanKaziPhoto = kaziPhotoForPreload.startsWith('/') ? kaziPhotoForPreload.substring(1) : kaziPhotoForPreload;
-        const cleanKaziModal = kaziModalForPreload.startsWith('/') ? kaziModalForPreload.substring(1) : kaziModalForPreload;
-
-        // Arka planda yükle, await etme (hızlı açılış için)
-        cacheImageAsBlob(cleanKaziPhoto, 'kazi');
-        cacheImageAsBlob(cleanKaziModal, 'kaziModal');
-
     } catch (err) { console.error('Twin profili hatası:', err); }
 
-    // İçeriği göster
+    // Kazikate profil resimlerini önceden yükle
+    let kaziPhotoForPreload = "https://kazikate.github.io/Biography/assets/Profile2.png";
+    let kaziModalForPreload = "https://kazikate.github.io/Biography/assets/Profile.png";
+
+    if (kazikateData && kazikateData.kazi_profilePhoto) kaziPhotoForPreload = kazikateData.kazi_profilePhoto;
+    if (kazikateData && kazikateData.kazi_modalPhoto) kaziModalForPreload = kazikateData.kazi_modalPhoto;
+
+    if (kaziPhotoForPreload.startsWith('/')) kaziPhotoForPreload = kaziPhotoForPreload.substring(1);
+    if (kaziModalForPreload.startsWith('/')) kaziModalForPreload = kaziModalForPreload.substring(1);
+
+    const preloadKaziImg = new Image();
+    preloadKaziImg.src = kaziPhotoForPreload;
+    const preloadKaziModalImg = new Image();
+    preloadKaziModalImg.src = kaziModalForPreload;
+
     setTimeout(() => {
         document.querySelectorAll('#kazikate-mini-icons, #twin-mini-icons, .link-button').forEach(el => {
             el.classList.add('is-visible');
@@ -2266,74 +2242,73 @@ window.preloadedImages = {
     });
 
     // --- Profil Geçişi (toggleProfile) ---
-    
     window.toggleProfile = function(target) {
-    const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
-    const titleEl = currentPanel.querySelector('.username-switch');
-    
-    titleEl.classList.add('icon-spin-active');
-
-    setTimeout(() => {
-        if (navigator.vibrate) navigator.vibrate(15);
+        const currentPanel = target === 'twin' ? document.getElementById('kazikate-panel') : document.getElementById('twin-panel');
+        const titleEl = currentPanel.querySelector('.username-switch');
         
+        titleEl.classList.add('icon-spin-active');
+
         setTimeout(() => {
-            titleEl.classList.remove('icon-spin-active');
+            if (navigator.vibrate) navigator.vibrate(15);
             
-            const kazikatePanel = document.getElementById('kazikate-panel');
-            const twinPanel = document.getElementById('twin-panel');
-            const visualBg = document.querySelector('.profile-img-visual');
-            const downloadableImg = document.querySelector('.downloadable-profile-img');
-            const previewImage = document.getElementById('preview-image');
-
-            // Önbellekten al veya fallback olarak orijinal URL kullan
-            const kazikateBg = window.preloadedImages.kazi || "https://kazikate.github.io/Biography/assets/Profile2.png";
-            const kazikateModal = window.preloadedImages.kaziModal || "https://kazikate.github.io/Biography/assets/Profile.png";
-            const twinBg = window.preloadedImages.twin || "https://kazikate.github.io/Biography/assets/Twinbio.jpg";
-            const twinModal = window.preloadedImages.twinModal || "https://kazikate.github.io/Biography/assets/Twinbio2.jpg";
-
-            if (target === 'twin') {
-                window.currentProfileBg = twinBg; 
+            setTimeout(() => {
+                titleEl.classList.remove('icon-spin-active');
                 
-                kazikatePanel.classList.remove('active-panel');
-                kazikatePanel.classList.add('hidden-panel');
-                twinPanel.classList.remove('hidden-panel');
-                twinPanel.classList.add('active-panel');
+                const kazikatePanel = document.getElementById('kazikate-panel');
+                const twinPanel = document.getElementById('twin-panel');
+                const visualBg = document.querySelector('.profile-img-visual');
+                const downloadableImg = document.querySelector('.downloadable-profile-img');
+                const previewImage = document.getElementById('preview-image');
+
+                const kazikateBg = (kazikateData && (kazikateData.kazi_profilePhoto || kazikateData.profilePhoto)) ? (kazikateData.kazi_profilePhoto || kazikateData.profilePhoto) : "https://kazikate.github.io/Biography/assets/Profile2.png";
+                const kazikateModal = (kazikateData && (kazikateData.kazi_modalPhoto || kazikateData.modalPhoto)) ? (kazikateData.kazi_modalPhoto || kazikateData.modalPhoto) : "https://kazikate.github.io/Biography/assets/Profile.png";
                 
-                if (typeof isLyricsMode !== 'undefined' && !isLyricsMode) {
-                    visualBg.style.backgroundImage = `url('${twinBg}')`;
-                    window.particleRGB = '138, 55, 138'; 
+                const twinBg = (twinData && (twinData.twin_profilePhoto || twinData.profilePhoto)) ? (twinData.twin_profilePhoto || twinData.profilePhoto) : "https://kazikate.github.io/Biography/assets/Twinbio.jpg"; 
+                const twinModal = (twinData && (twinData.twin_modalPhoto || twinData.modalPhoto)) ? (twinData.twin_modalPhoto || twinData.modalPhoto) : "https://kazikate.github.io/Biography/assets/Twinbio2.jpg";
+
+                if (target === 'twin') {
+                    window.currentProfileBg = twinBg; 
+                    
+                    kazikatePanel.classList.remove('active-panel');
+                    kazikatePanel.classList.add('hidden-panel');
+                    twinPanel.classList.remove('hidden-panel');
+                    twinPanel.classList.add('active-panel');
+                    
+                    if (typeof isLyricsMode !== 'undefined' && !isLyricsMode) {
+                        visualBg.style.backgroundImage = `url('${twinBg}')`;
+                        window.particleRGB = '138, 55, 138'; 
+                    }
+                    
+                    downloadableImg.src = twinBg;
+                    previewImage.src = twinModal;
+                    
+                    if(typeof updateModalGlow === 'function') updateModalGlow(twinModal);
+                    document.body.classList.add('is-twin-active');
+                } else {
+                    window.currentProfileBg = kazikateBg; 
+                    
+                    twinPanel.classList.remove('active-panel');
+                    twinPanel.classList.add('hidden-panel');
+                    kazikatePanel.classList.remove('hidden-panel');
+                    kazikatePanel.classList.add('active-panel');
+                    
+                    if (typeof isLyricsMode !== 'undefined' && !isLyricsMode) {
+                        visualBg.style.backgroundImage = `url('${kazikateBg}')`;
+                        window.particleRGB = '157, 80, 255'; 
+                    }
+                    
+                    downloadableImg.src = kazikateBg;
+                    previewImage.src = kazikateModal;
+                    
+                    if(typeof updateModalGlow === 'function') updateModalGlow(kazikateModal);
+                    document.body.classList.remove('is-twin-active');
                 }
                 
-                downloadableImg.src = twinBg;
-                previewImage.src = twinModal;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 
-                if (typeof updateModalGlow === 'function') updateModalGlow(twinModal);
-                document.body.classList.add('is-twin-active');
-            } else {
-                window.currentProfileBg = kazikateBg; 
-                
-                twinPanel.classList.remove('active-panel');
-                twinPanel.classList.add('hidden-panel');
-                kazikatePanel.classList.remove('hidden-panel');
-                kazikatePanel.classList.add('active-panel');
-                
-                if (typeof isLyricsMode !== 'undefined' && !isLyricsMode) {
-                    visualBg.style.backgroundImage = `url('${kazikateBg}')`;
-                    window.particleRGB = '157, 80, 255'; 
-                }
-                
-                downloadableImg.src = kazikateBg;
-                previewImage.src = kazikateModal;
-                
-                if (typeof updateModalGlow === 'function') updateModalGlow(kazikateModal);
-                document.body.classList.remove('is-twin-active');
-            }
+            }, 0); 
             
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-        }, 0); 
-        
-    }, 300); 
+        }, 300); 
     }
 </script>
 
@@ -2341,3 +2316,6 @@ window.preloadedImages = {
     <div class="bottom-blur-layer"></div>
 </body>
 </html>
+
+
+Şuanda kodlar bu şekilde ve ben burda promise all kısmını bulamadım.
